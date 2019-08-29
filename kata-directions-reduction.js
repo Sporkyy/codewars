@@ -26,6 +26,25 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// const dirVals = {
+//   NORTH: 1,
+//   SOUTH: -1,
+//   EAST: 2,
+//   WEST: -2,
+// };
+
+// function dirReduc(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     if (0 === dirVals[arr[i - 1]] + dirVals[arr[i]]) {
+//       arr = [...arr.slice(0, i - 1), ...arr.slice(i + 1, arr.length)];
+//       i -= 2;
+//     }
+//   }
+//   return arr;
+// }
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 const dirVals = {
   NORTH: 1,
   SOUTH: -1,
@@ -36,7 +55,7 @@ const dirVals = {
 function dirReduc(arr) {
   for (let i = 1; i < arr.length; i++) {
     if (0 === dirVals[arr[i - 1]] + dirVals[arr[i]]) {
-      arr = [...arr.slice(0, i - 1), ...arr.slice(i + 1, arr.length)];
+      arr.splice(i - 1, 2);
       i -= 2;
     }
   }
