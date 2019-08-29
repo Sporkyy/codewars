@@ -1,4 +1,4 @@
-// Alphabetical Addition
+// 7 kyu | Alphabetical Addition
 // https://www.codewars.com/kata/alphabetical-addition/
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

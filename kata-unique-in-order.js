@@ -1,4 +1,4 @@
-// Sum of Digits / Digital Root
+// 6 kyu | Sum of Digits / Digital Root
 // https://www.codewars.com/kata/unique-in-order/
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

@@ -1,4 +1,4 @@
-// Playing with digits
+// 6 kyu | Playing with digits
 // https://www.codewars.com/kata/playing-with-digits
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

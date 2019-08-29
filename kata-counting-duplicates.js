@@ -1,4 +1,4 @@
-// Counting Duplicates
+// 6 kyu | Counting Duplicates
 // https://www.codewars.com/kata/counting-duplicates/
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
