@@ -82,38 +82,61 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// [0, 0], [0, 1], [0, 2] => [0, 2], [1, 2], [2, 2]
-// [1, 0], [1, 1], [1, 2] => [0, 1], [1, 1], [2, 1]
-// [2, 0], [2, 1], [2, 2] => [0, 0], [1, 0], [2, 0]
-
-// [0, 0], [0, 1] => [0, 1], [1, 1], [2, 1]
-// [1, 0], [1, 1] => [0, 0], [1, 0], [2, 0]
-// [2, 0], [2, 1] =>
-
 const rotated = a => {
   const r = new Array(a[0].length).fill().map(u => new Array(a.length));
   for (let i = 0; i < a[0].length; i++) {
     for (let j = 0; j < a.length; j++) {
-      r[i][j] = a[j][a[0].length - i];
+      r[i][j] = a[j][a[0].length - 1 - i];
     }
   }
   console.log(r);
   return r;
 };
 
-// const test = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-const test = [[4, 5, 6], [7, 8, 9]];
-console.log(rotated(test));
+// 1 2 3 => 3 6 9
+// 4 5 6 => 2 5 8
+// 7 8 9 => 1 4 7
 
-// const snail = array => {
-//   let result = [];
-//   while (array.length) {
-//     result = result.concat(array.shift());
-//     console.log(result);
-//     array = rotate(array);
-//   }
-//   return result;
-// };
+// [0, 0], [0, 1], [0, 2] => [0, 2], [1, 2], [2, 2]
+// [1, 0], [1, 1], [1, 2] => [0, 1], [1, 1], [2, 1]
+// [2, 0], [2, 1], [2, 2] => [0, 0], [1, 0], [2, 0]
+
+console.log(rotated([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+
+// 4 5 6 => 6 9
+// 7 8 9 => 5 8
+//       => 4 7
+
+// [0, 0], [0, 1], [0, 2] => [0, 2], [1, 2]
+// [1, 0], [1, 1], [1, 2] => [0, 1], [1, 1]
+//                        => [0, 0], [1, 0]
+
+console.log(rotated([[4, 5, 6], [7, 8, 9]]));
+
+// 1 2 => 2 4 6
+// 3 4 => 1 3 5
+// 5 6 =>
+
+// [0, 0], [0, 1] => [0, 1], [1, 1], [2, 1]
+// [1, 0], [1, 1] => [0, 0], [1, 0], [2, 0]
+// [2, 0], [2, 1] =>
+
+console.log(rotated([[1, 2], [3, 4], [5, 6]]));
+
+console.log(rotated([[1]]));
+console.log(rotated([[]]));
+
+const snail = array => {
+  let result = [];
+  // while (array.length) {
+  // while (array[0][0]) {
+  while (array[0].length) {
+    result = result.concat(array.shift());
+    console.log(result);
+    array = rotated(array);
+  }
+  return result;
+};
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
