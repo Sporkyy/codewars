@@ -1,5 +1,5 @@
 // 5 kyu | RGB To Hex Conversion
-// https://www.codewars.com/kata/rgb-to-hex-conversion/train/javascript
+// https://www.codewars.com/kata/rgb-to-hex-conversion/
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
