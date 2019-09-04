@@ -56,29 +56,54 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const memo = {};
+// const memo = {};
 
-const isPrime = value => {
-  if (memo[value]) return memo[value];
-  for (var i = 2; i < value; i++) {
-    if (value % i === 0) {
-      memo[value] = false;
+// const isPrime = n => {
+//   if (memo[n]) return memo;
+//   for (let k = 2; k <= Math.sqrt(n); k++)
+//     if (0 === n % k) {
+//       memo[n] = false;
+//       return false;
+//     }
+//   memo[n] = true;
+//   return true;
+// };
+
+// const primeFactors = n => {
+//   if (isPrime(n)) return `(${n})`;
+//   const used = {};
+//   loop: while (1 < n) {
+//     // console.log(n);
+//     for (let i = 2; i < n * 2; i++) {
+//       // console.log(n);
+//       // console.log(i);
+//       if (1 === n) break loop;
+//       if (!isPrime(i) || 0 !== n % i) continue;
+//       n /= i;
+//       if ('undefined' !== typeof used[i]) used[i]++;
+//       else used[i] = 1;
+//     }
+//   }
+//   return Object.entries(used)
+//     .map(([f, m]) => (1 === m ? `(${f})` : `(${f}**${m})`))
+//     .join('');
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+const isPrime = n => {
+  for (let k = 2; k <= Math.sqrt(n); k++)
+    if (0 === n % k) {
       return false;
     }
-  }
-  memo[value] = 1 < value;
-  return 1 < value;
+  return true;
 };
 
 const primeFactors = n => {
   if (isPrime(n)) return `(${n})`;
   const used = {};
-  loop: while (1 < n) {
-    // console.log(n);
+  while (1 < n) {
     for (let i = 2; i < n * 2; i++) {
-      // console.log(n);
-      // console.log(i);
-      if (1 === n) break loop;
       if (!isPrime(i) || 0 !== n % i) continue;
       n /= i;
       if ('undefined' !== typeof used[i]) used[i]++;
