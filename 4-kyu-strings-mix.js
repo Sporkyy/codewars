@@ -37,67 +37,71 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 /**
- *
- *
  * @param {string} s1
  * @param {string} s2
  * @returns {string}
  */
 const mix = (s1, s2) => {
   const s1Cnts = new Array(26).fill(0);
-  console.log(s1Cnts);
 
   for (let i = 0; i <= s1.length; i++) {
     const code = s1.charCodeAt(i) - 97;
-    if (code < 0 || 26 < code) continue;
+    if (isNaN(code) || code < 0 || 26 < code) continue;
+    // console.log(code);
     s1Cnts[code]++;
   }
-
-  console.log(s1Cnts);
 
   const s2Cnts = new Array(26).fill(0);
 
   for (let i = 0; i <= s2.length; i++) {
     const code = s2.charCodeAt(i) - 97;
-    if (code < 0 || 26 < code) continue;
+    if (isNaN(code) || code < 0 || 26 < code) continue;
     s2Cnts[code]++;
   }
 
-  console.log(s2Cnts);
+  const substrings = [];
 
-  const maxCnts = new Array(26);
-
-  for (let i = 0; i <= 26; i++) {
-    if (s2Cnts[i] < s1Cnts[i]) maxCnts = [1, s1Cnts[i]];
-    else if (s1Cnts[i] === s2Cnts[i]) maxCnts = [2, s1Cnts[i]];
-    else maxCnts[i] = [2, s2Cnts[i]];
+  for (let i = 0; i <= 25; i++) {
+    if (s1Cnts[i] <= 1 && s2Cnts[i] <= 1) continue;
+    let id, count;
+    if (s2Cnts[i] < s1Cnts[i]) [id, count] = [1, s1Cnts[i]];
+    else if (s1Cnts[i] === s2Cnts[i]) [id, count] = ['=', s1Cnts[i]];
+    else [id, count] = [2, s2Cnts[i]];
+    const char = String.fromCharCode(97 + i);
+    substrings.push(`${id}:${char.repeat(count)}`);
   }
 
-  console.log(maxCnts);
+  return substrings
+    .sort((a, b) => {
+      if (a.length !== b.length) return b.length - a.length;
+      if (a.charCodeAt(0) !== b.charCodeAt(0)) return a.charCodeAt(0) - b.charCodeAt(0);
+      return a[2].localeCompare(b[2]);
+    })
+    .join('/');
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 const assert = require('assert');
 
-console.log(mix('Are they here', 'yes, they are here'));
-// assert.strictEqual(mix('Are they here', 'yes, they are here'), '2:eeeee/2:yy/=:hh/=:rr');
+// console.log(mix('Are they here', 'yes, they are here'));
+assert.strictEqual(mix('Are they here', 'yes, they are here'), '2:eeeee/2:yy/=:hh/=:rr');
 
-// assert.strictEqual(
-//   mix('looping is fun but dangerous', 'less dangerous than coding'),
-//   '1:ooo/1:uuu/2:sss/=:nnn/1:ii/2:aa/2:dd/2:ee/=:gg',
-// );
+assert.strictEqual(
+  mix('looping is fun but dangerous', 'less dangerous than coding'),
+  '1:ooo/1:uuu/2:sss/=:nnn/1:ii/2:aa/2:dd/2:ee/=:gg',
+);
 
-// assert.strictEqual(
-//   mix(' In many languages', " there's a pair of functions"),
-//   '1:aaa/1:nnn/1:gg/2:ee/2:ff/2:ii/2:oo/2:rr/2:ss/2:tt',
-// );
+assert.strictEqual(
+  mix(' In many languages', " there's a pair of functions"),
+  '1:aaa/1:nnn/1:gg/2:ee/2:ff/2:ii/2:oo/2:rr/2:ss/2:tt',
+);
 
-// assert.strictEqual(mix('Lords of the Fallen', 'gamekult'), '1:ee/1:ll/1:oo');
+assert.strictEqual(mix('Lords of the Fallen', 'gamekult'), '1:ee/1:ll/1:oo');
 
-// assert.strictEqual(mix('codewars', 'codewars'), '');
+assert.strictEqual(mix('codewars', 'codewars'), '');
 
-// assert.strictEqual(
-//   mix('A generation must confront the looming ', 'codewarrs'),
-//   '1:nnnnn/1:ooooo/1:tttt/1:eee/1:gg/1:ii/1:mm/=:rr',
-// );
+assert.strictEqual(
+  mix('A generation must confront the looming ', 'codewarrs'),
+  '1:nnnnn/1:ooooo/1:tttt/1:eee/1:gg/1:ii/1:mm/=:rr',
+);
