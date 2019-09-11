@@ -170,25 +170,21 @@
 const nextBigger = n => {
   const digits = [...n.toString()].map(n => parseInt(n));
   for (let i = digits.length - 1; 0 <= i; i--) {
-    let swapPosition,
-      swapDigit = Infinity;
-    for (let j = i + 1; j < digits.length; j++) {
-      if (digits[i] < digits[j] && digits[j] < swapDigit) {
+    let swapPosition;
+    for (let j = i + 1, smallestLargest; j < digits.length; j++) {
+      if (
+        digits[i] < digits[j] &&
+        (!smallestLargest || digits[j] < smallestLargest)
+      ) {
         swapPosition = j;
-        swapDigit = digits[j];
+        smallestLargest = digits[j];
       }
     }
-    // console.log(swapPosition, swapDigit);
-    if (swapPosition) {
-      [digits[i], digits[swapPosition]] = [digits[swapPosition], digits[i]];
-      // console.log(digits);
-      const firstHalf = digits.slice(0, i + 1);
-      // console.log(firstHalf);
-      const lastHalf = digits.slice(i + 1, digits.length).sort((a, b) => a - b);
-      // console.log(lastHalf);
-      // console.log(firstHalf.concat(lastHalf));
-      return parseInt(firstHalf.concat(lastHalf).join(''));
-    }
+    if ('undefined' === typeof swapPosition) continue;
+    [digits[i], digits[swapPosition]] = [digits[swapPosition], digits[i]];
+    const firstHalf = digits.slice(0, i + 1);
+    const lastHalf = digits.slice(i + 1, digits.length).sort((a, b) => a - b);
+    return parseInt(firstHalf.concat(lastHalf).join(''));
   }
   return -1;
 };
@@ -203,8 +199,6 @@ assert.strictEqual(nextBigger(12), 21);
 // console.log(nextBigger(513));
 assert.strictEqual(nextBigger(513), 531);
 
-// 2 0 1 7
-// 2 0 7 1
 // console.log(nextBigger(2017));
 assert.strictEqual(nextBigger(2017), 2071);
 
