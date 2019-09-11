@@ -167,17 +167,44 @@
 /**
  * @param {number} n
  */
+// const nextBigger = n => {
+//   const digits = [...n.toString()].map(n => parseInt(n));
+//   for (let i = digits.length - 1; 0 <= i; i--) {
+//     let swapPosition;
+//     for (let j = i + 1, smallestLargest; j < digits.length; j++) {
+//       if (
+//         digits[i] < digits[j] &&
+//         (!smallestLargest || digits[j] < smallestLargest)
+//       ) {
+//         swapPosition = j;
+//         smallestLargest = digits[j];
+//       }
+//     }
+//     if ('undefined' === typeof swapPosition) continue;
+//     [digits[i], digits[swapPosition]] = [digits[swapPosition], digits[i]];
+//     const firstHalf = digits.slice(0, i + 1);
+//     const lastHalf = digits.slice(i + 1, digits.length).sort((a, b) => a - b);
+//     return parseInt(firstHalf.concat(lastHalf).join(''));
+//   }
+//   return -1;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number} n
+ */
 const nextBigger = n => {
   const digits = [...n.toString()].map(n => parseInt(n));
   for (let i = digits.length - 1; 0 <= i; i--) {
     let swapPosition;
-    for (let j = i + 1, smallestLargest; j < digits.length; j++) {
+    for (let j = i + 1; j < digits.length; j++) {
       if (
         digits[i] < digits[j] &&
-        (!smallestLargest || digits[j] < smallestLargest)
+        ('undefined' === typeof swapPosition ||
+          digits[j] < digits[swapPosition])
       ) {
         swapPosition = j;
-        smallestLargest = digits[j];
       }
     }
     if ('undefined' === typeof swapPosition) continue;
@@ -223,3 +250,13 @@ assert.strictEqual(nextBigger(20), -1);
 assert.strictEqual(nextBigger(200), -1);
 
 assert.strictEqual(nextBigger(374), 437);
+
+assert.strictEqual(nextBigger(123456789), 123456798);
+
+assert.strictEqual(nextBigger(1234567890), 1234567908);
+
+assert.strictEqual(nextBigger(9876543210), -1);
+
+assert.strictEqual(nextBigger(9999999999), -1);
+
+assert.strictEqual(nextBigger(59884848459853), 59884848483559);
