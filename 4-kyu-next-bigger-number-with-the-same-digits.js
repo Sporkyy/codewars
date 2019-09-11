@@ -143,20 +143,51 @@
 /**
  * @param {number} n
  */
+// const nextBigger = n => {
+//   const digits = [...n.toString()].map(n => parseInt(n));
+//   for (let i = digits.length - 1; 0 <= i; i--) {
+//     for (let j = i + 1; j < digits.length; j++) {
+//       if (digits[i] < digits[j]) {
+//         [digits[i], digits[j]] = [digits[j], digits[i]];
+//         // console.log(digits);
+//         const firstHalf = digits.slice(0, i + 1);
+//         // console.log(firstHalf);
+//         const lastHalf = digits.slice(j, digits.length).sort((a, b) => a - b);
+//         // console.log(lastHalf);
+//         // console.log(firstHalf.concat(lastHalf));
+//         return parseInt(firstHalf.concat(lastHalf).join(''));
+//       }
+//     }
+//   }
+//   return -1;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number} n
+ */
 const nextBigger = n => {
   const digits = [...n.toString()].map(n => parseInt(n));
   for (let i = digits.length - 1; 0 <= i; i--) {
+    let swapPosition,
+      swapDigit = Infinity;
     for (let j = i + 1; j < digits.length; j++) {
-      if (digits[i] < digits[j]) {
-        [digits[i], digits[j]] = [digits[j], digits[i]];
-        // console.log(digits);
-        const firstHalf = digits.slice(0, i + 1);
-        // console.log(firstHalf);
-        const lastHalf = digits.slice(j, digits.length).sort((a, b) => a - b);
-        // console.log(lastHalf);
-        // console.log(firstHalf.concat(lastHalf));
-        return parseInt(firstHalf.concat(lastHalf).join(''));
+      if (digits[i] < digits[j] && digits[j] < swapDigit) {
+        swapPosition = j;
+        swapDigit = digits[j];
       }
+    }
+    // console.log(swapPosition, swapDigit);
+    if (swapPosition) {
+      [digits[i], digits[swapPosition]] = [digits[swapPosition], digits[i]];
+      // console.log(digits);
+      const firstHalf = digits.slice(0, i + 1);
+      // console.log(firstHalf);
+      const lastHalf = digits.slice(i + 1, digits.length).sort((a, b) => a - b);
+      // console.log(lastHalf);
+      // console.log(firstHalf.concat(lastHalf));
+      return parseInt(firstHalf.concat(lastHalf).join(''));
     }
   }
   return -1;
