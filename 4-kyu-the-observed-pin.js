@@ -92,7 +92,7 @@ const getPINs = observed =>
     .reduce((acc, curr) =>
       acc
         .map(head => curr.map(next => head + next))
-        .reduce((flattened, item) => flattened.concat(item)),
+        .reduce((flattened, arr) => flattened.concat(arr)),
     );
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
