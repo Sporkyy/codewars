@@ -42,39 +42,87 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// const sum_pairs = (ints, s) => {
+//   const dict = {};
+//   let firstP2;
+//   for (let p1 = 0, p2 = 1, comp = s - ints[0]; p1 < ints.length; p2++) {
+//     if (firstP2 && firstP2 < p2) p2 = Infinity;
+//     if (ints.length < p2) {
+//       p1++;
+//       p2 = p1 + 1;
+//       comp = s - ints[p1];
+//     }
+//     if (ints[p2] === comp) {
+//       if (!firstP2) firstP2 = p2;
+//       if ('undefined' === typeof dict[p2 - p1]) {
+//         dict[p2 - p1] = [ints[p1], ints[p2]];
+//       }
+//       p2 = Infinity;
+//     }
+//   }
+//   // console.log(dict);
+//   if (0 === Object.keys(dict).length) return undefined;
+//   // console.log(dict[Math.min(...Object.keys(dict).map(s => parseInt(s)))]);
+//   return dict[Math.min(...Object.keys(dict).map(s => parseInt(s)))];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// const sum_pairs = (ints, s) => {
+//   const dict = {};
+//   for (let i = 0; i < ints.length; i++) {
+//     if (dict.hasOwnProperty(ints[i])) dict[ints[i]].push(i);
+//     else dict[ints[i]] = [i];
+//   }
+//   console.log(dict);
+//   let num1Index = Infinity;
+//   let num2Index = Infinity;
+//   for (let i = 0; i < ints.length; i++) {
+//     const comp = s - ints[i];
+//     console.log(ints[i], comp);
+//     if (!dict.hasOwnProperty(comp)) continue;
+//     console.log(ints[i], comp);
+//     let compI;
+//     console.log(dict[comp]);
+//     for (let j = 0; j < dict[comp].length; j++) {
+//       if (i < dict[comp][j]) {
+//         compI = j;
+//         break;
+//       }
+//     }
+//     if ('undefined' === typeof compI) continue;
+//     console.log(i, compI);
+//     console.log(ints[i], ints[compI]);
+//     //   // console.log(indices);
+//     //   if (i < compI && i + compI < indices[0] + indices[1]) {
+//     //     indices = [i, compI];
+//     //   }
+//   }
+//   // if (Infinity === indices[0]) return undefined;
+//   // // console.log(indices);
+//   // return [ints[indices[0]], ints[indices[1]]];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 const sum_pairs = (ints, s) => {
-  const dict = {};
-  let firstP2;
-  for (let p1 = 0, p2 = 1, comp = s - ints[0]; p1 < ints.length; p2++) {
-    if (firstP2 && firstP2 < p2) p2 = Infinity;
-    if (ints.length < p2) {
-      p1++;
-      p2 = p1 + 1;
-      comp = s - ints[p1];
-    }
-    if (ints[p2] === comp) {
-      if (!firstP2) firstP2 = p2;
-      if ('undefined' === typeof dict[p2 - p1]) {
-        dict[p2 - p1] = [ints[p1], ints[p2]];
-      }
-      p2 = Infinity;
-    }
+  let indices = [Infinity, Infinity];
+  for (let i = 0; i < indices[1] && i < ints.length; i++) {
+    compI = ints.slice(i + 1).indexOf(s - ints[i]);
+    if (compI < 0) continue;
+    compI += i + 1;
+    if (-1 < compI && i < compI && i < indices[1] && compI < indices[1])
+      indices = [i, compI];
   }
-  // console.log(dict);
-  if (0 === Object.keys(dict).length) return undefined;
-  // console.log(dict[Math.min(...Object.keys(dict).map(s => parseInt(s)))]);
-  return dict[Math.min(...Object.keys(dict).map(s => parseInt(s)))];
+  if (Infinity === indices[0]) return undefined;
+  return [ints[indices[0]], ints[indices[1]]];
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 const assert = require('assert');
 
-// console.log(sum_pairs(l1, 8));
-
 assert.deepStrictEqual(sum_pairs([1, 4, 8, 7, 3, 15], 8), [1, 7]);
-
-// console.log(sum_pairs(l2, -6));
 
 assert.deepStrictEqual(sum_pairs([1, -2, 3, 0, -6, 1], -6), [0, -6]);
 
