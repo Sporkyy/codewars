@@ -105,14 +105,30 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// const sum_pairs = (ints, s) => {
+//   let indices = [Infinity, Infinity];
+//   for (let i = 0; i < indices[1] && i < ints.length; i++) {
+//     compI = ints.slice(i + 1).indexOf(s - ints[i]);
+//     if (compI < 0) continue;
+//     compI += i + 1;
+//     if (-1 < compI && i < compI && i < indices[1] && compI < indices[1])
+//       indices = [i, compI];
+//   }
+//   if (Infinity === indices[0]) return undefined;
+//   return [ints[indices[0]], ints[indices[1]]];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 const sum_pairs = (ints, s) => {
   let indices = [Infinity, Infinity];
+  let seen = {};
   for (let i = 0; i < indices[1] && i < ints.length; i++) {
-    compI = ints.slice(i + 1).indexOf(s - ints[i]);
-    if (compI < 0) continue;
-    compI += i + 1;
-    if (-1 < compI && i < compI && i < indices[1] && compI < indices[1])
-      indices = [i, compI];
+    if (seen.hasOwnProperty(ints[i])) continue;
+    seen[ints[i]] = true;
+    const ci = ints.indexOf(s - ints[i], i + 1);
+    if (ci < 0 || indices[1] < ci) continue;
+    indices = [i, ci];
   }
   if (Infinity === indices[0]) return undefined;
   return [ints[indices[0]], ints[indices[1]]];
