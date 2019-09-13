@@ -122,7 +122,7 @@
 
 const sum_pairs = (ints, s) => {
   let indices = [Infinity, Infinity];
-  let seen = {};
+  const seen = {};
   for (let i = 0; i < indices[1] && i < ints.length; i++) {
     if (seen.hasOwnProperty(ints[i])) continue;
     seen[ints[i]] = true;
