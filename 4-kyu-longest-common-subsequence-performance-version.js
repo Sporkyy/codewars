@@ -159,11 +159,48 @@
  * @param {string} x
  * @param {string} y
  */
+// const lcs = (x, y) => {
+//   if (y.length < x.length) return lcs(y, x);
+//   const possibilities = [...x].reduce((acc, curr) => {
+//     for (let value of Array.from(acc)) acc.add(`${value}${curr}`);
+//     return acc.add(curr);
+//   }, new Set());
+//   // console.log(possibilities);
+//   const candidates = new Array(x.length).fill().map(u => []);
+//   // console.log(candidates);
+//   for (let possibility of possibilities) {
+//     candidates[possibility.length - 1].push(possibility);
+//   }
+//   // console.log(candidates);
+//   for (let i = candidates.length - 1; 0 <= i; i--) {
+//     for (let j = candidates[i].length - 1; 0 <= j; j--) {
+//       if (new RegExp([...candidates[i][j]].join('.*')).test(y)) {
+//         return candidates[i][j];
+//       }
+//     }
+//   }
+//   return '';
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {string} x
+ * @param {string} y
+ */
 const lcs = (x, y) => {
   if (y.length < x.length) return lcs(y, x);
+  if (0 === x.length || 0 === y.length) return '';
   const possibilities = [...x].reduce((acc, curr) => {
-    for (let value of Array.from(acc)) acc.add(`${value}${curr}`);
-    return acc.add(curr);
+    for (let value of Array.from(acc)) {
+      const temp = `${value}${curr}`;
+      if (!acc.has(temp) && new RegExp([...temp].join('.*')).test(y)) {
+        acc.add(temp);
+      }
+    }
+    if (!acc.has(curr) && -1 < y.indexOf(curr)) acc.add(curr);
+    // console.log(acc);
+    return acc;
   }, new Set());
   // console.log(possibilities);
   const candidates = new Array(x.length).fill().map(u => []);
@@ -184,7 +221,9 @@ const lcs = (x, y) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+// new RegExp([...'nota'].join('.*')).test(y);
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 assert.strictEqual(lcs('', ''), '');
 assert.strictEqual(lcs('abc', ''), '');
