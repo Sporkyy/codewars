@@ -65,21 +65,15 @@
  */
 // const lcs = (x, y) => {
 //   if (y.length < x.length) return lcs(y, x);
-//   // Memoize all permuations
 //   const temp = [...x].reduce((acc, curr) => {
 //     for (let key of Object.keys(acc)) acc[`${key}${curr}`] = 0;
 //     acc[curr] = 0;
 //     return acc;
 //   }, {});
-//   console.log(temp);
-//   // Sort them
 //   const options = Object.keys(temp).sort(
 //     ({ length: a }, { length: b }) => b - a,
 //   );
-//   console.log(options);
-//   // Start with the longest ones
 //   for (let option of options) {
-//     // Return the first one that matches
 //     if (new RegExp([...option].join('.*')).test(y)) {
 //       return option;
 //     }
@@ -95,24 +89,22 @@
  */
 const lcs = (x, y) => {
   if (y.length < x.length) return lcs(y, x);
-  // Memoize all permuations
-  const temp = [...x].reduce((acc, curr) => {
-    for (let key of Object.keys(acc)) acc[`${key}${curr}`] = 0;
-    acc[curr] = 0;
-    return acc;
-  }, {});
-  // Sort them
-  const options = Object.keys(temp).sort(
-    ({ length: a }, { length: b }) => b - a,
-  );
-  // Start with the longest ones
-  for (let option of options) {
-    // Return the first one that matches
-    if (new RegExp([...option].join('.*')).test(y)) {
-      return option;
-    }
+  const poss = {};
+  for (let c of [...x]) {
+    // console.log(c);
+    for (let key of Object.keys(poss)) poss[`${key}${c}`] = 0;
+    poss[c] = 0;
   }
-  return '';
+  // console.log(poss);
+  const cand = {};
+  for (let p of Object.keys(poss)) {
+    const len = p.length;
+    if ('undefined' !== typeof cand[len]) continue;
+    if (new RegExp([...p].join('.*')).test(y)) cand[len] = p;
+  }
+  // console.log(cand);
+  const result = cand[Object.keys(cand).sort((a, b) => b - a)[0]];
+  return result || '';
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
