@@ -63,6 +63,36 @@
  * @param {string} x
  * @param {string} y
  */
+// const lcs = (x, y) => {
+//   if (y.length < x.length) return lcs(y, x);
+//   // Memoize all permuations
+//   const temp = [...x].reduce((acc, curr) => {
+//     for (let key of Object.keys(acc)) acc[`${key}${curr}`] = 0;
+//     acc[curr] = 0;
+//     return acc;
+//   }, {});
+//   console.log(temp);
+//   // Sort them
+//   const options = Object.keys(temp).sort(
+//     ({ length: a }, { length: b }) => b - a,
+//   );
+//   console.log(options);
+//   // Start with the longest ones
+//   for (let option of options) {
+//     // Return the first one that matches
+//     if (new RegExp([...option].join('.*')).test(y)) {
+//       return option;
+//     }
+//   }
+//   return '';
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {string} x
+ * @param {string} y
+ */
 const lcs = (x, y) => {
   if (y.length < x.length) return lcs(y, x);
   // Memoize all permuations
@@ -71,12 +101,10 @@ const lcs = (x, y) => {
     acc[curr] = 0;
     return acc;
   }, {});
-  console.log(temp);
   // Sort them
   const options = Object.keys(temp).sort(
     ({ length: a }, { length: b }) => b - a,
   );
-  console.log(options);
   // Start with the longest ones
   for (let option of options) {
     // Return the first one that matches
