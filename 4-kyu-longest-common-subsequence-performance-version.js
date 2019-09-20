@@ -113,6 +113,52 @@
  * @param {string} x
  * @param {string} y
  */
+// const lcs = (x, y) => {
+//   if (y.length < x.length) return lcs(y, x);
+//   const possibilities = [...x].reduce((acc, curr) => {
+//     for (let value of Array.from(acc)) acc.add(`${value}${curr}`);
+//     return acc.add(curr);
+//   }, new Set());
+//   // console.log(possibilities);
+//   const result = Array.from(possibilities).reduce(
+//     (acc, curr) =>
+//       acc.length < curr.length && new RegExp([...curr].join('.*')).test(y)
+//         ? curr
+//         : acc,
+//     '',
+//   );
+//   // console.log(result);
+//   return result || '';
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {string} x
+ * @param {string} y
+ */
+// const lcs = (x, y) =>
+//   y.length < x.length
+//     ? lcs(y, x)
+//     : Array.from(
+//         [...x].reduce((acc, curr) => {
+//           for (let value of Array.from(acc)) acc.add(`${value}${curr}`);
+//           return acc.add(curr);
+//         }, new Set()),
+//       ).reduce(
+//         (acc, curr) =>
+//           acc.length < curr.length && new RegExp([...curr].join('.*')).test(y)
+//             ? curr
+//             : acc,
+//         '',
+//       ) || '';
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {string} x
+ * @param {string} y
+ */
 const lcs = (x, y) => {
   if (y.length < x.length) return lcs(y, x);
   const possibilities = [...x].reduce((acc, curr) => {
@@ -120,15 +166,20 @@ const lcs = (x, y) => {
     return acc.add(curr);
   }, new Set());
   // console.log(possibilities);
-  const result = Array.from(possibilities).reduce(
-    (acc, curr) =>
-      acc.length < curr.length && new RegExp([...curr].join('.*')).test(y)
-        ? curr
-        : acc,
-    '',
-  );
-  // console.log(result);
-  return result || '';
+  const candidates = new Array(x.length).fill().map(u => []);
+  // console.log(candidates);
+  for (let possibility of possibilities) {
+    candidates[possibility.length - 1].push(possibility);
+  }
+  // console.log(candidates);
+  for (let i = candidates.length - 1; 0 <= i; i--) {
+    for (let j = candidates[i].length - 1; 0 <= j; j--) {
+      if (new RegExp([...candidates[i][j]].join('.*')).test(y)) {
+        return candidates[i][j];
+      }
+    }
+  }
+  return '';
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -138,6 +189,7 @@ const assert = require('assert');
 assert.strictEqual(lcs('', ''), '');
 assert.strictEqual(lcs('abc', ''), '');
 assert.strictEqual(lcs('', 'abc'), '');
+assert.strictEqual(lcs('abc', 'abc'), 'abc');
 assert.strictEqual(lcs('a', 'b'), '');
 assert.strictEqual(lcs('a', 'a'), 'a');
 assert.strictEqual(lcs('abc', 'ac'), 'ac');
