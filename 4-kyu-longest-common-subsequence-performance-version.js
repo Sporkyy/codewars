@@ -87,23 +87,47 @@
  * @param {string} x
  * @param {string} y
  */
+// const lcs = (x, y) => {
+//   if (y.length < x.length) return lcs(y, x);
+//   const poss = {};
+//   for (let c of [...x]) {
+//     // console.log(c);
+//     for (let key of Object.keys(poss)) poss[`${key}${c}`] = 0;
+//     poss[c] = 0;
+//   }
+//   // console.log(poss);
+//   const cand = {};
+//   for (let p of Object.keys(poss)) {
+//     const len = p.length;
+//     if ('undefined' !== typeof cand[len]) continue;
+//     if (new RegExp([...p].join('.*')).test(y)) cand[len] = p;
+//   }
+//   // console.log(cand);
+//   const result = cand[Object.keys(cand).sort((a, b) => b - a)[0]];
+//   return result || '';
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {string} x
+ * @param {string} y
+ */
 const lcs = (x, y) => {
   if (y.length < x.length) return lcs(y, x);
-  const poss = {};
-  for (let c of [...x]) {
-    // console.log(c);
-    for (let key of Object.keys(poss)) poss[`${key}${c}`] = 0;
-    poss[c] = 0;
-  }
-  // console.log(poss);
-  const cand = {};
-  for (let p of Object.keys(poss)) {
-    const len = p.length;
-    if ('undefined' !== typeof cand[len]) continue;
-    if (new RegExp([...p].join('.*')).test(y)) cand[len] = p;
-  }
-  // console.log(cand);
-  const result = cand[Object.keys(cand).sort((a, b) => b - a)[0]];
+  const possibilities = [...x].reduce((acc, curr) => {
+    for (let value of Array.from(acc)) acc.add(`${value}${curr}`);
+    return acc.add(curr);
+  }, new Set());
+  // console.log(possibilities);
+  const result = Array.from(possibilities).reduce(
+    (acc, curr) =>
+      acc.length < curr.length && new RegExp([...curr].join('.*')).test(y)
+        ? curr
+        : acc,
+    '',
+  );
+  // console.log(result);
   return result || '';
 };
 
