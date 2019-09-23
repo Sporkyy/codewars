@@ -96,62 +96,128 @@
 /**
  * @param {string} string
  */
-const parseInt = string => {
-  // console.log(string);
-  string = string.trim();
-  if (0 === string.length) return 0;
+// const parseInt = string => {
+//   // console.log(string);
+//   string = string.trim();
+//   if (0 === string.length) return 0;
 
-  if (/^\w+$/.test(string)) {
-    // console.log(string);
-    let total = 0;
-    const prefixes = {
-      ze: () => 0,
-      on: () => 1,
-      el: () => 1,
-      tw: () => 2,
-      th: () => 3,
-      fo: () => 4,
-      fi: () => 5,
-      si: () => 6,
-      se: () => 7,
-      ei: () => 8,
-      ni: () => 9,
-      te: () => 10,
-    };
-    total += prefixes[string.slice(0, 2)]();
-    if (string.includes('een') || string.includes('el')) total += 10;
-    else if (string.includes('ty')) total *= 10;
-    return total;
-  }
+//   if (/^\w+$/.test(string)) {
+//     // console.log(string);
+//     let total = 0;
+//     const prefixes = {
+//       ze: () => 0,
+//       on: () => 1,
+//       el: () => 1,
+//       tw: () => 2,
+//       th: () => 3,
+//       fo: () => 4,
+//       fi: () => 5,
+//       si: () => 6,
+//       se: () => 7,
+//       ei: () => 8,
+//       ni: () => 9,
+//       te: () => 10,
+//     };
+//     total += prefixes[string.slice(0, 2)]();
+//     if (string.includes('een') || string.includes('el')) total += 10;
+//     else if (string.includes('ty')) total *= 10;
+//     return total;
+//   }
 
-  string = string.replace(/\s+and\s+/, ' ').replace('-', ' ');
+//   string = string.replace(/\s+and\s+/, ' ').replace('-', ' ');
 
+//   let total = 0;
+//   let [millions, thousands, hundreds, tens] = [0, 0, 0, 0, 0];
+
+//   if (string.includes('million')) {
+//     [millions, string] = string.split('million');
+//     total += parseInt(millions) * 1000000;
+//   }
+
+//   if (string.includes('thousand')) {
+//     [thousands, string] = string.split('thousand');
+//     total += parseInt(thousands) * 1000;
+//   }
+
+//   if (string.includes('hundred')) {
+//     [hundreds, string] = string.split('hundred');
+//     total += parseInt(hundreds) * 100;
+//   }
+
+//   if (string.includes('ty')) {
+//     [, tens, string] = string.match(/(\w+ty)\s*(.*)/);
+//     total += parseInt(tens);
+//   }
+
+//   total += parseInt(string);
+
+//   return total;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {string} word
+ * @returns {number}
+ */
+const parseWord = word => {
+  word = word.trim();
+  if (undefined === typeof word || 0 === word.length) return 0;
   let total = 0;
-  let [millions, thousands, hundreds, tens] = [0, 0, 0, 0, 0];
-
-  if (string.includes('million')) {
-    [millions, string] = string.split('million');
-    total += parseInt(millions) * 1000000;
-  }
-
-  if (string.includes('thousand')) {
-    [thousands, string] = string.split('thousand');
-    total += parseInt(thousands) * 1000;
-  }
-
-  if (string.includes('hundred')) {
-    [hundreds, string] = string.split('hundred');
-    total += parseInt(hundreds) * 100;
-  }
-
-  if (string.includes('ty')) {
-    [, tens, string] = string.match(/(\w+ty)\s*(.*)/);
-    total += parseInt(tens);
-  }
-
-  total += parseInt(string);
-
+  const prefixes = {
+    ze: () => 0,
+    on: () => 1,
+    el: () => 1,
+    tw: () => 2,
+    th: () => 3,
+    fo: () => 4,
+    fi: () => 5,
+    si: () => 6,
+    se: () => 7,
+    ei: () => 8,
+    ni: () => 9,
+    te: () => 10,
+  };
+  total += prefixes[word.slice(0, 2)]();
+  if (word.includes('een') || word.includes('el')) total += 10;
+  else if (word.includes('ty')) total *= 10;
   return total;
+};
+
+/**
+ * @param {string} string
+ * @returns {number}
+ */
+const parseInt = string => {
+  string = string.replace(/\s+and\s+/g, ' ').replace(/-/g, ' ');
+
+  let [millions, thousands, hundreds, tens] = [0, 0, 0, 0];
+
+  let millionParts = string.split('million');
+  if (2 === millionParts.length) {
+    [millions, string] = millionParts;
+    millions = parseInt(millions) * 1000000;
+  }
+
+  let thousandParts = string.split('thousand');
+  if (2 === thousandParts.length) {
+    [thousands, string] = thousandParts;
+    thousands = parseInt(thousands) * 1000;
+  }
+
+  let hundredParts = string.split('hundred');
+  if (2 === hundredParts.length) {
+    [hundreds, string] = hundredParts;
+    hundreds = parseWord(hundreds) * 100;
+  }
+
+  let tensParts = string.split('ty');
+  if (2 === tensParts.length) {
+    [tens, string] = tensParts;
+    tens = parseWord(tens) * 10;
+  }
+
+  return millions + thousands + hundreds + tens + parseWord(string);
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -181,8 +247,15 @@ assert.strictEqual(parseInt('forty-six'), 46);
 assert.strictEqual(parseInt('ninety'), 90);
 assert.strictEqual(parseInt('ninety four'), 94);
 
+assert.strictEqual(parseInt('one hundred and eighty-nine'), 189);
 assert.strictEqual(parseInt('one hundred and eighty nine'), 189);
+assert.strictEqual(parseInt('one hundred eighty nine'), 189);
+assert.strictEqual(parseInt('one hundred eighty-nine'), 189);
+
 assert.strictEqual(parseInt('two hundred forty-six'), 246);
+
+assert.strictEqual(parseInt('one thousand'), 1000);
+assert.strictEqual(parseInt('one thousand and one'), 1001);
 
 assert.strictEqual(
   parseInt('seven hundred eighty-three thousand nine hundred and nineteen'),
