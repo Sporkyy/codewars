@@ -2,6 +2,7 @@
 // https://www.codewars.com/kata/product-sum-numbers/
 
 /*
+
 A product-sum number is a natural number N which can be expressed as both
 the product and the sum of the same set of numbers.
 
@@ -25,6 +26,7 @@ Your task is to write an algorithm to compute the sum of all minimal
 product-sum numbers where 2 ≤ k ≤ n.
 
 Courtesy of ProjectEuler.net
+
 */
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -32,6 +34,8 @@ Courtesy of ProjectEuler.net
 const memo = new Map();
 // For sums, if necessary
 // const memo2 = new Map();
+
+const memo2 = new Map();
 
 const factor = n => {
   if (memo.has(n)) return memo.get(n);
@@ -61,15 +65,18 @@ const factor = n => {
 // console.log(factor(6));
 // console.log(memo);
 
+let lastRun;
+
 /**
  * @param {number} k
  * @returns {boolean}
  */
 const productSum = k => {
+  if (memo2.has(k)) return memo2.get(k);
   let result = [];
   theloop: for (i = 2; i <= k; i++) {
     // console.log(i);
-    for (j = 2; j <= 9999; j++) {
+    for (j = 2; j <= 99999; j++) {
       // console.log(j);
       const testFactors = factor(j).filter(a => a.length <= i);
       // console.log(testFactors);
@@ -78,17 +85,25 @@ const productSum = k => {
         const sum = set.reduce((acc, curr) => acc + curr);
         // console.log(sum);
         if (j === sum + i - set.length) {
+          // console.log(set);
           // console.log(j);
           result.push(j);
+          memo2.set(
+            i,
+            Array.from(new Set(result)).reduce((acc, curr) => acc + curr),
+          );
           continue theloop;
         }
       }
     }
   }
-  result = Array.from(new Set(result));
+
   // console.log(result);
-  return result.reduce((acc, curr) => acc + curr);
+  return memo2.get(k);
 };
+
+productSum(999);
+// console.log(memo2);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -101,6 +116,18 @@ assert.strictEqual(productSum(3), 10);
 assert.strictEqual(productSum(6), 30);
 
 assert.strictEqual(productSum(12), 61);
+
+// More tests from https://oeis.org/A104173/list
+
+assert.strictEqual(productSum(20), 151);
+
+assert.strictEqual(productSum(71), 1135);
+
+console.log(productSum(997));
+console.log(productSum(998));
+console.log(productSum(999));
+
+assert.strictEqual(productSum(71), 1135);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -132,5 +159,8 @@ k=9: 15 = 1 × 1 × 1 × 1 × 1 × 1 × 1 × 3 × 5
 
 k=10: 16 = 1 × 1 × 1 × 1 × 1 × 1 × 1 × 1 × 4 × 4
       16 = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 4 + 4
+
+k=11: 16 = 1 × 1 × 1 × 1 × 1 × 1 × 1 × 1 × 2 × 2 × 4
+      16 = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 2 + 4
 
 */
