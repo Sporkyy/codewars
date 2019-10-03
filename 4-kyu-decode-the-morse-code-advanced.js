@@ -120,6 +120,75 @@ const MORSE_CODE = {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {string} bits
+//  */
+// const decodeBits = bits => {
+//   bits = bits.replace(/^0*([01]+?)0*$/, '$1');
+//   freq = 1;
+//   if (bits.includes('0')) {
+//     let [min, max] = [Infinity, 0];
+//     for (let { length: len } of bits.match(/(0+)/g)) {
+//       if (len < min) min = len;
+//       if (max < len) max = len;
+//     }
+//     // console.log(min, max);
+//     if (min < max) {
+//       if (0 === min % 3) freq = min / 3;
+//       else if (0 === max % 7) freq = max / 7;
+//     } else {
+//       if (1 < min && min < 3) freq = min;
+//       else if (0 === min % 7) freq = min / 7;
+//       else if (0 === min % 3) freq = min / 3;
+//       else freq = min;
+//     }
+//   } else {
+//     freq = bits.length;
+//   }
+//   // console.log(freq);
+//   bits = bits.replace(new RegExp(`([01])\\1{${freq - 1}}`, 'g'), '$1');
+//   // console.log(bits);
+//   let morseCode = [];
+//   for (let bWord of bits.split('0000000')) {
+//     const mWord = [];
+//     for (let bChar of bWord.split('000')) {
+//       // console.log(bChar);
+//       let mChar = bChar;
+//       mChar = mChar.replace(/111/g, '-');
+//       mChar = mChar.replace(/1/g, '.');
+//       mChar = mChar.replace(/0/g, '');
+//       mWord.push(mChar);
+//     }
+//     morseCode.push(mWord);
+//   }
+//   // console.log(morseCode);
+//   morseCode = morseCode.map(w => w.join(' ')).join('   ');
+//   // console.log(morseCode);
+//   return morseCode;
+// };
+
+// /**
+//  * Copy+paste of my soltuion from previous kata
+//  * 6 kyu | Decode the Morse code
+//  * https://www.codewars.com/kata/decode-the-morse-code/
+//  *
+//  * @param {string} morseCode
+//  */
+// const decodeMorse = morseCode => {
+//   return morseCode
+//     .trim()
+//     .split(/\s{3,}/g)
+//     .map(word =>
+//       word
+//         .split(/\s+/)
+//         .map(code => MORSE_CODE[code])
+//         .join(''),
+//     )
+//     .join(' ');
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {string} bits
  */
@@ -127,32 +196,28 @@ const decodeBits = bits => {
   bits = bits.replace(/^0*([01]+?)0*$/, '$1');
   freq = 1;
   if (bits.includes('0')) {
-    let [min, max] = [Infinity, 0];
+    let [min, max] = [Number.MAX_VALUE, Number.MIN_VALUE];
     for (let { length: len } of bits.match(/(0+)/g)) {
       if (len < min) min = len;
       if (max < len) max = len;
     }
-    // console.log(min, max);
     if (min < max) {
       if (0 === min % 3) freq = min / 3;
       else if (0 === max % 7) freq = max / 7;
     } else {
-      if (1 < min && min < 3) freq = min;
-      else if (0 === min % 7) freq = min / 7;
+      if (2 === min) freq = 2;
       else if (0 === min % 3) freq = min / 3;
+      else if (0 === min % 7) freq = min / 7;
       else freq = min;
     }
   } else {
     freq = bits.length;
   }
-  // console.log(freq);
   bits = bits.replace(new RegExp(`([01])\\1{${freq - 1}}`, 'g'), '$1');
-  // console.log(bits);
   let morseCode = [];
   for (let bWord of bits.split('0000000')) {
     const mWord = [];
     for (let bChar of bWord.split('000')) {
-      // console.log(bChar);
       let mChar = bChar;
       mChar = mChar.replace(/111/g, '-');
       mChar = mChar.replace(/1/g, '.');
@@ -161,9 +226,7 @@ const decodeBits = bits => {
     }
     morseCode.push(mWord);
   }
-  // console.log(morseCode);
   morseCode = morseCode.map(w => w.join(' ')).join('   ');
-  // console.log(morseCode);
   return morseCode;
 };
 
@@ -236,24 +299,31 @@ assert.strictEqual(decodeMorse(decodeBits('11')), 'E');
 // Extra zeros handling
 // Expected: 'E', instead got: 'T'
 assert.strictEqual(decodeMorse(decodeBits('011')), 'E');
+
 // Expected: 'E', instead got: 'T'
 assert.strictEqual(decodeMorse(decodeBits('110')), 'E');
 
-// Log
-// 2 2
-// 0.6666666666666666
 // Expected: 'I', instead got: 'H'
-
 assert.strictEqual(decodeMorse(decodeBits('110011')), 'I');
 
-// Log
-// 5 5
-// 1.6666666666666667
 // Expected: 'I', instead got: 'DD'
 assert.strictEqual(decodeMorse(decodeBits('111110000011111')), 'I');
 
-// Log
-// 2 2
-// 0.6666666666666666
 // Expected: 'M', instead got: ''
 assert.strictEqual(decodeMorse(decodeBits('1110111')), 'M');
+
+// "1110000000111" is a good test
+// "- -" (runlength 1) is the only valid possibility
+assert.strictEqual(decodeMorse(decodeBits('1110000000111')), 'T T');
+
+// "111000111" is ambigous
+// both "- -" (runlength 1) as well as ".." (runlength 3) are valid
+assert.strictEqual(decodeMorse(decodeBits('111000111')), 'TT');
+
+// "111000111000111" is ambigous
+// both "- - -" (runlength 1) as well as "..." (runlength 3) are valid
+assert.strictEqual(decodeMorse(decodeBits('111000111000111')), 'TTT');
+
+// "111000000000111" is a good test
+// ". ." (runlength 3) is only 1 valid possibility
+assert.strictEqual(decodeMorse(decodeBits('111000000000111')), 'EE');
