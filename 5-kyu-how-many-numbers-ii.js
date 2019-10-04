@@ -90,7 +90,7 @@ const maxSumDig = (nmax, maxsm) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// const assert = require('assert');
+const assert = require('assert');
 
 assert.deepStrictEqual(maxSumDig(2000, 3), [11, 1110, 12555]);
 
