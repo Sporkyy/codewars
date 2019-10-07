@@ -136,17 +136,90 @@ Their digits are in increasing order
  * @param {number} k
  * @returns {Array}
  */
+// const findAll = (n, k) => {
+//   const results = [];
+//   const [min, max] = [
+//     parseInt(`1${'0'.repeat(k - 1)}`, 10),
+//     parseInt('9'.repeat(k), 10),
+//   ];
+//   const reDecreasing = new RegExp(
+//     '(?:9[0-8]|8[0-7]|7[0-6]|6[0-5]|5[0-4]|4[0-3]|3[0-2]|2[01]|10)',
+//   );
+//   outermost: for (let i = min; i <= max; i++) {
+//     if (reDecreasing.test(i)) continue outermost;
+//     let remaining = i;
+//     let sum = 0;
+//     let next;
+//     while (0 < remaining) {
+//       const digit = remaining % 10;
+//       if (next < digit) continue outermost;
+//       sum += digit;
+//       if (n < sum) continue outermost;
+//       remaining = Math.trunc(remaining / 10);
+//       next = digit;
+//     }
+//     if (n !== sum) continue outermost;
+//     results.push(i);
+//   }
+//   if (0 === results.length) return [];
+//   return [
+//     results.length,
+//     results[0].toString(),
+//     results[results.length - 1].toString(),
+//   ];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number} n
+ * @param {number} k
+ * @returns {Array}
+ */
+// const findAll = (n, k) => {
+//   const results = [];
+//   const [min, max] = [
+//     parseInt(`1${'0'.repeat(k - 1)}`, 10),
+//     parseInt('9'.repeat(k), 10),
+//   ];
+//   outermost: for (let i = min; i <= max; i++) {
+//     let remaining = i;
+//     let sum = 0;
+//     let next;
+//     while (0 < remaining) {
+//       const digit = remaining % 10;
+//       if (next < digit) continue outermost;
+//       sum += digit;
+//       if (n < sum) continue outermost;
+//       remaining = Math.trunc(remaining / 10);
+//       next = digit;
+//     }
+//     if (n !== sum) continue outermost;
+//     results.push(i);
+//   }
+//   if (0 === results.length) return [];
+//   return [
+//     results.length,
+//     results[0].toString(),
+//     results[results.length - 1].toString(),
+//   ];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number} n
+ * @param {number} k
+ * @returns {Array}
+ */
 const findAll = (n, k) => {
+  if (9 * k < n) return [];
   const results = [];
   const [min, max] = [
     parseInt(`1${'0'.repeat(k - 1)}`, 10),
-    parseInt('9'.repeat(k), 10),
+    parseInt(`${Math.ceil(n / k)}`.repeat(k), 10),
   ];
-  const reDecreasing = new RegExp(
-    '(?:9[0-8]|8[0-7]|7[0-6]|6[0-5]|5[0-4]|4[0-3]|3[0-2]|2[01]|10)',
-  );
   outermost: for (let i = min; i <= max; i++) {
-    if (reDecreasing.test(i)) continue outermost;
     let remaining = i;
     let sum = 0;
     let next;
@@ -173,7 +246,7 @@ const findAll = (n, k) => {
 
 const assert = require('assert');
 
-// console.log(findAll(10, 2));
+// console.log(findAll(7, 2));
 
 // Simple Cases
 
