@@ -96,36 +96,72 @@ Their digits are in increasing order
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number} n
+//  * @param {number} k
+//  * @returns
+//  */
+// const findAll = (n, k) => {
+//   const found = [];
+//   outermost: for (
+//     let i = parseInt(`1${'0'.repeat(k - 1)}`, 10);
+//     i <= parseInt('9'.repeat(k), 10);
+//     i++
+//   ) {
+//     let remaining = i;
+//     let sum = 0;
+//     let next;
+//     while (0 < remaining) {
+//       const digit = remaining % 10;
+//       sum += digit;
+//       if (next < digit) continue outermost;
+//       remaining = Math.trunc(remaining / 10);
+//       next = digit;
+//     }
+//     if (n !== sum) continue outermost;
+//     found.push(i);
+//   }
+//   if (0 === found.length) return [];
+//   return [
+//     found.length,
+//     found[0].toString(),
+//     found[found.length - 1].toString(),
+//   ];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {number} n
  * @param {number} k
  * @returns
  */
 const findAll = (n, k) => {
-  const found = [];
-  outermost: for (
-    let i = parseInt(`1${'0'.repeat(k - 1)}`, 10);
-    i <= parseInt('9'.repeat(k), 10);
-    i++
-  ) {
+  const results = [];
+  const [min, max] = [
+    parseInt(`1${'0'.repeat(k - 1)}`, 10),
+    parseInt('9'.repeat(k), 10),
+  ];
+  outermost: for (let i = min; i <= max; i++) {
     let remaining = i;
     let sum = 0;
     let next;
     while (0 < remaining) {
       const digit = remaining % 10;
-      sum += digit;
       if (next < digit) continue outermost;
+      sum += digit;
+      if (n < sum) continue outermost;
       remaining = Math.trunc(remaining / 10);
       next = digit;
     }
     if (n !== sum) continue outermost;
-    found.push(i);
+    results.push(i);
   }
-  if (0 === found.length) return [];
+  if (0 === results.length) return [];
   return [
-    found.length,
-    found[0].toString(),
-    found[found.length - 1].toString(),
+    results.length,
+    results[0].toString(),
+    results[results.length - 1].toString(),
   ];
 };
 
@@ -135,6 +171,8 @@ const assert = require('assert');
 
 // console.log(findAll(10, 2));
 
+// Simple Cases
+
 assert.deepStrictEqual(findAll(10, 3), [8, '118', '334']);
 
 assert.deepStrictEqual(findAll(27, 3), [1, '999', '999']);
@@ -142,3 +180,15 @@ assert.deepStrictEqual(findAll(27, 3), [1, '999', '999']);
 assert.deepStrictEqual(findAll(84, 4), []);
 
 assert.deepStrictEqual(findAll(35, 6), [123, '116999', '566666']);
+
+// Random Tests (sampling)
+
+assert.deepStrictEqual(findAll(30, 6), [151, '111999', '555555']);
+
+assert.deepStrictEqual(findAll(27, 4), [17, '1899', '6777']);
+
+assert.deepStrictEqual(findAll(20, 7), [70, '1111169', '2333333']);
+
+assert.deepStrictEqual(findAll(29, 7), [233, '1111799', '4444445']);
+
+assert.deepStrictEqual(findAll(39, 7), [263, '1119999', '5556666']);
