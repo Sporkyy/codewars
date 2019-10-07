@@ -51,6 +51,51 @@ Their digits are in increasing order
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number} n
+//  * @param {number} k
+//  * @returns
+//  */
+// const findAll = (n, k) => {
+//   const found = [];
+//   outermost: for (
+//     let i = parseInt(`1${'0'.repeat(k - 1)}`, 10);
+//     i <= parseInt('9'.repeat(k), 10);
+//     i++
+//   ) {
+//     // console.log(i);
+//     const digits = [];
+//     let tmp = i;
+//     while (0 < tmp) {
+//       digits.push(tmp % 10);
+//       tmp = Math.trunc(tmp / 10);
+//     }
+//     digits.reverse();
+//     // console.log(digits);
+//     let sum = digits[0];
+//     // console.log(sum);
+//     for (let j = 0; j < digits.length - 1; j++) {
+//       if (digits[j + 1] < digits[j]) continue outermost;
+//       // console.log(digits[j + 1]);
+//       sum += digits[j + 1];
+//       if (n < sum) continue outermost;
+//     }
+//     // console.log(sum);
+//     if (n !== sum) continue outermost;
+//     found.push(i);
+//     // console.log(found);
+//   }
+//   // console.log(found);
+//   if (0 === found.length) return [];
+//   return [
+//     found.length,
+//     found[0].toString(),
+//     found[found.length - 1].toString(),
+//   ];
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {number} n
  * @param {number} k
@@ -63,29 +108,19 @@ const findAll = (n, k) => {
     i <= parseInt('9'.repeat(k), 10);
     i++
   ) {
-    // console.log(i);
-    const digits = [];
-    let tmp = i;
-    while (0 < tmp) {
-      digits.push(tmp % 10);
-      tmp = Math.trunc(tmp / 10);
+    let remaining = i;
+    let sum = 0;
+    let next;
+    while (0 < remaining) {
+      const digit = remaining % 10;
+      sum += digit;
+      if (next < digit) continue outermost;
+      remaining = Math.trunc(remaining / 10);
+      next = digit;
     }
-    digits.reverse();
-    // console.log(digits);
-    let sum = digits[0];
-    // console.log(sum);
-    for (let j = 0; j < digits.length - 1; j++) {
-      if (digits[j + 1] < digits[j]) continue outermost;
-      // console.log(digits[j + 1]);
-      sum += digits[j + 1];
-      if (n < sum) continue outermost;
-    }
-    // console.log(sum);
     if (n !== sum) continue outermost;
     found.push(i);
-    // console.log(found);
   }
-  // console.log(found);
   if (0 === found.length) return [];
   return [
     found.length,
