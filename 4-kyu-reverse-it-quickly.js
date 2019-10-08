@@ -38,10 +38,16 @@
 /**
  * @param {number[]} a
  */
-const weirdReverse = a => Array.prototype.reverse.call(a);
+// const weirdReverse = a => Array.prototype.reverse.call(a);
 
-// length: 51
-// weirdReverse=a=> a.reduceRight((b,c)=>[...b,c],[]);
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} a
+ */
+const weirdReverse = a => a.sort(_ => 1);
+
+//  weirdReverse=a=>a.sort(_=>1)
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
