@@ -20,7 +20,28 @@
 /**
  * @param {number[]} a
  */
-weirdReverse = a => a.reduce((b, c, i) => b.concat(a[a.length - 1 - i]), []);
+// const weirdReverse = a =>
+//   a.reduce((b, c, i) => b.concat(a[a.length - 1 - i]), []);
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} a
+ */
+// const weirdReverse = a => a.reduceRight((b, c) => [...b, c], []);
+
+// length: 51
+// weirdReverse=a=> a.reduceRight((b,c)=>[...b,c],[]);
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} a
+ */
+const weirdReverse = a => Array.prototype.reverse.call(a);
+
+// length: 51
+// weirdReverse=a=> a.reduceRight((b,c)=>[...b,c],[]);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
