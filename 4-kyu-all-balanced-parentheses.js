@@ -97,52 +97,52 @@ const balancedParens = n => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-console.time('bench');
+// console.time('bench');
 // console.log(balancedParens(0).sort());
 // console.log(balancedParens(1).sort());
 // console.log(balancedParens(2).sort());
 // console.log(balancedParens(3).sort());
 // console.log(balancedParens(4).sort());
-console.log(balancedParens(5).sort());
+// console.log(balancedParens(5).sort());
 // console.log(balancedParens(6).sort());
 // console.log(balancedParens(7).sort());
 // console.log(balancedParens(8).sort());
 // console.log(balancedParens(9).sort());
-console.timeEnd('bench');
+// console.timeEnd('bench');
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { deepStrictEqual } from 'assert';
 
-// deepStrictEqual(balancedParens(0).sort(), ['']);
+deepStrictEqual(balancedParens(0).sort(), ['']);
 
-// deepStrictEqual(balancedParens(1).sort(), ['()']);
+deepStrictEqual(balancedParens(1).sort(), ['()']);
 
-// deepStrictEqual(balancedParens(2).sort(), ['(())', '()()']);
+deepStrictEqual(balancedParens(2).sort(), ['(())', '()()']);
 
-// deepStrictEqual(balancedParens(3).sort(), [
-//   '((()))',
-//   '(()())',
-//   '(())()',
-//   '()(())',
-//   '()()()',
-// ]);
+deepStrictEqual(balancedParens(3).sort(), [
+  '((()))',
+  '(()())',
+  '(())()',
+  '()(())',
+  '()()()',
+]);
 
-// deepStrictEqual(balancedParens(4).sort(), [
-//   '(((())))',
-//   '((()()))',
-//   '((())())',
-//   '((()))()',
-//   '(()(()))',
-//   '(()()())',
-//   '(()())()',
-//   '(())(())',
-//   '(())()()',
-//   '()((()))',
-//   '()(()())',
-//   '()(())()',
-//   '()()(())',
-//   '()()()()',
-// ]);
+deepStrictEqual(balancedParens(4).sort(), [
+  '(((())))',
+  '((()()))',
+  '((())())',
+  '((()))()',
+  '(()(()))',
+  '(()()())',
+  '(()())()',
+  '(())(())',
+  '(())()()',
+  '()((()))',
+  '()(()())',
+  '()(())()',
+  '()()(())',
+  '()()()()',
+]);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
