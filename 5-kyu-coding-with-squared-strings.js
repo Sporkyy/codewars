@@ -113,22 +113,22 @@ const data2Sol =
   '\vuroaf h vi ti o\n' +
   '\vfent I iotd nfr';
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // console.log(code(data1));
 // console.log(decode(code(data1)));
 
-assert.strictEqual(code(data1), data1Sol);
+strictEqual(code(data1), data1Sol);
 
-assert.strictEqual(code(data2), data2Sol);
+strictEqual(code(data2), data2Sol);
 
-assert.strictEqual(code(''), '');
+strictEqual(code(''), '');
 
-assert.strictEqual(decode(''), '');
+strictEqual(decode(''), '');
 
 // console.log(decode(data2Sol));
 
-assert.strictEqual(decode(data2Sol), data2);
+strictEqual(decode(data2Sol), data2);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 

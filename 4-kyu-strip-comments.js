@@ -32,9 +32,9 @@ const solution = (input, markers) =>
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(
+strictEqual(
   solution('apples, plums % and bananas\npears\noranges !applesauce', [
     '%',
     '!',
@@ -42,4 +42,4 @@ assert.strictEqual(
   'apples, plums\npears\noranges',
 );
 
-assert.strictEqual(solution('Q @b\nu\ne -e f g', ['@', '-']), 'Q\nu\ne');
+strictEqual(solution('Q @b\nu\ne -e f g', ['@', '-']), 'Q\nu\ne');

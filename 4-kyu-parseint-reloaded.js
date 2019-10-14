@@ -222,65 +222,62 @@ const parseInt = string => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(parseInt('zero'), 0);
-assert.strictEqual(parseInt('one'), 1);
-assert.strictEqual(parseInt('two'), 2);
-assert.strictEqual(parseInt('three'), 3);
-assert.strictEqual(parseInt('four'), 4);
-assert.strictEqual(parseInt('five'), 5);
-assert.strictEqual(parseInt('six'), 6);
-assert.strictEqual(parseInt('seven'), 7);
-assert.strictEqual(parseInt('eight'), 8);
-assert.strictEqual(parseInt('nine'), 9);
-assert.strictEqual(parseInt('ten'), 10);
+strictEqual(parseInt('zero'), 0);
+strictEqual(parseInt('one'), 1);
+strictEqual(parseInt('two'), 2);
+strictEqual(parseInt('three'), 3);
+strictEqual(parseInt('four'), 4);
+strictEqual(parseInt('five'), 5);
+strictEqual(parseInt('six'), 6);
+strictEqual(parseInt('seven'), 7);
+strictEqual(parseInt('eight'), 8);
+strictEqual(parseInt('nine'), 9);
+strictEqual(parseInt('ten'), 10);
 
-assert.strictEqual(parseInt('eleven'), 11);
-assert.strictEqual(parseInt('twelve'), 12);
-assert.strictEqual(parseInt('thirteen'), 13);
-assert.strictEqual(parseInt('seventeen'), 17);
+strictEqual(parseInt('eleven'), 11);
+strictEqual(parseInt('twelve'), 12);
+strictEqual(parseInt('thirteen'), 13);
+strictEqual(parseInt('seventeen'), 17);
 
-assert.strictEqual(parseInt('twenty'), 20);
-assert.strictEqual(parseInt('twenty two'), 22);
-assert.strictEqual(parseInt('forty-six'), 46);
-assert.strictEqual(parseInt('ninety'), 90);
-assert.strictEqual(parseInt('ninety four'), 94);
+strictEqual(parseInt('twenty'), 20);
+strictEqual(parseInt('twenty two'), 22);
+strictEqual(parseInt('forty-six'), 46);
+strictEqual(parseInt('ninety'), 90);
+strictEqual(parseInt('ninety four'), 94);
 
-assert.strictEqual(parseInt('one hundred and eighty-nine'), 189);
-assert.strictEqual(parseInt('one hundred and eighty nine'), 189);
-assert.strictEqual(parseInt('one hundred eighty nine'), 189);
-assert.strictEqual(parseInt('one hundred eighty-nine'), 189);
+strictEqual(parseInt('one hundred and eighty-nine'), 189);
+strictEqual(parseInt('one hundred and eighty nine'), 189);
+strictEqual(parseInt('one hundred eighty nine'), 189);
+strictEqual(parseInt('one hundred eighty-nine'), 189);
 
-assert.strictEqual(parseInt('two hundred forty-six'), 246);
+strictEqual(parseInt('two hundred forty-six'), 246);
 
-assert.strictEqual(parseInt('one thousand'), 1000);
-assert.strictEqual(parseInt('one thousand and one'), 1001);
+strictEqual(parseInt('one thousand'), 1000);
+strictEqual(parseInt('one thousand and one'), 1001);
 
-assert.strictEqual(
+strictEqual(
   parseInt('seven hundred eighty-three thousand nine hundred and nineteen'),
   783919,
 );
 
-assert.strictEqual(parseInt('one million'), 1000000);
+strictEqual(parseInt('one million'), 1000000);
 
-assert.strictEqual(parseInt('forty-six million'), 46000000);
+strictEqual(parseInt('forty-six million'), 46000000);
 
-assert.strictEqual(
+strictEqual(
   parseInt(
     'nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine',
   ),
   999999999,
 );
 
-assert.strictEqual(parseInt('six hundred million'), 600000000);
+strictEqual(parseInt('six hundred million'), 600000000);
 
-assert.strictEqual(
-  parseInt('eight hundred and seventy three million'),
-  873000000,
-);
+strictEqual(parseInt('eight hundred and seventy three million'), 873000000);
 
-assert.strictEqual(
+strictEqual(
   parseInt(
     'nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred and ninety-nine',
   ),

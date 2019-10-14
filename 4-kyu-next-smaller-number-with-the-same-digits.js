@@ -31,15 +31,15 @@ function nextSmaller(n) {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(nextSmaller(21), 12);
-assert.strictEqual(nextSmaller(907), 790);
-assert.strictEqual(nextSmaller(531), 513);
-assert.strictEqual(nextSmaller(135), -1);
-assert.strictEqual(nextSmaller(2071), 2017);
-assert.strictEqual(nextSmaller(1027), -1);
-assert.strictEqual(nextSmaller(414), 144);
-assert.strictEqual(nextSmaller(123456798), 123456789);
-assert.strictEqual(nextSmaller(123456789), -1);
-assert.strictEqual(nextSmaller(1234567908), 1234567890);
+strictEqual(nextSmaller(21), 12);
+strictEqual(nextSmaller(907), 790);
+strictEqual(nextSmaller(531), 513);
+strictEqual(nextSmaller(135), -1);
+strictEqual(nextSmaller(2071), 2017);
+strictEqual(nextSmaller(1027), -1);
+strictEqual(nextSmaller(414), 144);
+strictEqual(nextSmaller(123456798), 123456789);
+strictEqual(nextSmaller(123456789), -1);
+strictEqual(nextSmaller(1234567908), 1234567890);

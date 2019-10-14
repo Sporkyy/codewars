@@ -32,9 +32,23 @@ const uniqueInOrder = iterable => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert').strict;
+import { deepStrictEqual } from 'assert';
 
-assert.deepStrictEqual(uniqueInOrder('AAAABBBCCDAABBB'), ['A', 'B', 'C', 'D', 'A', 'B']);
-assert.deepStrictEqual(uniqueInOrder('AAAABBBCCDAABBB'), ['A', 'B', 'C', 'D', 'A', 'B']);
-assert.deepStrictEqual(uniqueInOrder('ABBCcAD'), ['A', 'B', 'C', 'c', 'A', 'D']);
-assert.deepStrictEqual(uniqueInOrder([1, 2, 2, 3, 3]), [1, 2, 3]);
+deepStrictEqual(uniqueInOrder('AAAABBBCCDAABBB'), [
+  'A',
+  'B',
+  'C',
+  'D',
+  'A',
+  'B',
+]);
+deepStrictEqual(uniqueInOrder('AAAABBBCCDAABBB'), [
+  'A',
+  'B',
+  'C',
+  'D',
+  'A',
+  'B',
+]);
+deepStrictEqual(uniqueInOrder('ABBCcAD'), ['A', 'B', 'C', 'c', 'A', 'D']);
+deepStrictEqual(uniqueInOrder([1, 2, 2, 3, 3]), [1, 2, 3]);

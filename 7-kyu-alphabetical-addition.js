@@ -41,21 +41,21 @@ const addLetters = (...letters) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // a = 0 + b = 1 + c = 2 = 2 + 1 + 1
 // a = 0 + b = 1 + c = 2 = f = 5
-assert.strictEqual(addLetters('a', 'b', 'c'), 'f');
+strictEqual(addLetters('a', 'b', 'c'), 'f');
 
-assert.strictEqual(addLetters('a', 'b'), 'c');
+strictEqual(addLetters('a', 'b'), 'c');
 
 // console.log(addLetters('z'));
-assert.strictEqual(addLetters('z'), 'z');
+strictEqual(addLetters('z'), 'z');
 
 // console.log(addLetters('z', 'a'));
-assert.strictEqual(addLetters('z', 'a'), 'a');
+strictEqual(addLetters('z', 'a'), 'a');
 
 // Notice the letters overflowing
-assert.strictEqual(addLetters('y', 'c', 'b'), 'd');
+strictEqual(addLetters('y', 'c', 'b'), 'd');
 
-assert.strictEqual(addLetters(), 'z');
+strictEqual(addLetters(), 'z');

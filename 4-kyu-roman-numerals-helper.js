@@ -102,19 +102,19 @@ class RomanNumerals {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(RomanNumerals.toRoman(1000), 'M');
-assert.strictEqual(RomanNumerals.toRoman(999), 'CMXCIX');
-assert.strictEqual(RomanNumerals.toRoman(4), 'IV');
-assert.strictEqual(RomanNumerals.toRoman(1), 'I');
-assert.strictEqual(RomanNumerals.toRoman(1991), 'MCMXCI');
-assert.strictEqual(RomanNumerals.toRoman(2006), 'MMVI');
-assert.strictEqual(RomanNumerals.toRoman(2020), 'MMXX');
+strictEqual(RomanNumerals.toRoman(1000), 'M');
+strictEqual(RomanNumerals.toRoman(999), 'CMXCIX');
+strictEqual(RomanNumerals.toRoman(4), 'IV');
+strictEqual(RomanNumerals.toRoman(1), 'I');
+strictEqual(RomanNumerals.toRoman(1991), 'MCMXCI');
+strictEqual(RomanNumerals.toRoman(2006), 'MMVI');
+strictEqual(RomanNumerals.toRoman(2020), 'MMXX');
 
-assert.strictEqual(RomanNumerals.fromRoman('XXI'), 21);
-assert.strictEqual(RomanNumerals.fromRoman('I'), 1);
-assert.strictEqual(RomanNumerals.fromRoman('III'), 3);
-assert.strictEqual(RomanNumerals.fromRoman('IV'), 4);
-assert.strictEqual(RomanNumerals.fromRoman('MMVII'), 2007);
-assert.strictEqual(RomanNumerals.fromRoman('MDCLXIX'), 1669);
+strictEqual(RomanNumerals.fromRoman('XXI'), 21);
+strictEqual(RomanNumerals.fromRoman('I'), 1);
+strictEqual(RomanNumerals.fromRoman('III'), 3);
+strictEqual(RomanNumerals.fromRoman('IV'), 4);
+strictEqual(RomanNumerals.fromRoman('MMVII'), 2007);
+strictEqual(RomanNumerals.fromRoman('MDCLXIX'), 1669);

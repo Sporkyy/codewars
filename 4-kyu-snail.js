@@ -138,15 +138,25 @@ const snail = array => {
 
 // console.log(rotated([[]]));
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
-assert.deepStrictEqual(snail([[]]), []);
+deepStrictEqual(snail([[]]), []);
 
-assert.deepStrictEqual(snail([[1]]), [1]);
+deepStrictEqual(snail([[1]]), [1]);
 
-assert.deepStrictEqual(snail([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), [1, 2, 3, 6, 9, 8, 7, 4, 5]);
+deepStrictEqual(snail([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), [
+  1,
+  2,
+  3,
+  6,
+  9,
+  8,
+  7,
+  4,
+  5,
+]);
 
-assert.deepStrictEqual(
+deepStrictEqual(
   snail([
     [1, 2, 3, 4, 5],
     [6, 7, 8, 9, 10],
@@ -154,10 +164,36 @@ assert.deepStrictEqual(
     [16, 17, 18, 19, 20],
     [21, 22, 23, 24, 25],
   ]),
-  [1, 2, 3, 4, 5, 10, 15, 20, 25, 24, 23, 22, 21, 16, 11, 6, 7, 8, 9, 14, 19, 18, 17, 12, 13],
+  [
+    1,
+    2,
+    3,
+    4,
+    5,
+    10,
+    15,
+    20,
+    25,
+    24,
+    23,
+    22,
+    21,
+    16,
+    11,
+    6,
+    7,
+    8,
+    9,
+    14,
+    19,
+    18,
+    17,
+    12,
+    13,
+  ],
 );
 
-assert.deepStrictEqual(
+deepStrictEqual(
   snail([
     [1, 2, 3, 4, 5, 6],
     [20, 21, 22, 23, 24, 7],

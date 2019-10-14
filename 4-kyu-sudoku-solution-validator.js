@@ -37,9 +37,9 @@ const validSolution = board => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(
+strictEqual(
   validSolution([
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
@@ -54,7 +54,7 @@ assert.strictEqual(
   true,
 );
 
-assert.strictEqual(
+strictEqual(
   validSolution([
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 0, 3, 4, 8],

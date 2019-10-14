@@ -25,7 +25,7 @@
  */
 const validParentheses = parens => {
   const stack = [];
-  for (paren of [...parens])
+  for (const paren of [...parens])
     if ('(' === paren) stack.push(paren);
     else if ('(' !== stack.pop()) return false;
   return 0 === stack.length;
@@ -46,10 +46,10 @@ const validParentheses = parens => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(validParentheses('()'), true);
-assert.strictEqual(validParentheses('())'), false);
-assert.strictEqual(validParentheses('(())'), true);
-assert.strictEqual(validParentheses(')('), false);
-assert.strictEqual(validParentheses('(()())()()'), true);
+strictEqual(validParentheses('()'), true);
+strictEqual(validParentheses('())'), false);
+strictEqual(validParentheses('(())'), true);
+strictEqual(validParentheses(')('), false);
+strictEqual(validParentheses('(()())()()'), true);

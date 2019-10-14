@@ -42,22 +42,22 @@ const sumStrings = (a, b) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(sumStrings('99', '99'), '198');
+strictEqual(sumStrings('99', '99'), '198');
 
-assert.strictEqual(sumStrings('123', '456789'), '456912');
+strictEqual(sumStrings('123', '456789'), '456912');
 
-assert.strictEqual(sumStrings('', '5'), '5');
+strictEqual(sumStrings('', '5'), '5');
 
-assert.strictEqual(sumStrings('00103', '08567'), '8670');
+strictEqual(sumStrings('00103', '08567'), '8670');
 
-assert.strictEqual(
+strictEqual(
   sumStrings('712569312664357328695151392', '8100824045303269669937'),
   '712577413488402631964821329',
 );
 
-assert.strictEqual(
+strictEqual(
   sumStrings('50095301248058391139327916261', '81055900096023504197206408605'),
   '131151201344081895336534324866',
 );

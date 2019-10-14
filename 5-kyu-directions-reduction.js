@@ -64,21 +64,25 @@ function dirReduc(arr) {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
 // console.log(dirReduc(['NORTH', 'SOUTH', 'EAST', 'EAST']));
 
 // console.log(dirReduc(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']));
 
-assert.deepStrictEqual(dirReduc(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']), [
-  'WEST',
-]);
+deepStrictEqual(
+  dirReduc(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST']),
+  ['WEST'],
+);
 
-assert.deepStrictEqual(dirReduc(['NORTH', 'WEST', 'SOUTH', 'EAST']), [
+deepStrictEqual(dirReduc(['NORTH', 'WEST', 'SOUTH', 'EAST']), [
   'NORTH',
   'WEST',
   'SOUTH',
   'EAST',
 ]);
 
-assert.deepStrictEqual(dirReduc(['NORTH', 'SOUTH', 'EAST', 'WEST', 'EAST', 'WEST']), []);
+deepStrictEqual(
+  dirReduc(['NORTH', 'SOUTH', 'EAST', 'WEST', 'EAST', 'WEST']),
+  [],
+);

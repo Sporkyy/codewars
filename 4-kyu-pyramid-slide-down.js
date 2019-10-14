@@ -53,7 +53,7 @@ const longestSlideDown = pyramid => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 //       3       |         [0,0]
 //     7   4     |      [1,0]  [1,1]
@@ -62,10 +62,7 @@ const assert = require('assert');
 
 // console.log(longestSlideDown([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]));
 
-assert.strictEqual(
-  longestSlideDown([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]),
-  23,
-);
+strictEqual(longestSlideDown([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]), 23);
 
 //                             75
 //                           95  64
@@ -103,7 +100,7 @@ assert.strictEqual(
 //   ]),
 // );
 
-assert.strictEqual(
+strictEqual(
   longestSlideDown([
     [75],
     [95, 64],

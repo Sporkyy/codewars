@@ -26,8 +26,6 @@ const convertQueryToMap = query => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
-
 console.log(
   convertQueryToMap(
     'user.name.firstname=Bob&user.name.lastname=Smith&user.favoritecolor=Light%20Blue',

@@ -6,7 +6,7 @@
 const moveZeros = arr => {
   const head = [];
   const tail = [];
-  for (digit of arr) {
+  for (const digit of arr) {
     if (0 !== digit) head.push(digit);
     else tail.push(digit);
   }
@@ -29,11 +29,11 @@ const moveZeros = arr => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
 // console.log(moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]));
 
-assert.deepStrictEqual(moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]), [
+deepStrictEqual(moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]), [
   1,
   2,
   1,

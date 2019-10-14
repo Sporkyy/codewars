@@ -218,45 +218,45 @@ const nextBigger = n => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // console.log(nextBigger(12), 21);
-assert.strictEqual(nextBigger(12), 21);
+strictEqual(nextBigger(12), 21);
 
 // console.log(nextBigger(513));
-assert.strictEqual(nextBigger(513), 531);
+strictEqual(nextBigger(513), 531);
 
 // console.log(nextBigger(2017));
-assert.strictEqual(nextBigger(2017), 2071);
+strictEqual(nextBigger(2017), 2071);
 
-assert.strictEqual(nextBigger(414), 441);
+strictEqual(nextBigger(414), 441);
 
-assert.strictEqual(nextBigger(144), 414);
+strictEqual(nextBigger(144), 414);
 
-assert.strictEqual(nextBigger(210), -1);
+strictEqual(nextBigger(210), -1);
 
-assert.strictEqual(nextBigger(201), 210);
+strictEqual(nextBigger(201), 210);
 
-assert.strictEqual(nextBigger(102), 120);
+strictEqual(nextBigger(102), 120);
 
-assert.strictEqual(nextBigger(120), 201);
+strictEqual(nextBigger(120), 201);
 
-assert.strictEqual(nextBigger(1201), 1210);
+strictEqual(nextBigger(1201), 1210);
 
-assert.strictEqual(nextBigger(890), 908);
+strictEqual(nextBigger(890), 908);
 
-assert.strictEqual(nextBigger(20), -1);
+strictEqual(nextBigger(20), -1);
 
-assert.strictEqual(nextBigger(200), -1);
+strictEqual(nextBigger(200), -1);
 
-assert.strictEqual(nextBigger(374), 437);
+strictEqual(nextBigger(374), 437);
 
-assert.strictEqual(nextBigger(123456789), 123456798);
+strictEqual(nextBigger(123456789), 123456798);
 
-assert.strictEqual(nextBigger(1234567890), 1234567908);
+strictEqual(nextBigger(1234567890), 1234567908);
 
-assert.strictEqual(nextBigger(9876543210), -1);
+strictEqual(nextBigger(9876543210), -1);
 
-assert.strictEqual(nextBigger(9999999999), -1);
+strictEqual(nextBigger(9999999999), -1);
 
-assert.strictEqual(nextBigger(59884848459853), 59884848483559);
+strictEqual(nextBigger(59884848459853), 59884848483559);

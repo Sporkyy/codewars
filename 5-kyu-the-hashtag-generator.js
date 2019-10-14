@@ -30,31 +30,43 @@ const generateHashtag = str => {
 // console.log(generateHashtag(''));
 // console.log(generateHashtag('Do We have A Hashtag'));
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(generateHashtag(''), false, 'Expected an empty string to return false');
+strictEqual(
+  generateHashtag(''),
+  false,
+  'Expected an empty string to return false',
+);
 
-assert.strictEqual(generateHashtag(' '.repeat(200)), false, 'Still an empty string');
+strictEqual(generateHashtag(' '.repeat(200)), false, 'Still an empty string');
 
-assert.strictEqual(
+strictEqual(
   generateHashtag('Do We have A Hashtag'),
   '#DoWeHaveAHashtag',
   'Expected a Hashtag (#) at the beginning.',
 );
 
-assert.strictEqual(generateHashtag('Codewars'), '#Codewars', 'Should handle a single word.');
+strictEqual(
+  generateHashtag('Codewars'),
+  '#Codewars',
+  'Should handle a single word.',
+);
 
-assert.strictEqual(generateHashtag('Codewars Is Nice'), '#CodewarsIsNice', 'Should remove spaces.');
+strictEqual(
+  generateHashtag('Codewars Is Nice'),
+  '#CodewarsIsNice',
+  'Should remove spaces.',
+);
 
-assert.strictEqual(
+strictEqual(
   generateHashtag('Codewars is nice'),
   '#CodewarsIsNice',
   'Should capitalize first letters of words.',
 );
 
-assert.strictEqual(generateHashtag('code' + ' '.repeat(140) + 'wars'), '#CodeWars');
+strictEqual(generateHashtag('code' + ' '.repeat(140) + 'wars'), '#CodeWars');
 
-assert.strictEqual(
+strictEqual(
   generateHashtag(
     'Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Cat',
   ),
@@ -62,6 +74,10 @@ assert.strictEqual(
   'Should return false if the final word is longer than 140 chars.',
 );
 
-assert.strictEqual(generateHashtag('a'.repeat(139)), '#A' + 'a'.repeat(138), 'Should work');
+strictEqual(
+  generateHashtag('a'.repeat(139)),
+  '#A' + 'a'.repeat(138),
+  'Should work',
+);
 
-assert.strictEqual(generateHashtag('a'.repeat(140)), false, 'Too long');
+strictEqual(generateHashtag('a'.repeat(140)), false, 'Too long');

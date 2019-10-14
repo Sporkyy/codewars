@@ -194,7 +194,7 @@ const MORSE_CODE = {
  */
 const decodeBits = bits => {
   bits = bits.replace(/^0*([01]+?)0*$/, '$1');
-  freq = 1;
+  let freq = 1;
   if (bits.includes('0')) {
     let [min, max] = [Number.MAX_VALUE, Number.MIN_VALUE];
     for (let { length: len } of bits.match(/(0+)/g)) {
@@ -252,7 +252,7 @@ const decodeMorse = morseCode => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // "HEY JUDE"
 // console.log(
@@ -267,7 +267,7 @@ const assert = require('assert');
 //     ),
 //   ),
 // );
-assert.strictEqual(
+strictEqual(
   decodeMorse(
     decodeBits(
       '1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011',
@@ -279,51 +279,51 @@ assert.strictEqual(
 // Basic bits decoding
 // Expected: 'EE', instead got: 'I'
 // console.log(decodeBits('10001'));
-assert.strictEqual(decodeMorse(decodeBits('10001')), 'EE');
+strictEqual(decodeMorse(decodeBits('10001')), 'EE');
 // console.log(decodeBits('1100000011'));
-assert.strictEqual(decodeMorse(decodeBits('1100000011')), 'EE');
+strictEqual(decodeMorse(decodeBits('1100000011')), 'EE');
 // console.log(decodeBits('111000000000111'));
-assert.strictEqual(decodeMorse(decodeBits('111000000000111')), 'EE');
+strictEqual(decodeMorse(decodeBits('111000000000111')), 'EE');
 // console.log(decodeBits('11110000000000001111'));
 // console.log(decodeMorse(decodeBits('11110000000000001111')));
 
 // Multiple bits per dot handling
 // console.log(decodeMorse(decodeBits('1')));
-assert.strictEqual(decodeMorse(decodeBits('1')), 'E');
+strictEqual(decodeMorse(decodeBits('1')), 'E');
 // Expected: 'E', instead got: 'T'
 // console.log(decodeMorse(decodeBits('111')));
-assert.strictEqual(decodeMorse(decodeBits('11')), 'E');
+strictEqual(decodeMorse(decodeBits('11')), 'E');
 // Expected: 'E', instead got: 'G'
 // How did I screw this one up?
 
 // Extra zeros handling
 // Expected: 'E', instead got: 'T'
-assert.strictEqual(decodeMorse(decodeBits('011')), 'E');
+strictEqual(decodeMorse(decodeBits('011')), 'E');
 
 // Expected: 'E', instead got: 'T'
-assert.strictEqual(decodeMorse(decodeBits('110')), 'E');
+strictEqual(decodeMorse(decodeBits('110')), 'E');
 
 // Expected: 'I', instead got: 'H'
-assert.strictEqual(decodeMorse(decodeBits('110011')), 'I');
+strictEqual(decodeMorse(decodeBits('110011')), 'I');
 
 // Expected: 'I', instead got: 'DD'
-assert.strictEqual(decodeMorse(decodeBits('111110000011111')), 'I');
+strictEqual(decodeMorse(decodeBits('111110000011111')), 'I');
 
 // Expected: 'M', instead got: ''
-assert.strictEqual(decodeMorse(decodeBits('1110111')), 'M');
+strictEqual(decodeMorse(decodeBits('1110111')), 'M');
 
 // "1110000000111" is a good test
 // "- -" (runlength 1) is the only valid possibility
-assert.strictEqual(decodeMorse(decodeBits('1110000000111')), 'T T');
+strictEqual(decodeMorse(decodeBits('1110000000111')), 'T T');
 
 // "111000111" is ambigous
 // both "- -" (runlength 1) as well as ".." (runlength 3) are valid
-assert.strictEqual(decodeMorse(decodeBits('111000111')), 'TT');
+strictEqual(decodeMorse(decodeBits('111000111')), 'TT');
 
 // "111000111000111" is ambigous
 // both "- - -" (runlength 1) as well as "..." (runlength 3) are valid
-assert.strictEqual(decodeMorse(decodeBits('111000111000111')), 'TTT');
+strictEqual(decodeMorse(decodeBits('111000111000111')), 'TTT');
 
 // "111000000000111" is a good test
 // ". ." (runlength 3) is only 1 valid possibility
-assert.strictEqual(decodeMorse(decodeBits('111000000000111')), 'EE');
+strictEqual(decodeMorse(decodeBits('111000000000111')), 'EE');

@@ -86,7 +86,7 @@ const isPalindrome = n => n === reverseInt(n);
  * @param {number} number
  * @param {number[]} awesomePhrases
  */
-isInteresting = (number, awesomePhrases) => {
+const isInteresting = (number, awesomePhrases) => {
   if (number < 98) return 0;
   const map = new Map();
   for (let i = number; i < number + 3; i++)
@@ -106,37 +106,37 @@ isInteresting = (number, awesomePhrases) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // Defacto boring
-assert.strictEqual(isInteresting(0, []), 0);
-assert.strictEqual(isInteresting(3, [1337, 256]), 0);
-assert.strictEqual(isInteresting(97, []), 0);
+strictEqual(isInteresting(0, []), 0);
+strictEqual(isInteresting(3, [1337, 256]), 0);
+strictEqual(isInteresting(97, []), 0);
 
 // Digit Followed by Zeroes
-assert.strictEqual(isInteresting(100, []), 2);
-assert.strictEqual(isInteresting(98, []), 1);
-assert.strictEqual(isInteresting(99, []), 1);
+strictEqual(isInteresting(100, []), 2);
+strictEqual(isInteresting(98, []), 1);
+strictEqual(isInteresting(99, []), 1);
 
 // Incrementing
-assert.strictEqual(isInteresting(1234, []), 2);
-assert.strictEqual(isInteresting(889, []), 1);
-assert.strictEqual(isInteresting(890, []), 2);
-assert.strictEqual(isInteresting(1229, []), 0);
-assert.strictEqual(isInteresting(1230, []), 0);
+strictEqual(isInteresting(1234, []), 2);
+strictEqual(isInteresting(889, []), 1);
+strictEqual(isInteresting(890, []), 2);
+strictEqual(isInteresting(1229, []), 0);
+strictEqual(isInteresting(1230, []), 0);
 
 // Decrementing
-assert.strictEqual(isInteresting(4321, []), 2);
-assert.strictEqual(isInteresting(4320, []), 1);
-assert.strictEqual(isInteresting(4322, []), 0);
+strictEqual(isInteresting(4321, []), 2);
+strictEqual(isInteresting(4320, []), 1);
+strictEqual(isInteresting(4322, []), 0);
 
 // Close to, but not quite a palindrome
-assert.strictEqual(isInteresting(11208, [1337, 256]), 0);
+strictEqual(isInteresting(11208, [1337, 256]), 0);
 
 // Palindrome
-assert.strictEqual(isInteresting(11211, [1337, 256]), 2);
-assert.strictEqual(isInteresting(11209, [1337, 256]), 1);
+strictEqual(isInteresting(11211, [1337, 256]), 2);
+strictEqual(isInteresting(11209, [1337, 256]), 1);
 
 // In the awesomePhrases Array
-assert.strictEqual(isInteresting(1336, [1337, 256]), 1);
-assert.strictEqual(isInteresting(1337, [1337, 256]), 2);
+strictEqual(isInteresting(1336, [1337, 256]), 1);
+strictEqual(isInteresting(1337, [1337, 256]), 2);

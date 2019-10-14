@@ -97,19 +97,19 @@ const getPINs = observed =>
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
 // console.log(getPINs('8'));
-assert.deepStrictEqual(getPINs('8').sort(), ['5', '7', '8', '9', '0'].sort());
+deepStrictEqual(getPINs('8').sort(), ['5', '7', '8', '9', '0'].sort());
 
 // console.log(getPINs('11'));
-assert.deepStrictEqual(
+deepStrictEqual(
   getPINs('11').sort(),
   ['11', '22', '44', '12', '21', '14', '41', '24', '42'].sort(),
 );
 
 // console.log(getPINs('369'));
-assert.deepStrictEqual(
+deepStrictEqual(
   getPINs('369').sort(),
   [
     '339',

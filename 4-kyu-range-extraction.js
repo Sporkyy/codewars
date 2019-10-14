@@ -73,19 +73,19 @@ const solution = list =>
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(solution([1]), '1');
+strictEqual(solution([1]), '1');
 
-assert.strictEqual(solution([1, 2]), '1,2');
+strictEqual(solution([1, 2]), '1,2');
 
-assert.strictEqual(solution([1, 2, 3]), '1-3');
+strictEqual(solution([1, 2, 3]), '1-3');
 
-assert.strictEqual(solution([1, 2, 3, 5]), '1-3,5');
+strictEqual(solution([1, 2, 3, 5]), '1-3,5');
 
-assert.strictEqual(solution([1, 2, 3, 5, 6]), '1-3,5,6');
+strictEqual(solution([1, 2, 3, 5, 6]), '1-3,5,6');
 
-assert.strictEqual(
+strictEqual(
   solution([
     -6,
     -3,

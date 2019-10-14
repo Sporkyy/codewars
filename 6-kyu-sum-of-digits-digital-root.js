@@ -12,9 +12,9 @@ const digital_root = n => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert').strict;
+import { strictEqual } from 'assert';
 
-assert.strictEqual(digital_root(16), 7);
-assert.strictEqual(digital_root(456), 6);
-assert.strictEqual(digital_root(0), 0);
-assert.strictEqual(digital_root(1), 1);
+strictEqual(digital_root(16), 7);
+strictEqual(digital_root(456), 6);
+strictEqual(digital_root(0), 0);
+strictEqual(digital_root(1), 1);

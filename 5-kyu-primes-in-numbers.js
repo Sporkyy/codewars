@@ -117,14 +117,14 @@ const primeFactors = n => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // 36 = 18 * 2 = 9 * 2 * 2 = 3 * 3 * 2 * 2 = (3**2)(2**2)
 // console.log(primeFactors(36));
-assert.strictEqual(primeFactors(36), '(2**2)(3**2)');
+strictEqual(primeFactors(36), '(2**2)(3**2)');
 
 // console.log(primeFactors(7775460));
-assert.strictEqual(primeFactors(7775460), '(2**2)(3**3)(5)(7)(11**2)(17)');
+strictEqual(primeFactors(7775460), '(2**2)(3**3)(5)(7)(11**2)(17)');
 
 // console.log(primeFactors(7919));
-assert.strictEqual(primeFactors(7919), '(7919)');
+strictEqual(primeFactors(7919), '(7919)');

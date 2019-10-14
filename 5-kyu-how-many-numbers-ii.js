@@ -90,17 +90,17 @@ const maxSumDig = (nmax, maxsm) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
-assert.deepStrictEqual(maxSumDig(2000, 3), [11, 1110, 12555]);
+deepStrictEqual(maxSumDig(2000, 3), [11, 1110, 12555]);
 
-assert.deepStrictEqual(maxSumDig(2000, 4), [21, 1120, 23665]);
+deepStrictEqual(maxSumDig(2000, 4), [21, 1120, 23665]);
 
-assert.deepStrictEqual(maxSumDig(2000, 7), [85, 1200, 99986]);
+deepStrictEqual(maxSumDig(2000, 7), [85, 1200, 99986]);
 
-assert.deepStrictEqual(maxSumDig(3000, 7), [141, 1600, 220756]);
+deepStrictEqual(maxSumDig(3000, 7), [141, 1600, 220756]);
 
-assert.deepStrictEqual(maxSumDig(4000, 4), [35, 2000, 58331]);
+deepStrictEqual(maxSumDig(4000, 4), [35, 2000, 58331]);
 
 console.log(maxSumDig(1009, 2));
 

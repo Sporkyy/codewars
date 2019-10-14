@@ -35,14 +35,14 @@ const formatDuration = seconds => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(formatDuration(1), '1 second');
-assert.strictEqual(formatDuration(62), '1 minute and 2 seconds');
-assert.strictEqual(formatDuration(120), '2 minutes');
-assert.strictEqual(formatDuration(3600), '1 hour');
-assert.strictEqual(formatDuration(3662), '1 hour, 1 minute and 2 seconds');
-assert.strictEqual(
+strictEqual(formatDuration(1), '1 second');
+strictEqual(formatDuration(62), '1 minute and 2 seconds');
+strictEqual(formatDuration(120), '2 minutes');
+strictEqual(formatDuration(3600), '1 hour');
+strictEqual(formatDuration(3662), '1 hour, 1 minute and 2 seconds');
+strictEqual(
   formatDuration(36622222),
   '1 year, 58 days, 20 hours, 50 minutes and 22 seconds',
 );

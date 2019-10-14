@@ -28,11 +28,11 @@ const primeFactors = n => {
 const sumOfDivided = lst => {
   lst = lst.map(n => [n, primeFactors(n)]);
   const apf = new Set();
-  for (let [_n, fs] of lst) for (f of fs) apf.add(f);
+  for (const [_n, fs] of lst) for (const f of fs) apf.add(f);
   const result = [];
-  for (let f of apf.values()) {
+  for (const f of apf.values()) {
     let sum = 0;
-    for (let [n, fs] of lst) if (fs.includes(f)) sum += n;
+    for (const [n, fs] of lst) if (fs.includes(f)) sum += n;
     result.push([f, sum]);
   }
   result.sort((a, b) => a[0] - b[0]);
@@ -41,13 +41,13 @@ const sumOfDivided = lst => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
 // sumOfDivided([12, 15]);
 
-assert.deepStrictEqual(sumOfDivided([12, 15]), [[2, 12], [3, 27], [5, 15]]);
+deepStrictEqual(sumOfDivided([12, 15]), [[2, 12], [3, 27], [5, 15]]);
 
-assert.deepStrictEqual(sumOfDivided([15, 21, 24, 30, 45]), [
+deepStrictEqual(sumOfDivided([15, 21, 24, 30, 45]), [
   [2, 54],
   [3, 135],
   [5, 90],
@@ -56,7 +56,7 @@ assert.deepStrictEqual(sumOfDivided([15, 21, 24, 30, 45]), [
 
 // sumOfDivided([15, 30, -45]);
 
-assert.deepStrictEqual(sumOfDivided([15, 21, 24, 30, -45]), [
+deepStrictEqual(sumOfDivided([15, 21, 24, 30, -45]), [
   [2, 54],
   [3, 45],
   [5, 0],
@@ -65,7 +65,7 @@ assert.deepStrictEqual(sumOfDivided([15, 21, 24, 30, -45]), [
 
 // sumOfDivided([107, 158, 204, 100, 118, 123, 126, 110, 116, 100]);
 
-assert.deepStrictEqual(
+deepStrictEqual(
   sumOfDivided([107, 158, 204, 100, 118, 123, 126, 110, 116, 100]),
   [
     [2, 1032],

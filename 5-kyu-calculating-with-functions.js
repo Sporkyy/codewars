@@ -57,14 +57,14 @@ const dividedBy = y => x => Math.trunc(x / y);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // console.log(one());
 // console.log(one(plus()));
 // console.log(one(plus(one())));
 
-assert.strictEqual(seven(times(five())), 35);
-assert.strictEqual(four(plus(nine())), 13);
-assert.strictEqual(eight(minus(three())), 5);
-assert.strictEqual(six(dividedBy(two())), 3);
-assert.strictEqual(six(dividedBy(four())), 1);
+strictEqual(seven(times(five())), 35);
+strictEqual(four(plus(nine())), 13);
+strictEqual(eight(minus(three())), 5);
+strictEqual(six(dividedBy(two())), 3);
+strictEqual(six(dividedBy(four())), 1);

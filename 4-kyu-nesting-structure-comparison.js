@@ -10,18 +10,18 @@ Array.prototype.sameStructureAs = function(other) {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual([1, 1, 1].sameStructureAs([2, 2, 2]), true);
+strictEqual([1, 1, 1].sameStructureAs([2, 2, 2]), true);
 
-assert.strictEqual([1, [1, 1]].sameStructureAs([2, [2, 2]]), true);
+strictEqual([1, [1, 1]].sameStructureAs([2, [2, 2]]), true);
 
-assert.strictEqual([1, [1, 1]].sameStructureAs([[2, 2], 2]), false);
+strictEqual([1, [1, 1]].sameStructureAs([[2, 2], 2]), false);
 
-assert.strictEqual([1, [1, 1]].sameStructureAs([[2], 2]), false);
+strictEqual([1, [1, 1]].sameStructureAs([[2], 2]), false);
 
-assert.strictEqual([[[], []]].sameStructureAs([[[], []]]), true);
+strictEqual([[[], []]].sameStructureAs([[[], []]]), true);
 
-assert.strictEqual([[[], []]].sameStructureAs([[1, 1]]), false);
+strictEqual([[[], []]].sameStructureAs([[1, 1]]), false);
 
-assert.strictEqual([1, '[', ']'].sameStructureAs(['[', ']', 1]), true);
+strictEqual([1, '[', ']'].sameStructureAs(['[', ']', 1]), true);

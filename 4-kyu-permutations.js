@@ -64,32 +64,32 @@ const permutations = string =>
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
-// assert.deepStrictEqual(permutations('a'), ['a']);
+// deepStrictEqual(permutations('a'), ['a']);
 
 // console.log(permutations('ab'));
 
 // permutations('ab');
 
-// assert.deepStrictEqual(permutations('ab').sort(), ['ab', 'ba'].sort());
+// deepStrictEqual(permutations('ab').sort(), ['ab', 'ba'].sort());
 
 // permutations('abc');
 // console.log(permutations('abc'));
 
-assert.deepStrictEqual(
+deepStrictEqual(
   permutations('abc').sort(),
   ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'].sort(),
 );
 
 // console.log(permutations('aabb'));
 
-// assert.deepStrictEqual(
+// deepStrictEqual(
 //   permutations('aabb').sort(),
 //   ['aabb', 'abab', 'abba', 'baab', 'baba', 'bbaa'].sort(),
 // );
 
-// assert.deepStrictEqual(
+// deepStrictEqual(
 //   permutations('abc').sort(),
 //   ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'].sort(),
 // );
@@ -103,7 +103,7 @@ assert.deepStrictEqual(
 
 // console.log(permutations('abcd').sort());
 
-// assert.deepStrictEqual(
+// deepStrictEqual(
 //   permutations('abcd').sort(),
 //   [
 //     'abcd',

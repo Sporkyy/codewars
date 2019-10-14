@@ -91,16 +91,19 @@ const findSequences = n => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
-assert.deepStrictEqual(findSequences(1), []);
+deepStrictEqual(findSequences(1), []);
 
-assert.deepStrictEqual(findSequences(3), [[1, 2]]);
+deepStrictEqual(findSequences(3), [[1, 2]]);
 
-assert.deepStrictEqual(findSequences(15), [[7, 8], [4, 5, 6], [1, 2, 3, 4, 5]]);
+deepStrictEqual(findSequences(15), [[7, 8], [4, 5, 6], [1, 2, 3, 4, 5]]);
 
-assert.deepStrictEqual(findSequences(20), [[2, 3, 4, 5, 6]]);
+deepStrictEqual(findSequences(20), [[2, 3, 4, 5, 6]]);
 
-assert.deepStrictEqual(findSequences(100), [[18, 19, 20, 21, 22], [9, 10, 11, 12, 13, 14, 15, 16]]);
+deepStrictEqual(findSequences(100), [
+  [18, 19, 20, 21, 22],
+  [9, 10, 11, 12, 13, 14, 15, 16],
+]);
 
 // console.log(findSequences(999));

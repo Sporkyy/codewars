@@ -51,7 +51,7 @@ const LCS = (x, y) =>
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(LCS('a', 'b'), '');
-assert.strictEqual(LCS('abcdef', 'abc'), 'abc');
+strictEqual(LCS('a', 'b'), '');
+strictEqual(LCS('abcdef', 'abc'), 'abc');

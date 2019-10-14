@@ -33,18 +33,18 @@ console.log(buddy(47, 49));
 // console.log(buddy(23, 4669));
 // console.log(buddy(48, 48));
 
-const assert = require('assert');
+import { deepStrictEqual } from 'assert';
 
 // 48: 1, 2, 3, 4, 6, 8, 12, 16, 24 -> sum: 76 = 75 + 1
 // 75: 1, 3, 5, 15, 25 -> sum: 49 = 48 + 1
-assert.deepStrictEqual(buddy(23, 4669), [48, 75]);
+deepStrictEqual(buddy(23, 4669), [48, 75]);
 
-assert.deepStrictEqual(buddy(4952, 6539), [5775, 6128]);
+deepStrictEqual(buddy(4952, 6539), [5775, 6128]);
 
 // console.log(buddy(1050, 1050));
 // console.log(buddy(381, 4318));
-assert.deepStrictEqual(buddy(381, 4318), [1050, 1925]);
+deepStrictEqual(buddy(381, 4318), [1050, 1925]);
 
-assert.deepStrictEqual(buddy(2382, 3679), 'Nothing');
+deepStrictEqual(buddy(2382, 3679), 'Nothing');
 
-assert.deepStrictEqual(buddy(305047, 309143), 'Nothing');
+deepStrictEqual(buddy(305047, 309143), 'Nothing');

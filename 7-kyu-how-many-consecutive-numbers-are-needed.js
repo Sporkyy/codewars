@@ -21,12 +21,12 @@ const consecutive = arr =>
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const asssert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(consecutive([4, 8, 6]), 2);
+strictEqual(consecutive([4, 8, 6]), 2);
 
-assert.strictEqual(consecutive([1, 2, 3, 4]), 0);
+strictEqual(consecutive([1, 2, 3, 4]), 0);
 
-assert.strictEqual(consecutive([]), 0);
+strictEqual(consecutive([]), 0);
 
-assert.strictEqual(consecutive([1]), 0);
+strictEqual(consecutive([1]), 0);

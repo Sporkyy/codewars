@@ -74,7 +74,8 @@ const mix = (s1, s2) => {
   return substrings
     .sort((a, b) => {
       if (a.length !== b.length) return b.length - a.length;
-      if (a.charCodeAt(0) !== b.charCodeAt(0)) return a.charCodeAt(0) - b.charCodeAt(0);
+      if (a.charCodeAt(0) !== b.charCodeAt(0))
+        return a.charCodeAt(0) - b.charCodeAt(0);
       return a[2].localeCompare(b[2]);
     })
     .join('/');
@@ -82,26 +83,29 @@ const mix = (s1, s2) => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // console.log(mix('Are they here', 'yes, they are here'));
-assert.strictEqual(mix('Are they here', 'yes, they are here'), '2:eeeee/2:yy/=:hh/=:rr');
+strictEqual(
+  mix('Are they here', 'yes, they are here'),
+  '2:eeeee/2:yy/=:hh/=:rr',
+);
 
-assert.strictEqual(
+strictEqual(
   mix('looping is fun but dangerous', 'less dangerous than coding'),
   '1:ooo/1:uuu/2:sss/=:nnn/1:ii/2:aa/2:dd/2:ee/=:gg',
 );
 
-assert.strictEqual(
+strictEqual(
   mix(' In many languages', " there's a pair of functions"),
   '1:aaa/1:nnn/1:gg/2:ee/2:ff/2:ii/2:oo/2:rr/2:ss/2:tt',
 );
 
-assert.strictEqual(mix('Lords of the Fallen', 'gamekult'), '1:ee/1:ll/1:oo');
+strictEqual(mix('Lords of the Fallen', 'gamekult'), '1:ee/1:ll/1:oo');
 
-assert.strictEqual(mix('codewars', 'codewars'), '');
+strictEqual(mix('codewars', 'codewars'), '');
 
-assert.strictEqual(
+strictEqual(
   mix('A generation must confront the looming ', 'codewarrs'),
   '1:nnnnn/1:ooooo/1:tttt/1:eee/1:gg/1:ii/1:mm/=:rr',
 );

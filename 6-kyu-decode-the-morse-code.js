@@ -70,11 +70,11 @@ const decodeMorse = morseCode => {
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
-assert.strictEqual(decodeMorse('.... . -.--   .--- ..- -.. .'), 'HEY JUDE');
-assert.strictEqual(decodeMorse('.... . -.--     .--- ..- -.. .'), 'HEY JUDE');
-assert.strictEqual(decodeMorse('...---...'), 'SOS');
-assert.strictEqual(decodeMorse('...---... -.-.--'), 'SOS!');
-assert.strictEqual(decodeMorse('     ...---...          '), 'SOS');
-assert.strictEqual(decodeMorse('-.... .-.-.- ----.'), '6.9');
+strictEqual(decodeMorse('.... . -.--   .--- ..- -.. .'), 'HEY JUDE');
+strictEqual(decodeMorse('.... . -.--     .--- ..- -.. .'), 'HEY JUDE');
+strictEqual(decodeMorse('...---...'), 'SOS');
+strictEqual(decodeMorse('...---... -.-.--'), 'SOS!');
+strictEqual(decodeMorse('     ...---...          '), 'SOS');
+strictEqual(decodeMorse('-.... .-.-.- ----.'), '6.9');

@@ -34,15 +34,15 @@ const digPow = (n, p) => {
 
 // (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n * k
 
-const assert = require('assert');
+import { strictEqual } from 'assert';
 
 // 89 --> 8¹ + 9² = 89 * 1
-assert.strictEqual(digPow(89, 1), 1);
+strictEqual(digPow(89, 1), 1);
 
-assert.strictEqual(digPow(92, 1), -1);
+strictEqual(digPow(92, 1), -1);
 
 // 695 --> 6² + 9³ + 5⁴= 1390 = 695 * 2
-assert.strictEqual(digPow(695, 2), 2);
+strictEqual(digPow(695, 2), 2);
 
 // 46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
-assert.strictEqual(digPow(46288, 3), 51);
+strictEqual(digPow(46288, 3), 51);
