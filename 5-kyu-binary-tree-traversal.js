@@ -10,56 +10,59 @@ Node left; // Undefined if there is no left child.
 Node right; // Undefined if there is no right child.
 */
 
-// 1.) Root node, 2.) traverse left subtree, 3.) traverse right subtree.
-/**
- * @param {Node} node
- * @returns {number[]}
- */
-const preOrder = node => {
-  const results = [];
-  const helper = node => {
-    const { data, left, right } = node;
-    results.push(data);
-    if (left) helper(left);
-    if (right) helper(right);
-  };
-  helper(node);
-  return results;
-};
+// /**
+//  * 1.) Root node, 2.) traverse left subtree, 3.) traverse right subtree.
+//  *
+//  * @param {Node} node
+//  * @returns {number[]}
+//  */
+// const preOrder = node => {
+//   const results = [];
+//   const helper = node => {
+//     const { data, left, right } = node;
+//     results.push(data);
+//     if (left) helper(left);
+//     if (right) helper(right);
+//   };
+//   helper(node);
+//   return results;
+// };
 
-// 1.) Traverse left subtree, 2.) root node, 3.) traverse right subtree.
-/**
- * @param {Node} node
- * @returns {number[]}
- */
-const inOrder = node => {
-  const results = [];
-  const helper = node => {
-    const { left, data, right } = node;
-    if (left) helper(left);
-    results.push(data);
-    if (right) helper(right);
-  };
-  helper(node);
-  return results;
-};
+// /**
+//  * 1.) Traverse left subtree, 2.) root node, 3.) traverse right subtree.
+//  *
+//  * @param {Node} node
+//  * @returns {number[]}
+//  */
+// const inOrder = node => {
+//   const results = [];
+//   const helper = node => {
+//     const { left, data, right } = node;
+//     if (left) helper(left);
+//     results.push(data);
+//     if (right) helper(right);
+//   };
+//   helper(node);
+//   return results;
+// };
 
-// 1.) Traverse left subtree, 2.) traverse right subtree, 3.) root node.
-/**
- * @param {Node} node
- * @returns {number[]}
- */
-const postOrder = node => {
-  const results = [];
-  const helper = node => {
-    const { left, right, data } = node;
-    if (left) helper(left);
-    if (right) helper(right);
-    results.push(data);
-  };
-  helper(node);
-  return results;
-};
+// /**
+//  * 1.) Traverse left subtree, 2.) traverse right subtree, 3.) root node.
+//  *
+//  * @param {Node} node
+//  * @returns {number[]}
+//  */
+// const postOrder = node => {
+//   const results = [];
+//   const helper = node => {
+//     const { left, right, data } = node;
+//     if (left) helper(left);
+//     if (right) helper(right);
+//     results.push(data);
+//   };
+//   helper(node);
+//   return results;
+// };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -70,61 +73,64 @@ Node left; // Undefined if there is no left child.
 Node right; // Undefined if there is no right child.
 */
 
-// 1.) Root node, 2.) traverse left subtree, 3.) traverse right subtree.
 /**
+ * 1.) Root node, 2.) traverse left subtree, 3.) traverse right subtree.
+ *
  * @param {Node} node
  * @returns {number[]}
  */
-// const preOrder = node => {
-//   const results = [];
-//   const stack = [node];
-//   while (stack.length) {
-//     const { data, left, right } = stack.pop();
-//     results.push(data);
-//     if (right) stack.push(right);
-//     if (left) stack.push(left);
-//   }
-//   return results;
-// };
+const preOrder = node => {
+  const results = [];
+  const stack = [node];
+  while (stack.length) {
+    const { data, left, right } = stack.pop();
+    results.push(data);
+    if (right) stack.push(right);
+    if (left) stack.push(left);
+  }
+  return results;
+};
 
-// 1.) Traverse left subtree, 2.) root node, 3.) traverse right subtree.
 /**
+ * 1.) Traverse left subtree, 2.) root node, 3.) traverse right subtree.
+ *
  * @param {Node} node
  * @returns {number[]}
  */
-// const inOrder = node => {
-//   const results = [];
-//   const stack = [];
-//   let current = node;
-//   while (current || stack.length) {
-//     if (current) {
-//       stack.push(current);
-//       current = current.left;
-//     } else {
-//       current = stack.pop();
-//       results.push(current.data);
-//       current = current.right;
-//     }
-//   }
-//   return results;
-// };
+const inOrder = node => {
+  const results = [];
+  const stack = [];
+  let current = node;
+  while (current || stack.length) {
+    if (current) {
+      stack.push(current);
+      current = current.left;
+    } else {
+      current = stack.pop();
+      results.push(current.data);
+      current = current.right;
+    }
+  }
+  return results;
+};
 
-// 1.) Traverse left subtree, 2.) traverse right subtree, 3.) root node.
 /**
+ * 1.) Traverse left subtree, 2.) traverse right subtree, 3.) root node.
+ *
  * @param {Node} node
  * @returns {number[]}
  */
-// const postOrder = node => {
-//   const results = [];
-//   const stack = [node];
-//   while (stack.length) {
-//     const { data, left, right } = stack.pop();
-//     results.unshift(data);
-//     if (left) stack.push(left);
-//     if (right) stack.push(right);
-//   }
-//   return results;
-// };
+const postOrder = node => {
+  const results = [];
+  const stack = [node];
+  while (stack.length) {
+    const { data, left, right } = stack.pop();
+    results.unshift(data);
+    if (left) stack.push(left);
+    if (right) stack.push(right);
+  }
+  return results;
+};
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
