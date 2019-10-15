@@ -47,35 +47,30 @@ class TreeNode {
 
   // Added code
 
-  static maxDepth(root) {
+  static depth(root) {
     return !root
       ? 0
-      : 1 +
-          Math.max(TreeNode.maxDepth(root.left), TreeNode.maxDepth(root.right));
+      : 1 + Math.max(TreeNode.depth(root.left), TreeNode.depth(root.right));
   }
 
-  static serialize(root) {
-    if (!root) return null;
-    const result = [];
-    const stk = [root];
-    while (stk.length) {
-      const { val, left, right } = stk.pop();
-      if (!left && !right) {
-        result.push(val);
-        continue;
-      }
-      if (left) stk.push(left);
-      if (right) stk.push(right);
+  static cnt(root) {
+    let cnt = 0;
+    const stack = [root];
+    while (stack.length) {
+      const { left, right } = stack.pop();
+      cnt++;
+      if (right) stack.push(right);
+      if (left) stack.push(left);
     }
-    return result;
+    return cnt;
   }
 
   static isPerfect(root) {
-    const depth = TreeNode.maxDepth(root);
+    const depth = TreeNode.depth(root);
     if (0 === depth) return true;
-    const serialized = TreeNode.serialize(root);
-    if (1 === depth && 1 === serialized.length) return true;
-    return (depth - 1) * 2 === serialized.length;
+    const cnt = TreeNode.cnt(root);
+    if ((1 === depth && 1 === cnt) || (2 === depth && 3 === cnt)) return true;
+    return depth * 2 + 1 === cnt;
   }
 }
 
@@ -83,10 +78,64 @@ class TreeNode {
 
 import { strictEqual } from 'assert';
 
-// strictEqual(TreeNode.isPerfect(null), true);
+strictEqual(TreeNode.isPerfect(null), true);
 
-// strictEqual(TreeNode.isPerfect(TreeNode.leaf().withLeaves()), true);
+strictEqual(TreeNode.isPerfect(TreeNode.leaf().withLeaves()), true);
 
-// strictEqual(TreeNode.isPerfect(TreeNode.leaf().withLeftLeaf()), false);
+strictEqual(TreeNode.isPerfect(TreeNode.leaf().withLeftLeaf()), false);
 
 strictEqual(TreeNode.isPerfect(TreeNode.leaf()), true);
+
+// /*
+//  * full two level tree
+//  *
+//  *      0
+//  *    /   \
+//  *   0     0
+//  *  / \   / \
+//  * 0   0 0   0
+//  *
+//  */
+strictEqual(
+  TreeNode.isPerfect(
+    TreeNode.join(TreeNode.leaf().withLeaves(), TreeNode.leaf().withLeaves()),
+  ),
+  true,
+);
+
+// /*
+//  * full unbalanced tree
+//  *
+//  *      0
+//  *    /   \
+//  *   0     0
+//  *  / \
+//  * 0   0
+//  *
+//  */
+strictEqual(
+  TreeNode.isPerfect(
+    TreeNode.join(TreeNode.leaf().withLeaves(), TreeNode.leaf()),
+  ),
+  false,
+);
+
+// /*
+//  * non-full balanced tree
+//  *
+//  *      0
+//  *    /   \
+//  *   0     0
+//  *  /       \
+//  * 0         0
+//  *
+//  */
+strictEqual(
+  TreeNode.isPerfect(
+    TreeNode.join(
+      TreeNode.leaf().withLeftLeaf(),
+      TreeNode.leaf().withRightLeaf(),
+    ),
+  ),
+  false,
+);
