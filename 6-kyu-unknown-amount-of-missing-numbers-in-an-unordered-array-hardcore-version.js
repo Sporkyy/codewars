@@ -5,10 +5,7 @@
 
 // const missNumsFinder = arr => {
 //   const a = new Array(Math.max(...arr) + 1).fill(0);
-//   // console.log(a);
 //   for (const n of arr) a[n]++;
-//   // console.log(a);
-//   // console.log(a.slice(1));
 //   const results = [];
 //   a.slice(1).forEach((n, i) => {
 //     if (0 === n) results.push(i + 1);
@@ -92,16 +89,33 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const set = new Set(arr);
+//   const results = [];
+//   for (let i = 1; i <= Math.max(...Array.from(set)); i++)
+//     if (!set.has(i)) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {number[]} arr
  * @returns {number[]}
  */
 const missNumsFinder = arr => {
   const set = new Set(arr);
+  let max = 0;
   const results = [];
-  for (let i = 1; i <= Math.max(...Array.from(set)); i++)
-    if (!set.has(i)) results.push(i);
-  return results;
+  for (let i = 1; i < 99999; i++) {
+    if (set.has(i) && max < i) max = i;
+    else results.push(i);
+  }
+  return results.filter(r => r < max);
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
