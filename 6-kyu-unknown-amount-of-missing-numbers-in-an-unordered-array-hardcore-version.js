@@ -4,6 +4,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 // /**
+//  * x99: 4ms-5ms;
+//  *
 //  * @param {number[]} arr
 //  * @returns {number[]}
 //  */
@@ -108,10 +110,10 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// /**
-//  * @param {number[]} arr
-//  * @returns {number[]}
-//  */
+/**
+ * @param {number[]} arr
+ * @returns {number[]}
+ */
 // const missNumsFinder = arr => {
 //   const set = new Set(arr);
 //   let max = 0;
@@ -125,30 +127,103 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-/**
- * @param {number[]} arr
- * @returns {number[]}
- */
-const missNumsFinder = arr => {
-  const a = new Array(99999);
-  let max = 0;
-  for (const n of arr) {
-    a[n] = true;
-    if (max < n) max = n;
-  }
-  const results = [];
-  for (let i = 1; i < 99999; i++) {
-    if (!a[i]) results.push(i);
-    if (max <= i) break;
-  }
-  return results;
-};
+// /**
+//  * x99 = 5-7ms
+//  *
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const a = new Array(99999999);
+//   let max = 0;
+//   for (const n of arr) {
+//     a[n] = true;
+//     if (max < n) max = n;
+//   }
+//   const results = [];
+//   for (let i = 1; i < 99999999; i++) {
+//     if (!a[i]) results.push(i);
+//     if (max <= i) break;
+//   }
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// /**
+//  * x99 = 3ms-4ms
+//  *
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const set = new Set(arr);
+//   const max = Math.max(...set);
+//   const results = [];
+//   for (let i = 1; i <= max; i++) if (!set.has(i)) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const set = new Set(arr);
+//   const max = Math.max(...set);
+//   const results = [];
+//   for (let i = 1; i < max; i++) if (!set.has(i)) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// Reference solution
+
+// function takeTrailZeroes(arr) {
+//   while (arr[arr.length - 1] === 0) {
+//     arr.pop();
+//   }
+//   return arr;
+// }
+
+// function missNumsFinder(arr) {
+//   var k = 15,
+//     l = arr.length;
+//   var res = Array(l + k).fill(0);
+//   for (var i = 0; i <= arr.length - 1; i++) {
+//     var n = arr[i];
+//     res[n - 1] = n;
+//   }
+//   res = takeTrailZeroes(res);
+//   var fin = [];
+//   for (i = 0; i <= res.length - 1; i++) {
+//     if (res[i] === 0) fin.push(i + 1);
+//   }
+//   return fin;
+// }
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   let tmp = [...new Array(99999).keys()];
+//   let max = 0;
+//   for (const n of new Set(arr)) {
+//     tmp[n] = false;
+//     if (max < n) max = n;
+//   }
+//   return tmp.slice(1, max).filter(e => !!e);
+// };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { deepStrictEqual } from 'assert';
-
-console.time();
 
 deepStrictEqual(missNumsFinder([2, 3, 1, 9, 4, 5, 6, 10, 7]), [8]);
 
@@ -174,5 +249,3 @@ deepStrictEqual(
   missNumsFinder([9, 10, 7, 2, 11, 8, 1, 17, 6, 16, 18, 19, 15, 3, 13]),
   [4, 5, 12, 14],
 );
-
-console.timeEnd();
