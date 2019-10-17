@@ -21,21 +21,94 @@
 /**
  * @param {number[]} arr
  */
+// const missNumsFinder = arr => {
+//   const map = new Map();
+//   let max = -Infinity;
+//   for (const n of arr) {
+//     if (max < n) max = n;
+//     map.set(n, true);
+//   }
+//   const results = [];
+//   for (let i = 1; i <= max; i++) if (!map.get(i)) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const buckets = new Array(99999).fill(0);
+//   let max = -Infinity;
+//   for (const n of arr) {
+//     if (max < n) max = n;
+//     buckets[n]++;
+//   }
+//   const results = [];
+//   for (let i = 1; i <= max; i++) if (0 === buckets[i]) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} arr
+ * @returns {number[]}
+ */
+// const missNumsFinder = arr => {
+//   arr = new Set(arr);
+//   const buckets = new Array(99999).fill(0);
+//   let max = -Infinity;
+//   for (const n of arr) {
+//     if (max < n) max = n;
+//     buckets[n]++;
+//   }
+//   const results = [];
+//   for (let i = 1; i <= max; i++) if (0 === buckets[i]) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} arr
+ * @returns {number[]}
+ */
+// const missNumsFinder = arr => {
+//   const map = new Map();
+//   let max = 0;
+//   for (const n of arr) {
+//     map.set(n, true);
+//     if (max < n) max = n;
+//   }
+//   const buckets = new Array(max).fill(0);
+//   for (const n of map.keys()) buckets[n]++;
+//   const results = [];
+//   for (let i = 1; i <= max; i++) if (0 === buckets[i]) results.push(i);
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} arr
+ * @returns {number[]}
+ */
 const missNumsFinder = arr => {
-  const map = new Map();
-  let max = -Infinity;
-  for (const n of arr) {
-    if (max < n) max = n;
-    map.set(n, true);
-  }
+  const set = new Set(arr);
   const results = [];
-  for (let i = 1; i <= max; i++) if (!map.get(i)) results.push(i);
+  for (let i = 1; i <= Math.max(...Array.from(set)); i++)
+    if (!set.has(i)) results.push(i);
   return results;
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { deepStrictEqual } from 'assert';
+
+console.time();
 
 deepStrictEqual(missNumsFinder([2, 3, 1, 9, 4, 5, 6, 10, 7]), [8]);
 
@@ -61,3 +134,5 @@ deepStrictEqual(
   missNumsFinder([9, 10, 7, 2, 11, 8, 1, 17, 6, 16, 18, 19, 15, 3, 13]),
   [4, 5, 12, 14],
 );
+
+console.timeEnd();
