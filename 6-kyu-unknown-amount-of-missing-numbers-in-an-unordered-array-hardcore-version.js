@@ -207,19 +207,19 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// /**
-//  * @param {number[]} arr
-//  * @returns {number[]}
-//  */
-// const missNumsFinder = arr => {
-//   let tmp = [...new Array(99999).keys()];
-//   let max = 0;
-//   for (const n of new Set(arr)) {
-//     tmp[n] = false;
-//     if (max < n) max = n;
-//   }
-//   return tmp.slice(1, max).filter(e => !!e);
-// };
+/**
+ * @param {number[]} arr
+ * @returns {number[]}
+ */
+const missNumsFinder = arr => {
+  let tmp = [...new Array(99999).keys()];
+  let max = 0;
+  for (const n of new Set(arr)) {
+    tmp[n] = false;
+    if (max < n) max = n;
+  }
+  return tmp.slice(1, max).filter(e => !!e);
+};
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
