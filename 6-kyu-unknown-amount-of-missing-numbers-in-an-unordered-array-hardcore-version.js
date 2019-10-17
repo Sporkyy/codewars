@@ -3,6 +3,10 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
 // const missNumsFinder = arr => {
 //   const a = new Array(Math.max(...arr) + 1).fill(0);
 //   for (const n of arr) a[n]++;
@@ -15,9 +19,10 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-/**
- * @param {number[]} arr
- */
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
 // const missNumsFinder = arr => {
 //   const map = new Map();
 //   let max = -Infinity;
@@ -103,19 +108,40 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const set = new Set(arr);
+//   let max = 0;
+//   const results = [];
+//   for (let i = 1; i < 99999; i++) {
+//     if (set.has(i) && max < i) max = i;
+//     else results.push(i);
+//   }
+//   return results.filter(r => r < max);
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {number[]} arr
  * @returns {number[]}
  */
 const missNumsFinder = arr => {
-  const set = new Set(arr);
+  const a = new Array(99999);
   let max = 0;
+  for (const n of arr) {
+    a[n] = true;
+    if (max < n) max = n;
+  }
   const results = [];
   for (let i = 1; i < 99999; i++) {
-    if (set.has(i) && max < i) max = i;
-    else results.push(i);
+    if (!a[i]) results.push(i);
+    if (max <= i) break;
   }
-  return results.filter(r => r < max);
+  return results;
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
