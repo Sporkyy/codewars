@@ -3,16 +3,33 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// const missNumsFinder = arr => {
+//   const a = new Array(Math.max(...arr) + 1).fill(0);
+//   // console.log(a);
+//   for (const n of arr) a[n]++;
+//   // console.log(a);
+//   // console.log(a.slice(1));
+//   const results = [];
+//   a.slice(1).forEach((n, i) => {
+//     if (0 === n) results.push(i + 1);
+//   });
+//   return results;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/**
+ * @param {number[]} arr
+ */
 const missNumsFinder = arr => {
-  const a = new Array(Math.max(...arr) + 1).fill(0);
-  // console.log(a);
-  for (const n of arr) a[n]++;
-  // console.log(a);
-  // console.log(a.slice(1));
+  const map = new Map();
+  let max = -Infinity;
+  for (const n of arr) {
+    if (max < n) max = n;
+    map.set(n, true);
+  }
   const results = [];
-  a.slice(1).forEach((n, i) => {
-    if (0 === n) results.push(i + 1);
-  });
+  for (let i = 1; i <= max; i++) if (!map.get(i)) results.push(i);
   return results;
 };
 
