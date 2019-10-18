@@ -57,10 +57,10 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-/**
- * @param {number[]} arr
- * @returns {number[]}
- */
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
 // const missNumsFinder = arr => {
 //   arr = new Set(arr);
 //   const buckets = new Array(99999).fill(0);
@@ -76,10 +76,10 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-/**
- * @param {number[]} arr
- * @returns {number[]}
- */
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
 // const missNumsFinder = arr => {
 //   const map = new Map();
 //   let max = 0;
@@ -110,10 +110,10 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-/**
- * @param {number[]} arr
- * @returns {number[]}
- */
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
 // const missNumsFinder = arr => {
 //   const set = new Set(arr);
 //   let max = 0;
@@ -207,18 +207,75 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   let tmp = [...new Array(99999).keys()];
+//   let max = 0;
+//   for (const n of arr) {
+//     tmp[n] = false;
+//     if (max < n) max = n;
+//   }
+//   return tmp.slice(1, max).filter(e => e);
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// /**
+//  * Modified refrence implementation
+//  * How do I know 15 + arr.length works as the number of buckets?
+//  *
+//  * @param {number[]} arr
+//  * @returns {number[]}
+//  */
+// const missNumsFinder = arr => {
+//   const res = Array(15 + arr.length).fill(0); // What does 15 mean?
+//   // const res = Array(99999).fill(0);
+//   for (let i = 0; i < arr.length; i++) {
+//     const n = arr[i];
+//     res[n] = n;
+//   }
+//   while (0 === res[res.length - 1]) res.pop();
+//   const fin = [];
+//   for (let i = 1; i < res.length; i++) if (0 === res[i]) fin.push(i);
+//   return fin;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
+ * Why doesn't this work? It's basically the same algorithm as the reference
+ * implementation. It's just updated a bit for modern JS.
+ *
+ * This works, but how to know the number of buckets is supposed to be
+ * arr.length + 15?
+ *
+ * And arr.length + 10 works, but nothing I tried lower than that works
+ *
+ * Was "15" just supposed to be discovered through trial and error?
+ *
  * @param {number[]} arr
  * @returns {number[]}
  */
 const missNumsFinder = arr => {
-  let tmp = [...new Array(99999).keys()];
-  let max = 0;
-  for (const n of arr) {
-    tmp[n] = false;
-    if (max < n) max = n;
-  }
-  return tmp.slice(1, max).filter(e => e);
+  // const tmp = new Array(99999);
+  // const tmp = new Array(999999);
+  // const tmp = new Array(9999999);
+  // const tmp = new Array(30000000);
+  // const tmp = new Array(arr.length * 2);
+  // const tmp = new Array(arr.length + 15); // How to know arr.length + 15?
+  // const tmp = new Array(arr.length);
+  // const tmp = new Array(arr.length + 1);
+  // const tmp = new Array(arr.length + 5);
+  const tmp = new Array(arr.length + 10); // 10 works!
+  for (let i = 0; i < arr.length; i++) tmp[arr[i]] = arr[i];
+  while ('undefined' === typeof tmp[tmp.length - 1]) tmp.pop();
+  const result = [];
+  for (let i = 1; i < tmp.length; i++)
+    if ('undefined' === typeof tmp[i]) result.push(i);
+  return result;
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
