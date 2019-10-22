@@ -3,21 +3,46 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {number} n
+//  * @returns
+//  */
+// const coin = n => {
+//   const res = [];
+//   /**
+//    * @param {number} [heads=n]
+//    * @param {number} [tails=0]
+//    * @param {string} [str='']
+//    */
+//   const flip = (heads = 1, tails = 0, str = '') => {
+//     console.log(heads);
+//     if (str.length < n) flip(heads - 1, tails + 1, `${str}H`);
+//     if (str.length < n) flip(heads, tails - 1, `${str}T`);
+//     if (str.length === n) res.push(str);
+//   };
+//   flip();
+//   return res;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {number} n
- * @returns
+ * @returns {string[]}
  */
 const coin = n => {
+  if (n < 1) return [];
   const res = [];
   /**
-   * @param {number} [heads=n]
-   * @param {number} [tails=0]
    * @param {string} [str='']
    */
-  const flip = (heads = n, tails = 0, str = '') => {
-    if (str.length < n) flip(heads - 1, tails + 1, `${str}H`);
-    if (str.length < n) flip(heads, tails - 1, `${str}T`);
-    if (str.length === n) res.push(str);
+  const flip = (str = '') => {
+    if (str.length === n) {
+      res.push(str);
+    } else {
+      flip(`${str}H`);
+      flip(`${str}T`);
+    }
   };
   flip();
   return res;
@@ -46,6 +71,8 @@ const coin = n => {
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { deepStrictEqual } from 'assert';
+
+deepStrictEqual(coin(0), []);
 
 deepStrictEqual(coin(1), ['H', 'T']);
 
