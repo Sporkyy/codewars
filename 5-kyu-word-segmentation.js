@@ -3,29 +3,54 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {string[]} dictionary
+//  * @param {string} inputString
+//  * @returns {string[]}
+//  */
+// const segmentify = (dictionary, inputString) => {
+//   dictionary = Array.from(new Set(dictionary));
+//   const map = new Map();
+//   let remainder = inputString;
+//   for (let word of dictionary) {
+//     // console.log(word);
+//     if (inputString.includes(word)) {
+//       if (map.has(inputString.indexOf(word))) return 'AMBIGUOUS';
+//       map.set(inputString.indexOf(word), word);
+//       remainder = remainder.replace(word, '');
+//     }
+//   }
+//   // console.log(remainder);
+//   // console.log(map);
+//   if (0 < remainder.length) return 'IMPOSSIBLE';
+//   return Array.from(map.entries())
+//     .sort((a, b) => a[0] - b[0])
+//     .reduce((acc, [, word]) => `${acc} ${word}`, '')
+//     .trim();
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {string[]} dictionary
  * @param {string} inputString
  * @returns {string[]}
  */
 const segmentify = (dictionary, inputString) => {
-  dictionary = Array.from(new Set(dictionary));
-  const map = new Map();
+  const a = new Array(inputString.length);
+  let isAmbiguous = false;
   let remainder = inputString;
   for (let word of dictionary) {
-    if (inputString.includes(word)) {
-      if (map.has(inputString.indexOf(word))) return 'AMBIGUOUS';
-      map.set(inputString.indexOf(word), word);
-      remainder = remainder.replace(word, '');
-    }
+    remainder = remainder.replace(word, '');
+    // console.log(word);
+    if (a[inputString.indexOf(word)]) isAmbiguous = true;
+    if (inputString.includes(word)) a[inputString.indexOf(word)] = word;
   }
+  // console.log(a.join(' '));
   // console.log(remainder);
-  // console.log(map);
   if (0 < remainder.length) return 'IMPOSSIBLE';
-  return Array.from(map.entries())
-    .sort((a, b) => a[0] - b[0])
-    .reduce((acc, [, word]) => `${acc} ${word}`, '')
-    .trim();
+  if (isAmbiguous) return 'AMBIGUOUS';
+  return a.filter(e => e).join(' ');
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
