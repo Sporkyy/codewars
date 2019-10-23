@@ -149,6 +149,7 @@ const segmentify = (dictionary, inputString) => {
       } else unused.push(word);
     }
     if (0 < unused.length) looksImpossible = true;
+    console.log(inputSCpy);
     if (/^0+$/.test(inputSCpy)) {
       if (0 < solution.length) return 'AMBIGUOUS';
       else solution = inputSBuckets.filter(e => e).join(' ');
@@ -162,143 +163,70 @@ const segmentify = (dictionary, inputString) => {
 
 import { strictEqual } from 'assert';
 
-strictEqual(segmentify(['coffee', 'drink'], 'drinkcoffee'), 'drink coffee');
+// Happy test cases
+// should return the correct sentence
 
-strictEqual(
-  segmentify(['weather', 'the', 'how', 'is'], 'howistheweather'),
-  'how is the weather',
-);
+// strictEqual(segmentify(['coffee', 'drink'], 'drinkcoffee'), 'drink coffee');
 
-strictEqual(
-  segmentify(
-    ['quick', 'jumped', 'brown', 'fox', 'the', 'jumped', 'lazy'],
-    'thequickbrownfoxjumpedoverthelazydog',
-  ),
-  'IMPOSSIBLE',
-);
+// strictEqual(
+//   segmentify(['weather', 'the', 'how', 'is'], 'howistheweather'),
+//   'how is the weather',
+// );
 
-strictEqual(segmentify(['somewhere', 'over'], 'overtherainbow'), 'IMPOSSIBLE');
-
-strictEqual(
-  segmentify(
-    ['examples', 'over', 'haul', 'overhaul', 'the'],
-    'overhaultheexamples',
-  ),
-  'AMBIGUOUS',
-);
+// strictEqual(
+//   segmentify(['you', 'are', 'hey', 'how'], 'heyhowareyou'),
+//   'hey how are you',
+// );
 
 strictEqual(
   segmentify(
-    ['examples', 'over', 'overhaul', 'haul', 'the'],
-    'overhaultheexamples',
+    ['hat', 'you', 'give', 'me', 'that', 'can'],
+    'canyougivemethathat',
   ),
-  'AMBIGUOUS',
+  'can you give me that hat',
 );
 
-strictEqual(
-  segmentify(
-    ['the', 'chicken', 'crossed', 'the', 'road'],
-    'thechickencrossedtheroad',
-  ),
-  'the chicken crossed the road',
-);
+// strictEqual(
+//   segmentify(['road', 'chicken', 'the', 'crossed'], 'thechickencrossedtheroad'),
+//   'the chicken crossed the road',
+// );
 
-strictEqual(segmentify(['the', 'a', 'a'], 'theaa'), 'the a a');
+// strictEqual(segmentify(['the', 'a'], 'theaa'), 'the a a');
 
-strictEqual(
-  segmentify(
-    ['there', 'is', 'a', 'cat', 'in', 'a', 'hat', 'at', 'there'],
-    'thereisacatinahatatthere',
-  ),
-  'there is a cat in a hat at there',
-);
+// strictEqual(
+//   segmentify(
+//     ['a', 'hat', 'at', 'cat', 'in', 'me', 'is', 'there'],
+//     'thereisacatinahatatthere',
+//   ),
+//   'there is a cat in a hat at there',
+// );
 
-strictEqual(segmentify(['a', 'b'], 'ab'), 'a b');
+// Unhappy test cases
+// should return "IMPOSSIBLE"
 
-strictEqual(segmentify(['a', 'b', 'ab'], 'ab'), 'AMBIGUOUS');
+// strictEqual(
+//   segmentify(
+//     ['quick', 'jumped', 'brown', 'fox', 'the', 'jumped', 'lazy'],
+//     'thequickbrownfoxjumpedoverthelazydog',
+//   ),
+//   'IMPOSSIBLE',
+// );
 
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// strictEqual(segmentify(['somewhere', 'over'], 'overtherainbow'), 'IMPOSSIBLE');
 
-/*
+// strictEqual(segmentify(['s', 'i', 'm', 'p', 'l'], 'simple'), 'IMPOSSIBLE');
 
-['examples', 'over', 'haul', 'overhaul', 'the']
-'overhaultheexamples'
+// strictEqual(segmentify([], 'simple'), 'IMPOSSIBLE');
 
-over|haul|the|examples | overhaul
-over|haul|the|examples |
+// Ambiguous test cases
+// should return "AMBIGUOUS"
 
-over|haul|the|         | overhaul
-over|haul|the|examples |
+// strictEqual(
+//   segmentify(
+//     ['examples', 'over', 'haul', 'overhaul', 'the'],
+//     'overhaultheexamples',
+//   ),
+//   'AMBIGUOUS',
+// );
 
-    |haul|the|examples | overhaul
-over|haul|the|examples |
-
-[over][the][examples] | [overhaul]
-[over][the][examples] | [haul]
-
-over|haul|the|examples
-over|haul|the|examples
-
-over|haul|   |examples | overhaul
-over|haul|the|examples |
-
-=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-
-['the', 'over', 'haul', 'examples', 'overhaul']
-'overhaultheexamples'
-
-=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-
-['a', 'b', 'c', 'ab', 'bc', 'abc'], 'abc'
-
-[a][b][c] | ab, bc, abc
-[a][b][c] |
-
-  [b][c] | [ab][bc][abc]
-  [b][c] | [a]
-----------+----------
-   [a][c] | [ab][bc][abc]
-   [a][c] | [b]
-----------+----------
-   [a][b] | [ab][bc][abc]
-   [a][b] | [c]
-----------+----------
-[a][b][c] | [bc][abc]
-[a][b][c] |
-----------+----------
-[a][b][c] | [ab][abc]
-[a][b][c] |
-----------+----------
-[a][b][c] | [ab][bc]
-[a][b][c] |
-
-=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-
-['a', 'b', 'ab'], 'ab'
-
-[a][b] | [ab]
-[a][b] |
--------+-----
-   [b] | [ab]
-   [b] | [a]
--------+-----
-   [a] | [ab]
-   [a] | [b]
--------+-----
-[a][b] |
-[a][b] |
-
-=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
-
-['a', 'c'], 'ab'
-
-[a] | [c]
-[a] | [b]
-----+----
-    | [c]
-    | [ab]
-----+-----
-[a] |
-[a] | [b]
-
-*/
+// strictEqual(segmentify(['d', 'ab', 'cc', 'ccd'], 'abccd'), 'AMBIGUOUS');
