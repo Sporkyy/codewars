@@ -104,24 +104,24 @@
  * @param {string} inputString
  * @returns {string[]}
  */
-const segmentify = (dictionary, inputString) => {
-  const used = new Array(inputString.length);
-  let cpy = inputString;
-  let isAmbiguous = false;
-  for (let word of dictionary) {
-    // console.log(word);
-    // console.log(cpy);
-    if (cpy.includes(word)) {
-      used[cpy.indexOf(word)] = word;
-      cpy = cpy.replace(word, '0'.repeat(word.length));
-    } else if (inputString.includes(word)) isAmbiguous = true;
-  }
-  // console.log(cpy);
-  // console.log(used);
-  if (/[^0]/.test(cpy)) return 'IMPOSSIBLE';
-  if (isAmbiguous) return 'AMBIGUOUS';
-  return used.filter(e => e).join(' ');
-};
+// const segmentify = (dictionary, inputString) => {
+//   const used = new Array(inputString.length);
+//   let cpy = inputString;
+//   let isAmbiguous = false;
+//   for (let word of dictionary) {
+//     // console.log(word);
+//     // console.log(cpy);
+//     if (cpy.includes(word)) {
+//       used[cpy.indexOf(word)] = word;
+//       cpy = cpy.replace(word, '0'.repeat(word.length));
+//     } else if (inputString.includes(word)) isAmbiguous = true;
+//   }
+//   // console.log(cpy);
+//   // console.log(used);
+//   if (/[^0]/.test(cpy)) return 'IMPOSSIBLE';
+//   if (isAmbiguous) return 'AMBIGUOUS';
+//   return used.filter(e => e).join(' ');
+// };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -131,22 +131,31 @@ const segmentify = (dictionary, inputString) => {
  * @returns {string[]}
  */
 const segmentify = (dictionary, inputString) => {
-  const used = new Array(inputString.length);
-  let cpy = inputString;
-  let isAmbiguous = false;
-  for (let word of dictionary) {
-    // console.log(word);
-    // console.log(cpy);
-    if (cpy.includes(word)) {
-      used[cpy.indexOf(word)] = word;
-      cpy = cpy.replace(word, '0'.repeat(word.length));
-    } else if (inputString.includes(word)) isAmbiguous = true;
+  let solution = '';
+  let looksImpossible = false;
+  for (let i = 0; i <= dictionary.length; i++) {
+    const dictExcerpt = [...dictionary];
+    dictExcerpt.splice(i, 1);
+    // console.log(dictExcerpt);
+    const inputSBuckets = new Array(inputString.length);
+    // console.log(isBuckets);
+    let inputSCpy = inputString;
+    const unused = [];
+    for (let word of dictExcerpt) {
+      // console.log(word);
+      if (inputSCpy.includes(word)) {
+        inputSBuckets[inputSCpy.indexOf(word)] = word;
+        inputSCpy = inputSCpy.replace(word, '0'.repeat(word.length));
+      } else unused.push(word);
+    }
+    if (0 < unused.length) looksImpossible = true;
+    if (/^0+$/.test(inputSCpy)) {
+      if (0 < solution.length) return 'AMBIGUOUS';
+      else solution = inputSBuckets.filter(e => e).join(' ');
+    }
   }
-  // console.log(cpy);
-  // console.log(used);
-  if (/[^0]/.test(cpy)) return 'IMPOSSIBLE';
-  if (isAmbiguous) return 'AMBIGUOUS';
-  return used.filter(e => e).join(' ');
+  // console.log(solution);
+  return looksImpossible ? 'IMPOSSIBLE' : solution;
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -203,3 +212,93 @@ strictEqual(
   ),
   'there is a cat in a hat at there',
 );
+
+strictEqual(segmentify(['a', 'b'], 'ab'), 'a b');
+
+strictEqual(segmentify(['a', 'b', 'ab'], 'ab'), 'AMBIGUOUS');
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+/*
+
+['examples', 'over', 'haul', 'overhaul', 'the']
+'overhaultheexamples'
+
+over|haul|the|examples | overhaul
+over|haul|the|examples |
+
+over|haul|the|         | overhaul
+over|haul|the|examples |
+
+    |haul|the|examples | overhaul
+over|haul|the|examples |
+
+[over][the][examples] | [overhaul]
+[over][the][examples] | [haul]
+
+over|haul|the|examples
+over|haul|the|examples
+
+over|haul|   |examples | overhaul
+over|haul|the|examples |
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+
+['the', 'over', 'haul', 'examples', 'overhaul']
+'overhaultheexamples'
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+
+['a', 'b', 'c', 'ab', 'bc', 'abc'], 'abc'
+
+[a][b][c] | ab, bc, abc
+[a][b][c] |
+
+  [b][c] | [ab][bc][abc]
+  [b][c] | [a]
+----------+----------
+   [a][c] | [ab][bc][abc]
+   [a][c] | [b]
+----------+----------
+   [a][b] | [ab][bc][abc]
+   [a][b] | [c]
+----------+----------
+[a][b][c] | [bc][abc]
+[a][b][c] |
+----------+----------
+[a][b][c] | [ab][abc]
+[a][b][c] |
+----------+----------
+[a][b][c] | [ab][bc]
+[a][b][c] |
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+
+['a', 'b', 'ab'], 'ab'
+
+[a][b] | [ab]
+[a][b] |
+-------+-----
+   [b] | [ab]
+   [b] | [a]
+-------+-----
+   [a] | [ab]
+   [a] | [b]
+-------+-----
+[a][b] |
+[a][b] |
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
+
+['a', 'c'], 'ab'
+
+[a] | [c]
+[a] | [b]
+----+----
+    | [c]
+    | [ab]
+----+-----
+[a] |
+[a] | [b]
+
+*/
