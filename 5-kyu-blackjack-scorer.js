@@ -168,40 +168,45 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {string[]} cards
+//  * @returns {number}
+//  */
+// const scoreHand = cards =>
+//   cards
+//     .map(card => ('A' === card ? [1, 11] : [Number(card) || 10]))
+//     .reduce((acc1, curr1) =>
+//       acc1.reduce((acc2, curr2) => acc2.concat(curr1.map(n => n + curr2)), []),
+//     )
+//     .reduce((acc, curr) => (curr <= 21 && 21 - curr < 21 - acc ? curr : acc));
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {string[]} cards
  * @returns {number}
  */
-const scoreHand = cards =>
-  cards
-    .map(card => ('A' === card ? [1, 11] : [Number(card) || 10]))
-    .reduce((acc1, curr1) =>
-      acc1.reduce((acc2, curr2) => acc2.concat(curr1.map(n => n + curr2)), []),
-    )
-    .reduce((acc, curr) => (curr <= 21 && 21 - curr < 21 - acc ? curr : acc));
+const scoreHand = cards => {
+  new
+}
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-import { deepStrictEqual, strictEqual } from 'assert';
+import { strictEqual } from 'assert';
 
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-// Calculate scores with cards 2-10
-strictEqual(scoreHand(['2', '3']), 5);
-strictEqual(scoreHand(['7', '7', '8']), 22);
-strictEqual(scoreHand(['4', '7', '8']), 19);
-
-// Should score J, Q and K as 10
-strictEqual(scoreHand(['K', 'J', 'Q']), 30);
-
-// Should core hands with Aces correctly
-strictEqual(scoreHand(['A', '3']), 14);
-strictEqual(scoreHand(['A', 'A']), 12);
-strictEqual(scoreHand(['A', '2', 'A', '9', '9']), 22);
-strictEqual(scoreHand(['8', 'A', 'A']), 20);
-
-// Should recognize Blackjack
-strictEqual(scoreHand(['J', 'A']), 21);
+strictEqual(scoreHand(["3"]), 3);
+strictEqual(scoreHand(["A"]), 11);
+strictEqual(scoreHand(["A", "A"]), 12);
+strictEqual(scoreHand(["A", "A", "A", "A"]), 14);
+strictEqual(scoreHand(["A", "J"]), 21);
+strictEqual(scoreHand(["A", "J", "A"]), 12);
+strictEqual(scoreHand(["A", "J", "7"]), 18);
+strictEqual(scoreHand(["8", "7", "A"]), 16);
+strictEqual(scoreHand(["6", "5", "A", "3", "2", "A"]), 18);
+strictEqual(scoreHand(["K", "4", "3", "2", "A"]), 20);
+strictEqual(scoreHand(["A", "10", "2"]), 13);
+strictEqual(scoreHand(["K", "4", "3", "2", "A", "Q"]), 30);
+strictEqual(scoreHand(["5", "4", "3", "2", "A", "K"]), 25);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
