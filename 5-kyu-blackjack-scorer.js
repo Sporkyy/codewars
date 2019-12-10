@@ -182,20 +182,31 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {string[]} cards
+//  * @returns {number}
+//  */
+// const scoreHand = cards => {
+//   let [score, aceCnt] = [0, 0];
+//   for (const card of cards)
+//     if ('A' === card) aceCnt++;
+//     else score += Number(card) || 10;
+//   while (0 < aceCnt && score + 11 <= 21 - 1 * (aceCnt - 1)) {
+//     score += 11;
+//     aceCnt--;
+//   }
+//   return score + aceCnt;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {string[]} cards
  * @returns {number}
  */
 const scoreHand = cards => {
-  let [score, aceCnt] = [0, 0];
-  for (const card of cards)
-    if ('A' === card) aceCnt++;
-    else score += Number(card) || 10;
-  while (0 < aceCnt && score + 11 <= 21 - 1 * (aceCnt - 1)) {
-    score += 11;
-    aceCnt--;
-  }
-  return score + aceCnt;
+  let score = cards.reduce((a, c) => a + ('A' === c ? 1 : Number(c) || 10), 0);
+  return cards.includes('A') && score < 12 ? score + 10 : score;
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
