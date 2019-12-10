@@ -187,26 +187,36 @@
  * @returns {number}
  */
 const scoreHand = cards => {
-  new
-}
+  let [score, aceCnt] = [0, 0];
+  for (const card of cards)
+    if ('A' === card) aceCnt++;
+    else score += Number(card) || 10;
+  while (0 < aceCnt && score + 11 <= 21 - 1 * (aceCnt - 1)) {
+    score += 11;
+    aceCnt--;
+  }
+  return score + aceCnt;
+};
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { strictEqual } from 'assert';
 
-strictEqual(scoreHand(["3"]), 3);
-strictEqual(scoreHand(["A"]), 11);
-strictEqual(scoreHand(["A", "A"]), 12);
-strictEqual(scoreHand(["A", "A", "A", "A"]), 14);
-strictEqual(scoreHand(["A", "J"]), 21);
-strictEqual(scoreHand(["A", "J", "A"]), 12);
-strictEqual(scoreHand(["A", "J", "7"]), 18);
-strictEqual(scoreHand(["8", "7", "A"]), 16);
-strictEqual(scoreHand(["6", "5", "A", "3", "2", "A"]), 18);
-strictEqual(scoreHand(["K", "4", "3", "2", "A"]), 20);
-strictEqual(scoreHand(["A", "10", "2"]), 13);
-strictEqual(scoreHand(["K", "4", "3", "2", "A", "Q"]), 30);
-strictEqual(scoreHand(["5", "4", "3", "2", "A", "K"]), 25);
+strictEqual(scoreHand(['3']), 3);
+strictEqual(scoreHand(['A']), 11);
+strictEqual(scoreHand(['A', 'A']), 12);
+strictEqual(scoreHand(['A', 'A', 'A', 'A']), 14);
+strictEqual(scoreHand(['A', 'J']), 21);
+strictEqual(scoreHand(['A', 'J', 'A']), 12);
+strictEqual(scoreHand(['A', 'J', '7']), 18);
+strictEqual(scoreHand(['8', '7', 'A']), 16);
+strictEqual(scoreHand(['6', '5', 'A', '3', '2', 'A']), 18);
+strictEqual(scoreHand(['K', '4', '3', '2', 'A']), 20);
+strictEqual(scoreHand(['A', '10', '2']), 13);
+strictEqual(scoreHand(['K', '4', '3', '2', 'A', 'Q']), 30);
+strictEqual(scoreHand(['5', '4', '3', '2', 'A', 'K']), 25);
+
+strictEqual(scoreHand(['2', '3', '4']), 9);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -221,5 +231,10 @@ strictEqual(scoreHand(["5", "4", "3", "2", "A", "K"]), 25);
 + [4, 5]
 --------------
   [5, 6, 6, 7, 7, 8]
+
+[1, 11]                            = 1, 11
+[1, 11], 1, 11                     = 2, 12, 22
+[1, 11], [1, 11], [1, 11]          = 3, 13, 23, 33
+[1, 11], [1, 11], [1, 11], [1, 11] = 4, 14, 24, 34, 44
 
 */
