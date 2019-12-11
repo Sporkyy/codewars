@@ -4,8 +4,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 /**
- * @param {array[]} arrays
- * @returns {any[]}
+ * @param {*} arrays
+ * @returns {*[]}
  */
 const interleave = (...arrays) => {
   const max = Math.max(...arrays.map(a => a.length));
