@@ -3,20 +3,35 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-/**
- * @param {number} n
- * @return {number}
- */
-const fib = n => (n <= 1 ? n : fib(n - 1) + fib(n - 2));
+// /**
+//  * @param {number} n
+//  * @return {number}
+//  */
+// const fib = n => (n <= 1 ? n : fib(n - 1) + fib(n - 2));
+
+// /**
+//  * @param {number} n
+//  * @returns {number}
+//  */
+// const perimeter = n => {
+//   const seq = [];
+//   while (0 <= n) seq.push(fib(1 + n--));
+//   return seq.reduce((acc, curr) => acc + curr) * 4;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 /**
  * @param {number} n
  * @returns {number}
  */
 const perimeter = n => {
-  const seq = [];
-  while (0 <= n) seq.push(fib(1 + n--));
-  return seq.reduce((acc, curr) => acc + curr) * 4;
+  const seq = [0, 1];
+  for (let i = 2; i < n + 2; i++) seq.push(seq[i - 2] + seq[i - 1]);
+  return seq
+    .slice(1)
+    .map(x => x * 4)
+    .reduce((acc, curr) => acc + curr);
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
