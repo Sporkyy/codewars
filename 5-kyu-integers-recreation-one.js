@@ -3,21 +3,30 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const divisors = n => {
+/**
+ * @param {number} n
+ * @returns {number[]}
+ */
+const getDivisors = n => {
   n = Math.abs(n);
-  const factors = [];
-  for (let i = n; 0 < i; i--) if (0 === n % i) factors.push(i);
-  return factors;
+  const res = [];
+  for (let i = n; 0 < i; i--) if (0 === n % i) res.push(i);
+  return res;
 };
 
+/**
+ * @param {number} m
+ * @param {number} n
+ * @returns {number[][]}
+ */
 const listSquared = (m, n) => {
   const res = [];
   for (let i = m; i <= n; i++) {
-    const factors = divisors(i);
-    if (0 === factors.length) continue;
-    const sumOfSquaredfactors = factors.reduce((a, c) => a + c ** 2, 0);
-    if (0 !== Math.sqrt(sumOfSquaredfactors) % 1) continue;
-    res.push([i, sumOfSquaredfactors]);
+    const divisors = getDivisors(i);
+    if (0 === divisors.length) continue;
+    const sumOfSquaredDivisors = divisors.reduce((a, c) => a + c ** 2, 0);
+    if (0 !== Math.sqrt(sumOfSquaredDivisors) % 1) continue;
+    res.push([i, sumOfSquaredDivisors]);
   }
   return res;
 };
@@ -30,7 +39,6 @@ const listSquared = (m, n) => {
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { deepStrictEqual } from 'assert';
-import { DH_UNABLE_TO_CHECK_GENERATOR } from 'constants';
 
 deepStrictEqual(listSquared(41, 43), [[42, 2500]]);
 
