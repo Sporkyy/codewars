@@ -57,9 +57,74 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {String} str - inital string
+//  * @param {Number} len - line length
+//  */
+// const justify = (str, len) => {
+//   const chunks = str.split(/\s+/);
+//   const lines = [[]];
+
+//   for (const chunk of chunks) {
+//     if (
+//       len <
+//       (0 === lines[lines.length - 1].length
+//         ? 0
+//         : lines[lines.length - 1].reduce((acc, curr) => acc + curr.length, 0) +
+//           lines[lines.length - 1].length -
+//           1) +
+//         (0 === lines[lines.length - 1].length ? 0 : 1) +
+//         chunk.length
+//     ) {
+//       lines.push([chunk]);
+//     } else {
+//       lines[lines.length - 1].push(chunk);
+//     }
+//   }
+
+//   // console.log(lines);
+//   // console.log(lines.map(line => line.join(' ')).join('\n'));
+
+//   const justified = lines.map(line => {
+//     // console.log(line);
+//     const cntWords = line.length;
+//     // console.log(cntWords);
+//     const cntChars = line.reduce((acc, curr) => {
+//       // console.log(curr);
+//       // console.log(curr.length);
+//       return acc + curr.length;
+//     }, 0);
+//     // console.log(cntChars);
+//     const spaceWidth = Math.trunc((len - cntChars) / (cntWords - 1));
+//     // console.log(spaceWidth);
+//     const extraSpaces = (len - cntChars) % (cntWords - 1);
+//     // console.log(extraSpaces);
+//     return line.reduce((acc, curr, idx, src) => {
+//       let endPadded = curr;
+//       if (idx < src.length - 1) endPadded += ' '.repeat(spaceWidth);
+//       if (idx < extraSpaces) endPadded += ' ';
+//       // console.log(endPadded);
+//       return acc + endPadded;
+//     }, '');
+//   });
+
+//   // console.log(justified);
+//   // console.log(justified.join('\n'));
+
+//   // console.log(lines.slice(-1)[0].join(' '));
+
+//   return justified
+//     .slice(0, -1)
+//     .concat(lines.slice(-1)[0].join(' '))
+//     .join('\n');
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {String} str - inital string
  * @param {Number} len - line length
+ * @return {String}
  */
 const justify = (str, len) => {
   const chunks = str.split(/\s+/);
@@ -82,36 +147,20 @@ const justify = (str, len) => {
     }
   }
 
-  // console.log(lines);
-  // console.log(lines.map(line => line.join(' ')).join('\n'));
-
   const justified = lines.map(line => {
-    // console.log(line);
     const cntWords = line.length;
-    // console.log(cntWords);
     const cntChars = line.reduce((acc, curr) => {
-      // console.log(curr);
-      // console.log(curr.length);
       return acc + curr.length;
     }, 0);
-    // console.log(cntChars);
     const spaceWidth = Math.trunc((len - cntChars) / (cntWords - 1));
-    // console.log(spaceWidth);
     const extraSpaces = (len - cntChars) % (cntWords - 1);
-    // console.log(extraSpaces);
     return line.reduce((acc, curr, idx, src) => {
       let endPadded = curr;
       if (idx < src.length - 1) endPadded += ' '.repeat(spaceWidth);
       if (idx < extraSpaces) endPadded += ' ';
-      // console.log(endPadded);
       return acc + endPadded;
     }, '');
   });
-
-  // console.log(justified);
-  // console.log(justified.join('\n'));
-
-  // console.log(lines.slice(-1)[0].join(' '));
 
   return justified
     .slice(0, -1)
@@ -189,7 +238,7 @@ const unjustified = justified.replace('\n', ' ').replace(/\s{2,}/gm, ' ');
 
 import { strictEqual } from 'assert';
 
-// strictEqual(justify(unjustified, 30), justified);
+strictEqual(justify(unjustified, 30), justified);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
