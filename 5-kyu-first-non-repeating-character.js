@@ -21,10 +21,12 @@ const firstNonRepeatingLetter = s =>
 
 import { strictEqual } from 'assert';
 
+// Provided test suite
 strictEqual(firstNonRepeatingLetter('a'), 'a');
 strictEqual(firstNonRepeatingLetter('stress'), 't');
 strictEqual(firstNonRepeatingLetter('moonmen'), 'e');
 
+// Tests I devised
 strictEqual(firstNonRepeatingLetter('Catta'), 'C');
 strictEqual(firstNonRepeatingLetter('T'), 'T');
 strictEqual(firstNonRepeatingLetter('aa'), '');
@@ -32,6 +34,7 @@ strictEqual(firstNonRepeatingLetter('a'), 'a');
 strictEqual(firstNonRepeatingLetter(''), '');
 strictEqual(firstNonRepeatingLetter('0'), '0');
 
+// Tests stolen from the submission tests
 strictEqual(
   firstNonRepeatingLetter("Go hang a salami, I'm a lasagna hog!"),
   ',',
