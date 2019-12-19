@@ -3,8 +3,24 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {String} s
+//  * @return {String}
+//  */
+// const firstNonRepeatingLetter = s => {
+//   const cnts = new Array(1024).fill(0);
+//   const sLower = s.toLowerCase();
+//   for (let i = 0; i < s.length; i++) cnts[sLower.charCodeAt(i)]++;
+//   for (let i = 0; i < s.length; i++)
+//     if (1 === cnts[sLower.charCodeAt(i)]) return s[i];
+//   return '';
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {String} s
+ * @return {String}
  */
 const firstNonRepeatingLetter = s =>
   [...s].reduce(
@@ -39,3 +55,4 @@ strictEqual(
   firstNonRepeatingLetter("Go hang a salami, I'm a lasagna hog!"),
   ',',
 );
+strictEqual(firstNonRepeatingLetter('∞§ﬁ›ﬂ∞§'), 'ﬁ');
