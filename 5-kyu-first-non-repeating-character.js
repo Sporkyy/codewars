@@ -18,20 +18,36 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+// /**
+//  * @param {String} s
+//  * @return {String}
+//  */
+// const firstNonRepeatingLetter = s =>
+//   [...s].reduce(
+//     (acc, curr) =>
+//       !acc &&
+//       s.toLowerCase().indexOf(curr.toLowerCase()) ===
+//         s.toLowerCase().lastIndexOf(curr.toLowerCase())
+//         ? curr
+//         : acc,
+//     null,
+//   ) || '';
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 /**
  * @param {String} s
  * @return {String}
  */
-const firstNonRepeatingLetter = s =>
-  [...s].reduce(
-    (acc, curr) =>
-      !acc &&
-      s.toLowerCase().indexOf(curr.toLowerCase()) ===
-        s.toLowerCase().lastIndexOf(curr.toLowerCase())
-        ? curr
-        : acc,
-    null,
-  ) || '';
+const firstNonRepeatingLetter = s => {
+  const sLower = s.toLowerCase();
+  const map = new Map();
+  for (let i = 0; i < s.length; i++)
+    if (map.has(sLower[i])) map.set(sLower[i], map.get(sLower[i]) + 1);
+    else map.set(sLower[i], 1);
+  for (let i = 0; i < s.length; i++) if (1 === map.get(sLower[i])) return s[i];
+  return '';
+};
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
