@@ -3,15 +3,24 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const cakes = (recipe, available) => {
-  let cnt = Infinity;
-  for (const [ingredient, amount] of Object.entries(recipe)) {
-    // console.log(ingredient, amount);
-    cnt = Math.min(cnt, Math.trunc(available[ingredient] / amount));
-  }
-  // console.log(cnt || 0);
-  return cnt || 0;
-};
+// const cakes = (recipe, available) => {
+//   let cnt = Infinity;
+//   for (const [ingredient, amount] of Object.entries(recipe)) {
+//     // console.log(ingredient, amount);
+//     cnt = Math.min(cnt, Math.trunc(available[ingredient] / amount));
+//   }
+//   // console.log(cnt || 0);
+//   return cnt || 0;
+// };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+const cakes = (recipe, available) =>
+  Object.entries(recipe).reduce(
+    (acc, [ingredient, amount]) =>
+      Math.min(acc, Math.trunc(available[ingredient] / amount)),
+    Infinity,
+  ) || 0;
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
