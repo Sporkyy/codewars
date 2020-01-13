@@ -63,37 +63,52 @@
  * @param {string} part1
  * @param {string} part2
  */
-const isMerge = (s, part1, part2) => {
-  console.log({ s, part1, part2 });
-  if (0 === s.length + part1.length + part2.length) return true;
-  if (s[0] === part1[0]) isMerge(s.slice(1), part1.slice(1), part2);
-  if (s[0] === part2[0]) isMerge(s.slice(1), part1, part2.slice(1));
-  console.log(s.length);
-  return false;
-};
+const isMerge = (s, part1, part2) =>
+  s.length !== part1.length + part2.length
+    ? false
+    : 0 === s.length
+    ? true
+    : (s[0] === part1[0] && isMerge(s.slice(1), part1.slice(1), part2)) ||
+      (s[0] === part2[0] && isMerge(s.slice(1), part1, part2.slice(1)));
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { ok } from 'assert';
 
-// Sample Tests
-ok(isMerge('codewars', 'code', 'wars'));
-ok(isMerge('codewars', 'cdw', 'oears'));
-ok(!isMerge('codewars', 'cod', 'wars'));
+// Sample Cases
+// ok(isMerge('codewars', 'code', 'wars'));
+// ok(isMerge('codewars', 'cdw', 'oears'));
+// ok(!isMerge('codewars', 'cod', 'wars'));
 
-// Real Tests
-ok(isMerge('Bananas from Bahamas', 'Bahas', 'Bananas from am'));
+// Banana Case
+// ok(isMerge('Bananas from Bahamas', 'Bahas', 'Bananas from am'));
+// ok(isMerge('Bananas from Bahamas', 'Bananas from am', 'Bahas'));
+
+// Extra Characters
+ok(!isMerge('codewars', 'code', 'warss'));
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 /*
 
-1 | Bananas from Bahamas |
-1 |              Bah  as |
-1 | Bananas from    am   |
+   s = Bananas from Bahamas |
+part1 = Ba                   | has
+part2 =                      | Bananas from am
+-----------------------------+
+   s =   nanas from Bahamas
 
-2 | Bananas from Bahamas |               |
-2 | Bah  as              |               |
-2 |              Ba      | nanas from am |
+   s = Bananas from Bahamas |
+r1-p1 = Bananas from         | am
+r2-p2 =              Ba      | has
+r3-p1 =                ha    | s
+-----------------------------+
+                         mas
+
+   s = Bananas from Bahamas |
+Part1 = /Skip/               | Bahas
+part2 = Bananas from         | am
+part1 =              Bah     | as
+part2 =                 am   |
+part1 =                   as |
 
 */
