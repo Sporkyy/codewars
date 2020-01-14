@@ -1,5 +1,5 @@
-//
-//
+// 4 kyu | parseInt() reloaded
+// https://www.codewars.com/kata/parseint-reloaded/
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
