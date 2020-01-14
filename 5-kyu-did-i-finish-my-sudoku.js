@@ -3,236 +3,91 @@
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-// /**
-//  * Copy-pasted from the solution to a later kata
-//  * https://www.codewars.com/kata/sudoku-solution-validator/
-//  *
-//  * @param {Number[][]} board
-//  * @returns {String}
-//  */
-// function doneOrNot(board) {
-//   const cnts = new Array(10).fill(0);
-//   for (let i = 0; i < 9; i++) {
-//     for (let j = 0; j < 9; j++) {
-//       cnts[board[i][j]]++;
-//       cnts[board[j][i]]++;
-//       cnts[board[j % 3][i % 3]]++;
-//     }
-//   }
-//   console.log(cnts);
-//   return cnts.slice(1).every(n => 27 === n) ? 'Finished!' : 'Try again!';
-// }
-
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-// /**
-//  * @param {Number[][]} board
-//  * @returns {String}
-//  */
-// const doneOrNot = board => {
-//   // console.log(board);
-//   const sums = new Array(9).fill(0);
-//   for (let row = 0; row < 9; row++) {
-//     for (let col = 0; col < 9; col++) {
-//       // sums[row] += board[col % 3][row];
-//       console.log(`sums[${row}] = board[${col % 3}][${row}]`);
-//       sums[row] += board[col][row];
-//       sums[col] += board[row][col];
-//     }
-//   }
-//   console.log(sums);
-//   return sums.every(sum => 90 === sum) ? 'Finished!' : 'Try again!';
-// };
-
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 /**
  * @param {Number[][]} board
  * @returns {String}
  */
 const doneOrNot = board => {
-  // console.log(board);
-  const sums = new Array(9).fill(0);
-  for (let i = 0; i < 81; i++) {
-    // console.log(`board[${i % 9}][${Math.trunc(i / 9)}]`);
-    sums[i % 9] += board[i % 9][Math.trunc(i / 9)];
-    // console.log(`board[${Math.trunc(i / 9)}][${i % 9}]`);
-    sums[i % 9] += board[Math.trunc(i / 9)][i % 9];
-    // console.log(`board[${Math.trunc(i / 9)}][${i % 9}]`);
-    // console.log(
-    //   `${i} = sums[${Math.trunc(i / 9)}] = board[${Math.trunc(i / 9)}][${i %
-    //     9}]`,
-    // );
-    // sums[i % 9] += board[Math.trunc(i / 9)][i % 9];
-    // console.log(
-    //   `${i}: ${Math.trunc(i / 9) * 3 +
-    //     Number.parseInt(i.toString(3)[i.toString(3).length - 1], 10)}`,
-    // );
+  const colCheck = new Array(9);
+  const rowCheck = new Array(9);
+  const quadCheck = new Array(9);
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      rowCheck[i] ^= board[i][j];
+      colCheck[i] ^= board[j][i];
+      quadCheck[Math.trunc(i / 3) * 3 + Math.trunc(j / 3)] ^= board[i][j];
+    }
   }
-  console.log(sums);
-  return sums.every(sum => 90 === sum) ? 'Finished!' : 'Try again!';
+  return quadCheck.every(xored => 1 === xored) &&
+    colCheck.every(xored => 1 === xored) &&
+    rowCheck.every(xored => 1 === xored)
+    ? 'Finished!'
+    : 'Try again!';
 };
-
-// console.log(Math.trunc(0 / 9));
-// console.log(Math.trunc(1 / 9));
-// console.log(Math.trunc(2 / 9));
-// console.log(Math.trunc(3 / 9));
-// console.log(Math.trunc(6 / 9));
-// // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-// console.log(Math.trunc(27 / 26));
-// console.log(Math.trunc(28 / 26));
-// console.log(Math.trunc(29 / 26));
-// console.log(Math.trunc(30 / 26));
-// console.log(Math.trunc(33 / 26));
-
-console.log(`${Math.trunc(0 / 9)} = ${Math.trunc(0 / 3)}`);
-console.log(`${Math.trunc(9 / 9)} = ${Math.trunc(9 / 3)}`);
-console.log(`${Math.trunc(18 / 9)} = ${Math.trunc(18 / 3)}`);
-console.log(`${Math.trunc(27 / 9)} = ${Math.trunc(81 / 27)}`);
-
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-// /**
-//  * Copy-pasted from the solution to a later kata
-//  * https://www.codewars.com/kata/sudoku-solution-validator/
-//  *
-//  * @param {Number[][]} board
-//  * @returns {String}
-//  */
-// const doneOrNot = board => {
-//   console.log(board);
-//   const cnts = new Array(10).fill(0);
-//   for (let i = 0; i < 9; i++) {
-//     for (let j = 0; j < 9; j++) {
-//       cnts[board[i][j]]++;
-//       cnts[board[j][i]]++;
-//       cnts[board[j % 3][i % 3]]++;
-//     }
-//   }
-//   console.log(cnts);
-//   return '[0,27,27,27,27,27,27,27,27,27]' === JSON.stringify(cnts)
-//     ? 'Finished!'
-//     : 'Try again!';
-// };
-
-// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-// doneOrNot([
-//   [5, 3, 4, 6, 7, 8, 9, 1, 2],
-//   [6, 7, 2, 1, 9, 5, 3, 4, 8],
-//   [1, 9, 8, 3, 4, 2, 5, 6, 7],
-//   [8, 5, 9, 7, 6, 1, 4, 2, 3],
-//   [4, 2, 6, 8, 5, 3, 7, 9, 1],
-//   [7, 1, 3, 9, 2, 4, 8, 5, 6],
-//   [9, 6, 1, 5, 3, 7, 2, 8, 4],
-//   [2, 8, 7, 4, 1, 9, 6, 3, 5],
-//   [3, 4, 5, 2, 8, 6, 1, 7, 9],
-// ]);
-
-// Wrong
-// doneOrNot([
-//   [5, 3, 4, 6, 7, 8, 9, 1, 2],
-//   [6, 7, 2, 1, 9, 0, 3, 4, 9],
-//   [1, 0, 0, 3, 4, 2, 5, 6, 0],
-//   [8, 5, 9, 7, 6, 1, 0, 2, 0],
-//   [4, 2, 6, 8, 5, 3, 7, 9, 1],
-//   [7, 1, 3, 9, 2, 4, 8, 5, 6],
-//   [9, 0, 1, 5, 3, 7, 2, 1, 4],
-//   [2, 8, 7, 4, 1, 9, 6, 3, 5],
-//   [3, 0, 0, 4, 8, 1, 1, 7, 9],
-// ]);
-
-// Right
-// doneOrNot([
-//   [1, 3, 2, 5, 7, 9, 4, 6, 8],
-//   [4, 9, 8, 2, 6, 1, 3, 7, 5],
-//   [7, 5, 6, 3, 8, 4, 2, 1, 9],
-//   [6, 4, 3, 1, 5, 8, 7, 9, 2],
-//   [5, 2, 1, 7, 9, 3, 8, 4, 6],
-//   [9, 8, 7, 4, 2, 6, 5, 3, 1],
-//   [2, 1, 4, 9, 3, 5, 6, 8, 7],
-//   [3, 6, 5, 8, 1, 7, 9, 2, 4],
-//   [8, 7, 9, 6, 4, 2, 1, 5, 3],
-// ]);
-
-// Wrong
-// doneOrNot([
-//   [1, 3, 2, 5, 7, 9, 4, 6, 8],
-//   [4, 9, 8, 2, 6, 1, 3, 7, 5],
-//   [7, 5, 6, 3, 8, 4, 2, 1, 9],
-//   [6, 4, 3, 1, 5, 8, 7, 9, 2],
-//   [5, 2, 1, 7, 9, 3, 8, 4, 6],
-//   [9, 8, 7, 4, 2, 6, 5, 3, 1],
-//   [2, 1, 4, 9, 3, 5, 6, 8, 7],
-//   [3, 6, 5, 8, 1, 7, 9, 2, 4],
-//   [8, 7, 9, 6, 4, 2, 1, 3, 5],
-// ]);
-
-// console.log([8, 5, 9, 2, 6, 1, 7, 4, 5].reduce((acc, curr) => acc + curr));
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 import { deepStrictEqual } from 'assert';
 
-// deepStrictEqual(
-//   doneOrNot([
-//     [5, 3, 4, 6, 7, 8, 9, 1, 2],
-//     [6, 7, 2, 1, 9, 5, 3, 4, 8],
-//     [1, 9, 8, 3, 4, 2, 5, 6, 7],
-//     [8, 5, 9, 7, 6, 1, 4, 2, 3],
-//     [4, 2, 6, 8, 5, 3, 7, 9, 1],
-//     [7, 1, 3, 9, 2, 4, 8, 5, 6],
-//     [9, 6, 1, 5, 3, 7, 2, 8, 4],
-//     [2, 8, 7, 4, 1, 9, 6, 3, 5],
-//     [3, 4, 5, 2, 8, 6, 1, 7, 9],
-//   ]),
-//   'Finished!',
-// );
+deepStrictEqual(
+  doneOrNot([
+    [5, 3, 4, 6, 7, 8, 9, 1, 2],
+    [6, 7, 2, 1, 9, 5, 3, 4, 8],
+    [1, 9, 8, 3, 4, 2, 5, 6, 7],
+    [8, 5, 9, 7, 6, 1, 4, 2, 3],
+    [4, 2, 6, 8, 5, 3, 7, 9, 1],
+    [7, 1, 3, 9, 2, 4, 8, 5, 6],
+    [9, 6, 1, 5, 3, 7, 2, 8, 4],
+    [2, 8, 7, 4, 1, 9, 6, 3, 5],
+    [3, 4, 5, 2, 8, 6, 1, 7, 9],
+  ]),
+  'Finished!',
+);
 
-// deepStrictEqual(
-//   doneOrNot([
-//     [5, 3, 4, 6, 7, 8, 9, 1, 2],
-//     [6, 7, 2, 1, 9, 0, 3, 4, 9],
-//     [1, 0, 0, 3, 4, 2, 5, 6, 0],
-//     [8, 5, 9, 7, 6, 1, 0, 2, 0],
-//     [4, 2, 6, 8, 5, 3, 7, 9, 1],
-//     [7, 1, 3, 9, 2, 4, 8, 5, 6],
-//     [9, 0, 1, 5, 3, 7, 2, 1, 4],
-//     [2, 8, 7, 4, 1, 9, 6, 3, 5],
-//     [3, 0, 0, 4, 8, 1, 1, 7, 9],
-//   ]),
-//   'Try again!',
-// );
+deepStrictEqual(
+  doneOrNot([
+    [5, 3, 4, 6, 7, 8, 9, 1, 2],
+    [6, 7, 2, 1, 9, 0, 3, 4, 9],
+    [1, 0, 0, 3, 4, 2, 5, 6, 0],
+    [8, 5, 9, 7, 6, 1, 0, 2, 0],
+    [4, 2, 6, 8, 5, 3, 7, 9, 1],
+    [7, 1, 3, 9, 2, 4, 8, 5, 6],
+    [9, 0, 1, 5, 3, 7, 2, 1, 4],
+    [2, 8, 7, 4, 1, 9, 6, 3, 5],
+    [3, 0, 0, 4, 8, 1, 1, 7, 9],
+  ]),
+  'Try again!',
+);
 
-// deepStrictEqual(
-//   doneOrNot([
-//     [1, 3, 2, 5, 7, 9, 4, 6, 8],
-//     [4, 9, 8, 2, 6, 1, 3, 7, 5],
-//     [7, 5, 6, 3, 8, 4, 2, 1, 9],
-//     [6, 4, 3, 1, 5, 8, 7, 9, 2],
-//     [5, 2, 1, 7, 9, 3, 8, 4, 6],
-//     [9, 8, 7, 4, 2, 6, 5, 3, 1],
-//     [2, 1, 4, 9, 3, 5, 6, 8, 7],
-//     [3, 6, 5, 8, 1, 7, 9, 2, 4],
-//     [8, 7, 9, 6, 4, 2, 1, 5, 3],
-//   ]),
-//   'Finished!',
-// );
+deepStrictEqual(
+  doneOrNot([
+    [1, 3, 2, 5, 7, 9, 4, 6, 8],
+    [4, 9, 8, 2, 6, 1, 3, 7, 5],
+    [7, 5, 6, 3, 8, 4, 2, 1, 9],
+    [6, 4, 3, 1, 5, 8, 7, 9, 2],
+    [5, 2, 1, 7, 9, 3, 8, 4, 6],
+    [9, 8, 7, 4, 2, 6, 5, 3, 1],
+    [2, 1, 4, 9, 3, 5, 6, 8, 7],
+    [3, 6, 5, 8, 1, 7, 9, 2, 4],
+    [8, 7, 9, 6, 4, 2, 1, 5, 3],
+  ]),
+  'Finished!',
+);
 
-// deepStrictEqual(
-//   doneOrNot([
-//     [1, 3, 2, 5, 7, 9, 4, 6, 8],
-//     [4, 9, 8, 2, 6, 1, 3, 7, 5],
-//     [7, 5, 6, 3, 8, 4, 2, 1, 9],
-//     [6, 4, 3, 1, 5, 8, 7, 9, 2],
-//     [5, 2, 1, 7, 9, 3, 8, 4, 6],
-//     [9, 8, 7, 4, 2, 6, 5, 3, 1],
-//     [2, 1, 4, 9, 3, 5, 6, 8, 7],
-//     [3, 6, 5, 8, 1, 7, 9, 2, 4],
-//     [8, 7, 9, 6, 4, 2, 1, 3, 5],
-//   ]),
-//   'Try again!',
-// );
+deepStrictEqual(
+  doneOrNot([
+    [1, 3, 2, 5, 7, 9, 4, 6, 8],
+    [4, 9, 8, 2, 6, 1, 3, 7, 5],
+    [7, 5, 6, 3, 8, 4, 2, 1, 9],
+    [6, 4, 3, 1, 5, 8, 7, 9, 2],
+    [5, 2, 1, 7, 9, 3, 8, 4, 6],
+    [9, 8, 7, 4, 2, 6, 5, 3, 1],
+    [2, 1, 4, 9, 3, 5, 6, 8, 7],
+    [3, 6, 5, 8, 1, 7, 9, 2, 4],
+    [8, 7, 9, 6, 4, 2, 1, 3, 5],
+  ]),
+  'Try again!',
+);
 
 deepStrictEqual(
   doneOrNot([
@@ -365,5 +220,15 @@ Wrong
 33 = [3] = [5, 0]
 34 = [3] = [5, 1]
 35 = [3] = [5, 2]
+
+0, 0, 0, 1, 1, 1, 2, 2, 2,
+0, 0, 0, 1, 1, 1, 2, 2, 2,
+0, 0, 0, 1, 1, 1, 2, 2, 2,
+3, 3, 3, 4, 4, 4, 5, 5, 5,
+3, 3, 3, 4, 4, 4, 5, 5, 5,
+3, 3, 3, 4, 4, 4, 5, 5, 5,
+6, 6, 6, 7, 7, 7, 8, 8, 8,
+6, 6, 6, 7, 7, 7, 8, 8, 8,
+6, 6, 6, 7, 7, 7, 8, 8, 8,
 
 */
