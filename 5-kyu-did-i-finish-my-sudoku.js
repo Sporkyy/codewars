@@ -8,19 +8,15 @@
  * @returns {String}
  */
 const doneOrNot = board => {
-  const colCheck = new Array(9);
-  const rowCheck = new Array(9);
-  const quadCheck = new Array(9);
+  const [cols, rows, regions] = [new Array(9), new Array(9), new Array(9)];
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
-      rowCheck[i] ^= board[i][j];
-      colCheck[i] ^= board[j][i];
-      quadCheck[Math.trunc(i / 3) * 3 + Math.trunc(j / 3)] ^= board[i][j];
+      cols[i] ^= board[j][i];
+      rows[i] ^= board[i][j];
+      regions[Math.trunc(i / 3) * 3 + Math.trunc(j / 3)] ^= board[i][j];
     }
   }
-  return quadCheck.every(xored => 1 === xored) &&
-    colCheck.every(xored => 1 === xored) &&
-    rowCheck.every(xored => 1 === xored)
+  return [...cols, ...rows, ...regions].every(xored => 1 === xored)
     ? 'Finished!'
     : 'Try again!';
 };
@@ -74,6 +70,7 @@ deepStrictEqual(
   'Finished!',
 );
 
+// Column repeat
 deepStrictEqual(
   doneOrNot([
     [1, 3, 2, 5, 7, 9, 4, 6, 8],
@@ -85,6 +82,22 @@ deepStrictEqual(
     [2, 1, 4, 9, 3, 5, 6, 8, 7],
     [3, 6, 5, 8, 1, 7, 9, 2, 4],
     [8, 7, 9, 6, 4, 2, 1, 3, 5],
+  ]),
+  'Try again!',
+);
+
+// Row repeat
+deepStrictEqual(
+  doneOrNot([
+    [8, 5, 9, 2, 6, 1, 7, 4, 5],
+    [6, 7, 1, 9, 4, 3, 8, 2, 3],
+    [4, 3, 2, 7, 8, 5, 6, 9, 1],
+    [9, 1, 4, 8, 3, 6, 5, 7, 2],
+    [7, 6, 8, 5, 9, 2, 3, 1, 4],
+    [5, 2, 3, 1, 7, 4, 9, 8, 6],
+    [2, 8, 6, 3, 1, 7, 4, 5, 9],
+    [3, 9, 5, 4, 2, 8, 1, 6, 7],
+    [1, 4, 7, 6, 5, 9, 2, 3, 8],
   ]),
   'Try again!',
 );
