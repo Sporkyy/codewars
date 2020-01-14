@@ -9,13 +9,12 @@
  */
 const doneOrNot = board => {
   const [cols, rows, regions] = [new Array(9), new Array(9), new Array(9)];
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 9; i++)
     for (let j = 0; j < 9; j++) {
       cols[i] ^= board[j][i];
       rows[i] ^= board[i][j];
       regions[Math.trunc(i / 3) * 3 + Math.trunc(j / 3)] ^= board[i][j];
     }
-  }
   return [...cols, ...rows, ...regions].every(xored => 1 === xored)
     ? 'Finished!'
     : 'Try again!';
