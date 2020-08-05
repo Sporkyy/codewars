@@ -87,10 +87,7 @@ const add = (a, b) => {
     const sum = result.pop() + a[i] + b[i];
     result.push(sum % 10, Math.trunc(sum / 10));
   }
-  return result
-    .reverse()
-    .join('')
-    .replace(/^0+/, '');
+  return result.reverse().join('').replace(/^0+/, '');
 };
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
