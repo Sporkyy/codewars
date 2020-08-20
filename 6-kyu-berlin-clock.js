@@ -110,10 +110,25 @@ Please check the example test cases for the required output format.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
+// const berlinClock = time =>
+//   (([h, m, s]) =>
+//     [
+//       s % 2 === 1 ? 'O' : 'Y',
+//       'R'.repeat(Math.trunc(h / 5)).padEnd(4, 'O'),
+//       'R'.repeat(h % 5).padEnd(4, 'O'),
+//       'Y'
+//         .repeat(Math.trunc(m / 5))
+//         .replace(/YYY/g, 'YYR')
+//         .padEnd(11, 'O'),
+//       'Y'.repeat(m % 5).padEnd(4, 'O'),
+//     ].join('\n'))(time.split(':').map(Number));
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
 const berlinClock = time =>
   (([h, m, s]) =>
     [
-      s % 2 === 1 ? 'O' : 'Y',
+      ['Y', 'O'][s % 2],
       'R'.repeat(Math.trunc(h / 5)).padEnd(4, 'O'),
       'R'.repeat(h % 5).padEnd(4, 'O'),
       'Y'
