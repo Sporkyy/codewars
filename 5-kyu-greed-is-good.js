@@ -40,18 +40,46 @@ able to pass all the tests.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
-const score = dice => {
-  const cnts = new Array(7).fill(0);
-  const threes = [0, 1000, 200, 300, 400, 500, 600];
-  const singles = [0, 100, 0, 0, 0, 50, 0];
-  let score = 0;
-  for (const die of dice) cnts[die]++;
-  for (let i = 1; i < 7; i++) {
-    score += threes[i] * Math.trunc(cnts[i] / 3);
-    score += singles[i] * (cnts[i] % 3);
-  }
-  return score;
-};
+// const score = dice => {
+//   const cnts = new Array(7).fill(0);
+//   const threes = [0, 1000, 200, 300, 400, 500, 600];
+//   const singles = [0, 100, 0, 0, 0, 50, 0];
+//   let score = 0;
+//   for (const die of dice) cnts[die]++;
+//   for (let i = 1; i < 7; i++) {
+//     score += threes[i] * Math.trunc(cnts[i] / 3);
+//     score += singles[i] * (cnts[i] % 3);
+//   }
+//   return score;
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// const score = dice => {
+//   const cnts = new Array(7).fill(0);
+//   for (const die of dice) cnts[die]++;
+//   return cnts.reduce(
+//     (score, cnt, die) =>
+//       score +
+//       [0, 1000, 200, 300, 400, 500, 600][die] * Math.trunc(cnt / 3) +
+//       [0, 100, 0, 0, 0, 50, 0][die] * (cnt % 3),
+//   );
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+const score = dice =>
+  dice
+    .reduce((cnts, die) => {
+      cnts[die]++;
+      return cnts;
+    }, new Array(7).fill(0))
+    .reduce(
+      (score, cnt, die) =>
+        score +
+        [0, 1000, 200, 300, 400, 500, 600][die] * Math.trunc(cnt / 3) +
+        [0, 100, 0, 0, 0, 50, 0][die] * (cnt % 3),
+    );
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
@@ -71,3 +99,5 @@ strictEqual(score([1, 1, 1, 1, 3]), 1100);
 strictEqual(score([1, 1, 1, 1, 5]), 1150);
 
 strictEqual(score([1, 5, 1, 3, 4]), 250);
+
+strictEqual(score([1, 1, 1, 1, 1, 1]), 2000);
