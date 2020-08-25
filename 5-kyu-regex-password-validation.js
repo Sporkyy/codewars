@@ -17,12 +17,17 @@ Valid passwords will only be alphanumeric characters.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
+// const validate = password =>
+//   /.{6,}/.test(password) &&
+//   /[a-z]/.test(password) &&
+//   /[A-Z]/.test(password) &&
+//   /\d/.test(password) &&
+//   !/[^A-Za-z0-9]/.test(password);
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
 const validate = password =>
-  /.{6,}/.test(password) &&
-  /[a-z]/.test(password) &&
-  /[A-Z]/.test(password) &&
-  /\d/.test(password) &&
-  !/[^A-Za-z0-9]/.test(password);
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{6,}$/.test(password);
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
