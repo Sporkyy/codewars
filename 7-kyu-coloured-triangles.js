@@ -69,10 +69,38 @@ case of the example above, you would the given RRGBRGBB you should return G.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
-/**
- * @param {string} row
- */
+// /**
+//  * @param {string} row
+//  */
+// const triangle = row => {
+//   const obj = {
+//     RR: 'R',
+//     RG: 'B',
+//     RB: 'G',
+//     GG: 'G',
+//     GR: 'B',
+//     GB: 'R',
+//     BB: 'B',
+//     BR: 'G',
+//     BG: 'R',
+//   };
+//   while (1 < row.length) {
+//     let tmp = '';
+//     for (let i = 0; i < row.length - 1; i++)
+//       tmp += obj[`${row[i]}${row[i + 1]}`];
+//     row = tmp;
+//   }
+//   return row;
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
 const triangle = row => {
+  row = [[...row]].concat(
+    new Array(row.length - 1)
+      .fill()
+      .map((_, i) => new Array(row.length - i - 1)),
+  );
   const obj = {
     RR: 'R',
     RG: 'B',
@@ -84,13 +112,10 @@ const triangle = row => {
     BR: 'G',
     BG: 'R',
   };
-  while (1 < row.length) {
-    let tmp = '';
-    for (let i = 0; i < row.length - 1; i++)
-      tmp += obj[`${row[i]}${row[i + 1]}`];
-    row = tmp;
-  }
-  return row;
+  for (let i = 0; i < row.length - 1; i++)
+    for (let j = 0; j < row[i].length - 1; j++)
+      row[i + 1][j] = obj[`${row[i][j]}${row[i][j + 1]}`];
+  return row[row.length - 1][0];
 };
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
