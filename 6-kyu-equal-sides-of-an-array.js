@@ -95,7 +95,7 @@ const findEvenIndex = arr => {
 
 import { strictEqual } from 'assert';
 
-// strictEqual(findEvenIndex([1, 2, 3, 4, 3, 2, 1]), 3);
+strictEqual(findEvenIndex([1, 2, 3, 4, 3, 2, 1]), 3);
 
 strictEqual(findEvenIndex([1, 100, 50, -51, 1, 1]), 1);
 
@@ -107,11 +107,11 @@ strictEqual(findEvenIndex([1, 100, 50, -51, 1, 1]), 1);
 
 */
 
-// strictEqual(findEvenIndex([1, 2, 3, 4, 5, 6]), -1);
+strictEqual(findEvenIndex([1, 2, 3, 4, 5, 6]), -1);
 
-// strictEqual(findEvenIndex([20, 10, 30, 10, 10, 15, 35]), 3);
+strictEqual(findEvenIndex([20, 10, 30, 10, 10, 15, 35]), 3);
 
-// strictEqual(findEvenIndex([20, 10, -80, 10, 10, 15, 35]), 0);
+strictEqual(findEvenIndex([20, 10, -80, 10, 10, 15, 35]), 0);
 
 /*
 
@@ -120,3 +120,9 @@ strictEqual(findEvenIndex([1, 100, 50, -51, 1, 1]), 1);
 | 20 |  0 | -10 |  70 |  60 |  50 |  35 |  0  |    |
 
 */
+
+strictEqual(findEvenIndex([10, -80, 10, 10, 15, 35, 20]), 6);
+
+strictEqual(findEvenIndex([0, 8]), 1);
+
+strictEqual(findEvenIndex([8]), 0);
