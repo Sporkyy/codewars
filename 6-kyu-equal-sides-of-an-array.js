@@ -78,6 +78,8 @@ index.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
+// You have passed all of the tests! :)
+
 // /**
 //  * @param {number[]} arr
 //  * @returns {number}
