@@ -78,16 +78,37 @@ index.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
+// /**
+//  * @param {number[]} arr
+//  * @returns {number}
+//  */
+// const findEvenIndex = arr => {
+//   const lSums = (sum => [0, ...arr.map(n => (sum += n))])(0);
+//   const rSums = lSums.map(n => lSums[lSums.length - 1] - n);
+//   lSums.pop();
+//   rSums.shift();
+//   for (let i = 0; i < arr.length; i++) if (lSums[i] === rSums[i]) return i;
+//   return -1;
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// You have passed all of the tests! :)
+
 /**
  * @param {number[]} arr
  * @returns {number}
  */
 const findEvenIndex = arr => {
-  const lSums = (sum => [0, ...arr.map(n => (sum += n))])(0);
-  const rSums = lSums.map(n => lSums[lSums.length - 1] - n);
-  lSums.pop();
-  rSums.shift();
-  for (let i = 0; i < arr.length; i++) if (lSums[i] === rSums[i]) return i;
+  for (
+    let i = 0, lSum = 0, rSum = arr.reduce((sum, n) => sum + n);
+    i < arr.length;
+    i++
+  ) {
+    rSum -= arr[i];
+    if (lSum === rSum) return i;
+    lSum += arr[i];
+  }
   return -1;
 };
 
