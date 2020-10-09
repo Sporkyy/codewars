@@ -12,22 +12,63 @@ will always be greater than the first one.
 ## Examples
 
 ```
-ipsBetween("10.0.0.0", "10.0.0.50")  ===   50
-ipsBetween("10.0.0.0", "10.0.1.0")   ===  256
-ipsBetween("20.0.0.10", "20.0.1.0")  ===  246
+ipsBetween("10.0.0.0", "10.0.0.50") ===  50
+ipsBetween("10.0.0.0", "10.0.1.0")  === 256
+ipsBetween("20.0.0.10", "20.0.1.0") === 246
 ```
 
 */
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
-const ipsBetween(start, end) => {
-  // TODO
-}
+// You have passed all of the tests! :)
+
+// const ipsBetween = (start, end) => {
+//   // console.log(start, end);
+//   // console.log([start, end].map(ip => ip.split('.').map(Number)));
+//   const [splitS, splitE] = [start, end].map(ip => ip.split('.').map(Number));
+//   // console.log(splitS, splitE);
+//   // let tmp = 256;
+//   // console.log(
+//   //   splitS.map((n, i) => n * 256 ** (3 - i)).reduce((acc, curr) => acc + curr),
+//   // );
+//   // console.log(
+//   //   splitE.map((n, i) => n * 256 ** (3 - i)).reduce((acc, curr) => acc + curr),
+//   // );
+//   // console.log(
+//   //   splitE.map((n, i) => n * 256 ** (3 - i)).reduce((acc, curr) => acc + curr) -
+//   //     splitS
+//   //       .map((n, i) => n * 256 ** (3 - i))
+//   //       .reduce((acc, curr) => acc + curr),
+//   // );
+//   return (
+//     splitE.map((n, i) => n * 256 ** (3 - i)).reduce((acc, curr) => acc + curr) -
+//     splitS.map((n, i) => n * 256 ** (3 - i)).reduce((acc, curr) => acc + curr)
+//   );
+//   // console.log([256 ** 4, 256 ** 3, 256 ** 2, 256 ** 1]);
+//   // const difference = splitE.map((n, i) => n - splitS[i]);
+//   // console.log(difference);
+// };
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
-import { strictEqual } from 'assert'
+/**
+ * @param {string} start
+ * @param {string} end
+ * @returns {number}
+ */
+const ipsBetween = (start, end) =>
+  [start, end]
+    .map(ip =>
+      ip
+        .split('.')
+        .reduce((sum, bits, idx) => sum + Number(bits) * 256 ** (3 - idx), 0),
+    )
+    .reduce((s, e) => e - s);
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+import { strictEqual } from 'assert';
 
 strictEqual(ipsBetween('10.0.0.0', '10.0.0.50'), 50);
 strictEqual(ipsBetween('10.0.0.10', '10.0.1.0'), 246);
