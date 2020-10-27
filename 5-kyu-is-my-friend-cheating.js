@@ -212,6 +212,8 @@ each one also allocated.
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
+// You have passed all of the tests! :)
+
 const removeNb = n => {
   const frontwards = [];
   const backwards = [];
