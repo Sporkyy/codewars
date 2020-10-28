@@ -122,35 +122,56 @@ output is then `"6 12 4 12 3 12"`
 // (40348,68120)(43680,68120)(51090,68120)
 // (20174,34060)(21840,34060)(25545,34060)
 
+// const convertFrac = lst => {
+//   const x = [...lst].reduce(
+//     (acc, [, curr]) => (Number.isInteger(acc / curr) ? acc : acc * curr),
+//     1,
+//   );
+//   // console.log(x);
+//   let y = lst.map(([numer, denom]) => [numer * (x / denom), x]);
+//   // console.log(y);
+//   let z = [...new Set(y.map(([n]) => n)), x];
+//   // console.log(z);
+//   let min = Math.min(...z);
+//   // console.log(z);
+//   while (1 < min--) {
+//     // console.log(min + 1);
+//     if (z.every(n => Number.isInteger(n / (min + 1)))) {
+//       // console.log(min + 1);
+//       y = y.map(([numer, denom]) => [numer / (min + 1), denom / (min + 1)]);
+//       break;
+//     }
+//   }
+//   // for (const n of z) {
+//   //   n;
+//   //   if (z.every(m => Number.isInteger(m / n))) {
+//   //     console.log(n);
+//   //     y = y.map(([numer, denom]) => [numer / n, denom / n]);
+//   //     break;
+//   //   }
+//   // }
+//   // console.log(y);
+//   return y.map(([numer, denom]) => `(${numer},${denom})`).join('');
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// You have passed all of the tests! :)
+
 const convertFrac = lst => {
   const x = [...lst].reduce(
     (acc, [, curr]) => (Number.isInteger(acc / curr) ? acc : acc * curr),
     1,
   );
-  // console.log(x);
   let y = lst.map(([numer, denom]) => [numer * (x / denom), x]);
-  // console.log(y);
   let z = [...new Set(y.map(([n]) => n)), x];
-  // console.log(z);
   let min = Math.min(...z);
-  // console.log(z);
   while (1 < min--) {
-    // console.log(min + 1);
     if (z.every(n => Number.isInteger(n / (min + 1)))) {
-      // console.log(min + 1);
       y = y.map(([numer, denom]) => [numer / (min + 1), denom / (min + 1)]);
       break;
     }
   }
-  // for (const n of z) {
-  //   n;
-  //   if (z.every(m => Number.isInteger(m / n))) {
-  //     console.log(n);
-  //     y = y.map(([numer, denom]) => [numer / n, denom / n]);
-  //     break;
-  //   }
-  // }
-  // console.log(y);
   return y.map(([numer, denom]) => `(${numer},${denom})`).join('');
 };
 
