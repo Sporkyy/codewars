@@ -80,22 +80,58 @@ multiple processes at the same time: https://en.wikipedia.org/wiki/Thread_pool
 // You have passed all of the tests! :)
 // Completed in 5ms
 
+// /**
+//  * @param {number[]} customers
+//  * @param {number} n
+//  * @returns {number}
+//  */
+// const queueTime = (customers, n) => {
+//   const queue = new Array(n).fill(0);
+//   let time = 0;
+//   while (customers.length || !queue.every(till => 0 === till)) {
+//     while (customers.length && queue.includes(0))
+//       queue[queue.indexOf(0)] += customers.shift();
+//     for (let i = 0; i < n; i++) queue[i] = Math.max(0, queue[i] - 1);
+//     time++;
+//   }
+//   return time;
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// You have passed all of the tests! :)
+// Completed in 2ms
+
+// /**
+//  * @param {number[]} customers
+//  * @param {number} n
+//  * @returns {number}
+//  */
+// const queueTime = (customers, n) => {
+//   let tills = new Array(n).fill(0);
+//   while (customers.length) {
+//     tills[tills.indexOf(Math.min(...tills))] += customers.shift();
+//   }
+//   return Math.max(...tills);
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// You have passed all of the tests! :)
+// Completed in 2ms
+
 /**
  * @param {number[]} customers
  * @param {number} n
  * @returns {number}
  */
-const queueTime = (customers, n) => {
-  const queue = new Array(n).fill(0);
-  let time = 0;
-  while (customers.length || !queue.every(till => 0 === till)) {
-    while (customers.length && queue.includes(0))
-      queue[queue.indexOf(0)] += customers.shift();
-    for (let i = 0; i < n; i++) queue[i] = Math.max(0, queue[i] - 1);
-    time++;
-  }
-  return time;
-};
+const queueTime = (customers, n) =>
+  Math.max(
+    ...customers.reduce((tills, customer) => {
+      tills[tills.indexOf(Math.min(...tills))] += customer;
+      return tills;
+    }, new Array(n).fill(0)),
+  );
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
