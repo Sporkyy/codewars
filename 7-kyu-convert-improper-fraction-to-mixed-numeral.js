@@ -37,15 +37,48 @@ value. However, the input can be:
 // Failed: 0
 // You have passed all of the tests! :)
 
-const convertToMixedNumeral = parm => {
-  const [n, d] = parm.split('/');
-  // console.log(n, d);
-  const [q, r] = [Math.trunc(n / d), n % d];
-  // console.log(q, r);
-  if (!q) return parm;
-  if (!r) return `${q}`;
-  return `${q} ${Math.abs(r)}/${d}`;
-};
+// const convertToMixedNumeral = parm => {
+//   const [n, d] = parm.split('/');
+//   // console.log(n, d);
+//   const [q, r] = [Math.trunc(n / d), n % d];
+//   // console.log(q, r);
+//   if (!q) return parm;
+//   if (!r) return `${q}`;
+//   return `${q} ${Math.abs(r)}/${d}`;
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// Time: 745ms
+// Passed: 50
+// Failed: 0
+// You have passed all of the tests! :)
+
+// const convertToMixedNumeral = parm => {
+//   const [n, d] = parm.split('/');
+//   const [q, r] = [Math.trunc(n / d), n % d];
+//   if (!q) return parm;
+//   if (!r) return `${q}`;
+//   return `${q} ${Math.abs(r)}/${d}`;
+// };
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+// Time: 716ms
+// Passed: 50
+// Failed: 0
+// You have passed all of the tests! :)
+
+/**
+ * @param {string} parm
+ * @returns {string}
+ */
+const convertToMixedNumeral = parm =>
+  (([n, d]) =>
+    (([q, r]) => (!q ? parm : !r ? `${q}` : `${q} ${Math.abs(r)}/${d}`))([
+      Math.trunc(n / d),
+      n % d,
+    ]))(parm.split('/'));
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
