@@ -84,10 +84,10 @@ const convertToMixedNumeral = parm =>
 
 import { strictEqual } from 'assert';
 
-strictEqual(convertToMixedNumeral('6/2'), '3');
+strictEqual(getMixedNum('6/2'), '3');
 
-strictEqual(convertToMixedNumeral('74/3'), '24 2/3');
+strictEqual(getMixedNum('74/3'), '24 2/3');
 
-strictEqual(convertToMixedNumeral('-504/26'), '-19 10/26');
+strictEqual(getMixedNum('-504/26'), '-19 10/26');
 
-strictEqual(convertToMixedNumeral('9/18'), '9/18');
+strictEqual(getMixedNum('9/18'), '9/18');
