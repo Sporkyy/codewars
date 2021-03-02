@@ -23,10 +23,15 @@ hexadecimal notation (ie `"#FFF"`)
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
-const hexStringToRGB = hexString =>
-  (([, r, g, b]) => ({ r, g, b }))(
-    hexString.match(/^#(..)(..)(..)$/).map(hex => Number.parseInt(hex, 16)),
-  );
+// const hexStringToRGB = hexString =>
+//   (([, r, g, b]) => ({ r, g, b }))(
+//     hexString.match(/^#(..)(..)(..)$/).map(hex => Number.parseInt(hex, 16)),
+//   );
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+const hexStringToRGB = s =>
+  (([r, g, b]) => ({ r, g, b }))(s.match(/(\w{2})/g).map(h => +`0x${h}`));
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
