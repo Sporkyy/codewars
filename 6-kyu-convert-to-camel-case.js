@@ -16,7 +16,11 @@ Examples
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
-const toCamelCase = str => str.replace(/[-_](.)/g, (_, s) => s.toUpperCase());
+// const toCamelCase = str => str.replace(/[-_](.)/g, (_, s) => s.toUpperCase());
+
+// 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
+
+const toCamelCase = str => str.replace(/[-_](.)/g, (_, c) => c.toUpperCase());
 
 // 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰
 
